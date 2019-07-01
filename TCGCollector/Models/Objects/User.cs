@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
@@ -17,5 +18,6 @@ namespace TCGCollector.Models
         public DateTime CreateDate { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
+        public ICollection<UserCardCollection> UserCardCollections { get; set; }
     }
 }

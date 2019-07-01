@@ -10,6 +10,20 @@ namespace TCGCollector.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserCardCollection>()
+                .HasKey(ucc => new { ucc.UserID, ucc.CardCollectionID });
+            modelBuilder.Entity<UserCardCollection>()
+                .HasOne(ucc => ucc.User)
+                .WithMany(u => u.UserCardCollections)
+                .HasForeignKey(ucc => ucc.UserID);
+            modelBuilder.Entity<UserCardCollection>()
+                .HasOne(ucc => ucc.CardCollection)
+                .WithMany(cc => cc.UserCardCollections)
+                .HasForeignKey(ucc => ucc.CardCollectionID);
+        }
+
         public DbSet<Card> Cards { get; set;}
         public DbSet<CardCat> CardCats { get; set; }
         public DbSet<CardType> CardTypes { get; set; }

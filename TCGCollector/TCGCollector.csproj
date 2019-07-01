@@ -17,5 +17,7 @@
     <Folder Include="Models\EF\" />
     <Folder Include="Models\Interfaces\" />
     <Folder Include="Models\Objects\" />
+    <Folder Include="Models\Objects\Pokemon\" />
+    <Folder Include="Models\Objects\Magic\" />
   </ItemGroup>
 </Project>
