@@ -1,10 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using TCGCollector.Models;
 
 namespace TCGCollector.Helpers
@@ -50,6 +54,32 @@ namespace TCGCollector.Helpers
             SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals(SetName));
             
             return SetObj;
+        }
+
+        //Build a Set Object from JSON
+        public static void BuildSetsFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(@"JSON Data/Sets.json"));
+
+            foreach (var result in obj)
+            {
+                ctx.Sets.Add(
+                    new Set
+                    {
+                        SetName = (string)result["name"],
+                        SetCode = (string)result["code"],
+                        SetPTCGOCode = (string)result["ptcgoCode"],
+                        SetSeries = ObjectBuilderHelper.GetSetSeriesByName(ctx, (string)result["series"]),
+                        //SetSeries = context.SetSeries.FirstOrDefault(m => m.SetSeriesName.Equals("Sun & Moon")),
+                        SetTotalCards = (int)result["totalCards"],
+                        SetStandard = (bool)result["standardLegal"],
+                        SetExpanded = (bool)result["expandedLegal"],
+                        SetSymbolURL = (string)result["symbolUrl"],
+                        SetLogoURL = (string)result["logoUrl"],
+                        SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture)
+                    }
+                    );
+            }
         }
 
         //SetSeries Object Helper with create if not exists

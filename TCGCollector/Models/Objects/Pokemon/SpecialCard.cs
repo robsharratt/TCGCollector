@@ -8,6 +8,6 @@ namespace TCGCollector.Models
     public class SpecialCard : Card
     {
         [StringLength(1024)]
-        public string SpecialCardText;
+        public string SpecialCardText { get; set; }
     }
 }

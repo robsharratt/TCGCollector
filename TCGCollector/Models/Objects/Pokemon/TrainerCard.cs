@@ -8,7 +8,7 @@ namespace TCGCollector.Models
     public class TrainerCard : Card
     {
         [StringLength(1024)]
-        public string TrainerCardText;
+        public string TrainerCardText { get; set; }
 
     }
 }
