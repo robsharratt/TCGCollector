@@ -23,15 +23,15 @@ namespace TCGCollector.Models
                 .WithMany(cc => cc.UserCardCollections)
                 .HasForeignKey(ucc => ucc.CardCollectionID);
 
-            modelBuilder.Entity<SpecialCardCardText>()
-                .HasKey(scct => new { scct.CardID, scct.CardTextID });
-            modelBuilder.Entity<SpecialCardCardText>()
-                .HasOne(scct => scct.SpecialCard)
-                .WithMany(sc => sc.SpecialCardCardTexts)
-                .HasForeignKey(scct => scct.CardID);
-            modelBuilder.Entity<SpecialCardCardText>()
-                .HasOne(scct => scct.CardText)
-                .WithMany(ct => ct.SpecialCardCardTexts)
+            modelBuilder.Entity<SpecialCardSpecialCardText>()
+                .HasKey(scsct => new { scsct.CardID, scsct.CardTextID });
+            modelBuilder.Entity<SpecialCardSpecialCardText>()
+                .HasOne(scsct => scsct.SpecialCard)
+                .WithMany(sc => sc.SpecialCardSpecialCardTexts)
+                .HasForeignKey(scsct => scsct.CardID);
+            modelBuilder.Entity<SpecialCardSpecialCardText>()
+                .HasOne(scsct => scsct.CardText)
+                .WithMany(sct => sct.SpecialCardSpecialCardTexts)
                 .HasForeignKey(scct => scct.CardTextID);
         }
 
@@ -41,8 +41,8 @@ namespace TCGCollector.Models
         public DbSet<SetSeries> SetSeries { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
-        public DbSet<CardText> CardTexts { get; set; }
         public DbSet<Card> Cards { get; set; }
+        public DbSet<SpecialCardText> SpecialCardTexts { get; set; }
         public DbSet<SpecialCard> SpecialCards { get; set; }
         public DbSet<TrainerCard> TrainerCards { get; set; }
         public DbSet<User> Users { get; set; }

@@ -156,25 +156,18 @@ namespace TCGCollector.Helpers
                                     };
                                 if (result["text"].HasValues)
                                 {
-                                    List<SpecialCardCardText> specialCardCardTexts = new List<SpecialCardCardText>();
+                                    List<SpecialCardSpecialCardText> specialCardCardTexts = new List<SpecialCardSpecialCardText>();
                                     foreach (var textitem in result["text"])
                                     {
-                                        CardText CardTextObj = ctx.CardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
-                                            ?? new CardText()
+                                        SpecialCardText CardTextObj = ctx.SpecialCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
+                                            ?? new SpecialCardText()
                                             {
                                                 CardTextLine = textitem.ToString(),
                                                 LastUpdateDate = DateTime.Now
                                             };
 
-
-                                        //SpecialCardObj.SpecialCardCardTexts = new List<SpecialCardCardText> {
-                                        //new SpecialCardCardText
-                                        //{
-                                        //SpecialCard = SpecialCardObj,
-                                        //CardText = CardTextObj
-                                        //}
                                         specialCardCardTexts.Add(
-                                            new SpecialCardCardText
+                                            new SpecialCardSpecialCardText
                                             {
                                                 SpecialCard = SpecialCardObj,
                                                 CardText = CardTextObj
@@ -182,12 +175,7 @@ namespace TCGCollector.Helpers
                                         );
                                     }
 
-                                    SpecialCardObj.SpecialCardCardTexts = specialCardCardTexts;
-
-                                    //ctx.SpecialCards.Add(CardTextObj);
-                                    //CardTextObj.SpecialCardCardTexts.Add()
-                                    //SpecialCardObj.CardT.Add(CardTextObj);
-                                    //SpecialCardText = (string)result["text"],
+                                    SpecialCardObj.SpecialCardSpecialCardTexts = specialCardCardTexts;
                                 }
                                 ctx.AddOrUpdate(SpecialCardObj);
                         break;
@@ -198,7 +186,44 @@ namespace TCGCollector.Helpers
                     case "Pokemon":
                         break;
                     case "Trainer":
+                        //TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                        //    ?? new TrainerCard()
+                        //    {
+                        //        CardName = (string)result["name"],
+                        //        CardImageURL = (string)result["imageUrl"],
+                        //        CardImageHiURL = (string)result["imageUrlHiRes"],
+                        //        CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
+                        //        CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
+                        //        Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
+                        //        CardNum = (int)result["number"],
+                        //        Artist = (string)result["artist"],
+                        //        CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
+                        //        LastUpdateDate = DateTime.Now
+                        //    };
+                        //if (result["text"].HasValues)
+                        //{
+                        //    List<SpecialCardCardText> specialCardCardTexts = new List<SpecialCardCardText>();
+                        //    foreach (var textitem in result["text"])
+                        //    {
+                        //        CardText CardTextObj = ctx.CardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
+                        //            ?? new CardText()
+                        //            {
+                        //                CardTextLine = textitem.ToString(),
+                        //                LastUpdateDate = DateTime.Now
+                        //            };
 
+                        //        specialCardCardTexts.Add(
+                        //            new SpecialCardCardText
+                        //            {
+                        //                SpecialCard = SpecialCardObj,
+                        //                CardText = CardTextObj
+                        //            }
+                        //        );
+                        //    }
+
+                        //    SpecialCardObj.SpecialCardCardTexts = specialCardCardTexts;
+                        //}
+                        //ctx.AddOrUpdate(SpecialCardObj);
                         break;
                 default:
                         break;

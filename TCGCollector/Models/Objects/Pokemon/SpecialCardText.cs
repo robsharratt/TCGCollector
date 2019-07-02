@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TCGCollector.Models
 {
-    public class CardText
+    public class SpecialCardText
     {
-        public int CardTextID { get; set; }
+        public int SpecialCardTextID { get; set; }
         [StringLength(1024)]
         public string CardTextLine { get; set; }
-        public ICollection<SpecialCardCardText> SpecialCardCardTexts { get; set; }
+        public ICollection<SpecialCardSpecialCardText> SpecialCardSpecialCardTexts { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
 

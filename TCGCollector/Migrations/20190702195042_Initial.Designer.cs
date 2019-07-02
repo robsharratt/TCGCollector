@@ -10,8 +10,8 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190702185824_SpecialCardCardText4")]
-    partial class SpecialCardCardText4
+    [Migration("20190702195042_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,21 +108,6 @@ namespace TCGCollector.Migrations
                     b.ToTable("CardRarities");
                 });
 
-            modelBuilder.Entity("TCGCollector.Models.CardText", b =>
-                {
-                    b.Property<int>("CardTextID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CardTextLine")
-                        .HasMaxLength(1024);
-
-                    b.Property<DateTime>("LastUpdateDate");
-
-                    b.HasKey("CardTextID");
-
-                    b.ToTable("CardTexts");
-                });
-
             modelBuilder.Entity("TCGCollector.Models.CardType", b =>
                 {
                     b.Property<int>("CardTypeID")
@@ -199,7 +184,7 @@ namespace TCGCollector.Migrations
                     b.ToTable("SetSeries");
                 });
 
-            modelBuilder.Entity("TCGCollector.Models.SpecialCardCardText", b =>
+            modelBuilder.Entity("TCGCollector.Models.SpecialCardSpecialCardText", b =>
                 {
                     b.Property<int>("CardID");
 
@@ -209,7 +194,22 @@ namespace TCGCollector.Migrations
 
                     b.HasIndex("CardTextID");
 
-                    b.ToTable("SpecialCardCardText");
+                    b.ToTable("SpecialCardSpecialCardText");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.SpecialCardText", b =>
+                {
+                    b.Property<int>("SpecialCardTextID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CardTextLine")
+                        .HasMaxLength(1024);
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.HasKey("SpecialCardTextID");
+
+                    b.ToTable("SpecialCardTexts");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.User", b =>
@@ -292,15 +292,15 @@ namespace TCGCollector.Migrations
                         .HasForeignKey("SetSeriesID");
                 });
 
-            modelBuilder.Entity("TCGCollector.Models.SpecialCardCardText", b =>
+            modelBuilder.Entity("TCGCollector.Models.SpecialCardSpecialCardText", b =>
                 {
                     b.HasOne("TCGCollector.Models.SpecialCard", "SpecialCard")
-                        .WithMany("SpecialCardCardTexts")
+                        .WithMany("SpecialCardSpecialCardTexts")
                         .HasForeignKey("CardID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("TCGCollector.Models.CardText", "CardText")
-                        .WithMany("SpecialCardCardTexts")
+                    b.HasOne("TCGCollector.Models.SpecialCardText", "CardText")
+                        .WithMany("SpecialCardSpecialCardTexts")
                         .HasForeignKey("CardTextID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

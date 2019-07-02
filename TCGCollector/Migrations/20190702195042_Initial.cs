@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TCGCollector.Migrations
 {
-    public partial class Inital : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,6 +23,35 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CardCollection",
+                columns: table => new
+                {
+                    CardCollectionID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CardCollectionName = table.Column<string>(nullable: true),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CardCollection", x => x.CardCollectionID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CardRarities",
+                columns: table => new
+                {
+                    CardRarityID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CardRarityName = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CardRarities", x => x.CardRarityID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CardTypes",
                 columns: table => new
                 {
@@ -37,6 +66,20 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PokemonTypes",
+                columns: table => new
+                {
+                    PokemonTypeID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    PokemonTypeName = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PokemonTypes", x => x.PokemonTypeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SetSeries",
                 columns: table => new
                 {
@@ -48,6 +91,20 @@ namespace TCGCollector.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SetSeries", x => x.SetSeriesID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SpecialCardTexts",
+                columns: table => new
+                {
+                    SpecialCardTextID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CardTextLine = table.Column<string>(maxLength: 1024, nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialCardTexts", x => x.SpecialCardTextID);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,6 +156,30 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserCardCollection",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(nullable: false),
+                    CardCollectionID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCardCollection", x => new { x.UserID, x.CardCollectionID });
+                    table.ForeignKey(
+                        name: "FK_UserCardCollection_CardCollection_CardCollectionID",
+                        column: x => x.CardCollectionID,
+                        principalTable: "CardCollection",
+                        principalColumn: "CardCollectionID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserCardCollection_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "UserID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cards",
                 columns: table => new
                 {
@@ -112,10 +193,10 @@ namespace TCGCollector.Migrations
                     SetID = table.Column<int>(nullable: true),
                     CardNum = table.Column<int>(nullable: false),
                     Artist = table.Column<string>(nullable: true),
-                    CardRarity = table.Column<string>(nullable: true),
-                    SetReleaseDate = table.Column<DateTime>(nullable: false),
+                    CardRarityID = table.Column<int>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    TrainerCardText = table.Column<string>(maxLength: 1024, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,6 +206,12 @@ namespace TCGCollector.Migrations
                         column: x => x.CardCatID,
                         principalTable: "CardCats",
                         principalColumn: "CardCatID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Cards_CardRarities_CardRarityID",
+                        column: x => x.CardRarityID,
+                        principalTable: "CardRarities",
+                        principalColumn: "CardRarityID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Cards_CardTypes_CardTypeID",
@@ -140,10 +227,39 @@ namespace TCGCollector.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SpecialCardSpecialCardText",
+                columns: table => new
+                {
+                    CardID = table.Column<int>(nullable: false),
+                    CardTextID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialCardSpecialCardText", x => new { x.CardID, x.CardTextID });
+                    table.ForeignKey(
+                        name: "FK_SpecialCardSpecialCardText_Cards_CardID",
+                        column: x => x.CardID,
+                        principalTable: "Cards",
+                        principalColumn: "CardID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SpecialCardSpecialCardText_SpecialCardTexts_CardTextID",
+                        column: x => x.CardTextID,
+                        principalTable: "SpecialCardTexts",
+                        principalColumn: "SpecialCardTextID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_CardCatID",
                 table: "Cards",
                 column: "CardCatID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_CardRarityID",
+                table: "Cards",
+                column: "CardRarityID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_CardTypeID",
@@ -159,18 +275,46 @@ namespace TCGCollector.Migrations
                 name: "IX_Sets_SetSeriesID",
                 table: "Sets",
                 column: "SetSeriesID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpecialCardSpecialCardText_CardTextID",
+                table: "SpecialCardSpecialCardText",
+                column: "CardTextID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCardCollection_CardCollectionID",
+                table: "UserCardCollection",
+                column: "CardCollectionID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "PokemonTypes");
+
+            migrationBuilder.DropTable(
+                name: "SpecialCardSpecialCardText");
+
+            migrationBuilder.DropTable(
+                name: "UserCardCollection");
+
+            migrationBuilder.DropTable(
                 name: "Cards");
+
+            migrationBuilder.DropTable(
+                name: "SpecialCardTexts");
+
+            migrationBuilder.DropTable(
+                name: "CardCollection");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "CardCats");
+
+            migrationBuilder.DropTable(
+                name: "CardRarities");
 
             migrationBuilder.DropTable(
                 name: "CardTypes");

@@ -6,6 +6,6 @@ namespace TCGCollector.Models
 {
     public class SpecialCard : Card
     {
-        public ICollection<SpecialCardCardText> SpecialCardCardTexts { get; set; }
+        public ICollection<SpecialCardSpecialCardText> SpecialCardSpecialCardTexts { get; set; }
     }
 }

@@ -20,5 +20,6 @@
     <Folder Include="Models\Objects\Pokemon\" />
     <Folder Include="Models\Objects\Magic\" />
     <Folder Include="JSON Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
