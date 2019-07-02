@@ -159,7 +159,7 @@ namespace TCGCollector.Helpers
                                     List<SpecialCardSpecialCardText> specialCardCardTexts = new List<SpecialCardSpecialCardText>();
                                     foreach (var textitem in result["text"])
                                     {
-                                        SpecialCardText CardTextObj = ctx.SpecialCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
+                                        SpecialCardText SpecialCardTextObj = ctx.SpecialCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
                                             ?? new SpecialCardText()
                                             {
                                                 CardTextLine = textitem.ToString(),
@@ -170,7 +170,7 @@ namespace TCGCollector.Helpers
                                             new SpecialCardSpecialCardText
                                             {
                                                 SpecialCard = SpecialCardObj,
-                                                CardText = CardTextObj
+                                                CardText = SpecialCardTextObj
                                             }
                                         );
                                     }
@@ -186,44 +186,44 @@ namespace TCGCollector.Helpers
                     case "Pokemon":
                         break;
                     case "Trainer":
-                        //TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
-                        //    ?? new TrainerCard()
-                        //    {
-                        //        CardName = (string)result["name"],
-                        //        CardImageURL = (string)result["imageUrl"],
-                        //        CardImageHiURL = (string)result["imageUrlHiRes"],
-                        //        CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
-                        //        CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
-                        //        Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
-                        //        CardNum = (int)result["number"],
-                        //        Artist = (string)result["artist"],
-                        //        CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
-                        //        LastUpdateDate = DateTime.Now
-                        //    };
-                        //if (result["text"].HasValues)
-                        //{
-                        //    List<SpecialCardCardText> specialCardCardTexts = new List<SpecialCardCardText>();
-                        //    foreach (var textitem in result["text"])
-                        //    {
-                        //        CardText CardTextObj = ctx.CardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
-                        //            ?? new CardText()
-                        //            {
-                        //                CardTextLine = textitem.ToString(),
-                        //                LastUpdateDate = DateTime.Now
-                        //            };
+                        TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                            ?? new TrainerCard()
+                            {
+                                CardName = (string)result["name"],
+                                CardImageURL = (string)result["imageUrl"],
+                                CardImageHiURL = (string)result["imageUrlHiRes"],
+                                CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
+                                CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
+                                Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
+                                CardNum = (int)result["number"],
+                                Artist = (string)result["artist"],
+                                CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
+                                LastUpdateDate = DateTime.Now
+                            };
+                        if (result["text"].HasValues)
+                        {
+                            List<TrainerCardTrainerCardText> trainerCardCardTexts = new List<TrainerCardTrainerCardText>();
+                            foreach (var textitem in result["text"])
+                            {
+                                TrainerCardText TrainerCardTextObj = ctx.TrainerCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
+                                    ?? new TrainerCardText()
+                                    {
+                                        CardTextLine = textitem.ToString(),
+                                        LastUpdateDate = DateTime.Now
+                                    };
 
-                        //        specialCardCardTexts.Add(
-                        //            new SpecialCardCardText
-                        //            {
-                        //                SpecialCard = SpecialCardObj,
-                        //                CardText = CardTextObj
-                        //            }
-                        //        );
-                        //    }
+                               trainerCardCardTexts.Add(
+                                    new TrainerCardTrainerCardText
+                                    {
+                                        TrainerCard = TrainerCardObj,
+                                        CardText = TrainerCardTextObj
+                                    }
+                                );
+                            }
 
-                        //    SpecialCardObj.SpecialCardCardTexts = specialCardCardTexts;
-                        //}
-                        //ctx.AddOrUpdate(SpecialCardObj);
+                            TrainerCardObj.TrainerCardTrainerCardTexts = trainerCardCardTexts;
+                        }
+                        ctx.AddOrUpdate(TrainerCardObj);
                         break;
                 default:
                         break;

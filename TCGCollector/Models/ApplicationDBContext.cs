@@ -32,7 +32,18 @@ namespace TCGCollector.Models
             modelBuilder.Entity<SpecialCardSpecialCardText>()
                 .HasOne(scsct => scsct.CardText)
                 .WithMany(sct => sct.SpecialCardSpecialCardTexts)
-                .HasForeignKey(scct => scct.CardTextID);
+                .HasForeignKey(scsct => scsct.CardTextID);
+
+            modelBuilder.Entity<TrainerCardTrainerCardText>()
+                .HasKey(tctct => new { tctct.CardID, tctct.CardTextID });
+            modelBuilder.Entity<TrainerCardTrainerCardText>()
+                .HasOne(tctct => tctct.TrainerCard)
+                .WithMany(tc => tc.TrainerCardTrainerCardTexts)
+                .HasForeignKey(tctct => tctct.CardID);
+            modelBuilder.Entity<TrainerCardTrainerCardText>()
+                .HasOne(tctct => tctct.CardText)
+                .WithMany(tct => tct.TrainerCardTrainerCardTexts)
+                .HasForeignKey(tctct => tctct.CardTextID);
         }
 
         public DbSet<CardCat> CardCats { get; set; }
@@ -44,7 +55,9 @@ namespace TCGCollector.Models
         public DbSet<Card> Cards { get; set; }
         public DbSet<SpecialCardText> SpecialCardTexts { get; set; }
         public DbSet<SpecialCard> SpecialCards { get; set; }
+        public DbSet<TrainerCardText> TrainerCardTexts { get; set; }
         public DbSet<TrainerCard> TrainerCards { get; set; }
+        public DbSet<CardCollection> CardCollections { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

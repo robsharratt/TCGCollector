@@ -75,5 +75,56 @@
             "Line 2"
         ],
         "imageUrlHiRes": "https://images.pokemontcg.io/sm1/137_hires.png"
+    },
+    {
+        "id": "sm1-114",
+        "name": "Big Malasada",
+        "imageUrl": "https://images.pokemontcg.io/sm1/114.png",
+        "subtype": "Item",
+        "supertype": "Trainer",
+        "number": "114",
+        "artist": "5ban Graphics",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "text": [
+            "Heal 20 damage and remove a Special Condition from your Active Pokémon."
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/114_hires.png"
+    },
+    {
+        "id": "sm1-115",
+        "name": "Crushing Hammer",
+        "imageUrl": "https://images.pokemontcg.io/sm1/115.png",
+        "subtype": "Item",
+        "supertype": "Trainer",
+        "number": "115",
+        "artist": "Yoshinobu Saito",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "text": [
+            "Flip a coin. If heads, discard an Energy from 1 of your opponent's Pokémon."
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/115_hires.png"
+    },
+    {
+        "id": "sm1-116",
+        "name": "Energy Retrieval",
+        "imageUrl": "https://images.pokemontcg.io/sm1/116.png",
+        "subtype": "Item",
+        "supertype": "Trainer",
+        "number": "116",
+        "artist": "Toyste Beach",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "text": [
+            "Put 2 basic Energy cards from your discard pile into your hand."
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/116_hires.png"
     }
 ]
