@@ -25,6 +25,8 @@ namespace TCGCollector.Helpers
                     CardCatName = CardCatName,
                     LastUpdateDate = DateTime.Now
                 };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
             ctx.AddOrUpdate(CardCatObj);
             ctx.SaveChanges();
 
@@ -40,6 +42,8 @@ namespace TCGCollector.Helpers
                     CardTypeName = CardTypeName,
                     LastUpdateDate = DateTime.Now
                 };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
             ctx.AddOrUpdate(CardTypeObj);
             ctx.SaveChanges();
 
@@ -47,7 +51,7 @@ namespace TCGCollector.Helpers
         }
 
         //Set Object Helper with no create and return null
-        public static Set GetSetByName(ApplicationDbContext ctx, string SetName)
+        public static Set GetSetByNameNoInsert(ApplicationDbContext ctx, string SetName)
         {
             Set SetObj;
             //Check if object already exists and create it if it does not
@@ -63,9 +67,8 @@ namespace TCGCollector.Helpers
 
             foreach (var result in obj)
             {
-                ctx.Sets.Add(
-                    new Set
-                    {
+                Set SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals((string)result["name"]) && m.SetCode.Equals((string)result["code"]))
+                    ?? new Set() {
                         SetName = (string)result["name"],
                         SetCode = (string)result["code"],
                         SetPTCGOCode = (string)result["ptcgoCode"],
@@ -76,9 +79,14 @@ namespace TCGCollector.Helpers
                         SetExpanded = (bool)result["expandedLegal"],
                         SetSymbolURL = (string)result["symbolUrl"],
                         SetLogoURL = (string)result["logoUrl"],
-                        SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture)
-                    }
-                    );
+                        SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                        LastUpdateDate = DateTime.Now
+                    };
+                //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+                //SetObj.SetTotalCards = (int)result["totalCards"];
+
+                ctx.AddOrUpdate(SetObj);
+                ctx.SaveChanges();
             }
         }
 
@@ -92,6 +100,8 @@ namespace TCGCollector.Helpers
                     SetSeriesName = SetSeriesName,
                     LastUpdateDate = DateTime.Now
                 };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
             ctx.AddOrUpdate(SetSeriesObj);
             ctx.SaveChanges();
 
