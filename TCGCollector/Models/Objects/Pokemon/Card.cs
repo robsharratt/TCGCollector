@@ -32,8 +32,6 @@ namespace TCGCollector.Models
         public CardRarity CardRarity { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime SetReleaseDate { get; set; }
-        [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
     }
 }

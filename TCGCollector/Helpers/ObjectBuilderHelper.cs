@@ -131,8 +131,10 @@ namespace TCGCollector.Helpers
                                         CardNum = (int)result["number"],
                                         Artist = (string)result["artist"],
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
+                                        
                                         LastUpdateDate = DateTime.Now
                                     };
+                                ctx.AddOrUpdate(CardObj);
                                 break;
                             case "Special":
                                 //Special Eneryg
@@ -153,6 +155,8 @@ namespace TCGCollector.Helpers
                 //If PokemonCard
                 //If TrainerCar
                 //GetCardByName(ctx, (string)result["pokemontypename"]);
+                
+                ctx.SaveChanges();
             }
         }
 
