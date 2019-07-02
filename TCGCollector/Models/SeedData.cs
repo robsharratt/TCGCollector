@@ -40,14 +40,17 @@ namespace TCGCollector.Models
             //Create Card Cats
             if (!context.CardCats.Any())
             {
-                var strings = new List<string>()
-                {
-                    "Pokemon", "Trainer", "Energy"
-                };
+                ObjectBuilderHelper.BuildCardCatsFromJSON(context, @"JSON Data/CardCats.json");
 
-                foreach (string value in strings)
-                {
-                    ObjectBuilderHelper.GetCardCatByName(context, value);
+                //var strings = new List<string>()
+                //{
+                //    "Pokemon", "Trainer", "Energy"
+                //};
+
+                //foreach (string value in strings)
+                //{
+
+                    //ObjectBuilderHelper.GetCardCatByName(context, value);
                     //context.CardCats.Add(
                     //    new CardCat
                     //    {
@@ -55,7 +58,7 @@ namespace TCGCollector.Models
                     //        LastUpdateDate = DateTime.Now
                     //    }
                     //);
-                }
+                //}
                 context.SaveChanges();
             }
 

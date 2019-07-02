@@ -15,6 +15,17 @@ namespace TCGCollector.Helpers
 {
     public static class ObjectBuilderHelper
     {
+        //Build a Set Object from JSON
+        public static void BuildCardCatsFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(@"JSON Data/CardCats.json"));
+
+            foreach (var result in obj)
+            {
+                GetCardCatByName(ctx, (string)result["cardcatname"]);
+            }
+        }
+
         //CardCat Object Helper with create if not exists
         public static CardCat GetCardCatByName(ApplicationDbContext ctx, string CardCatName)
         {
