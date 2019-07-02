@@ -131,13 +131,28 @@ namespace TCGCollector.Helpers
                                         CardNum = (int)result["number"],
                                         Artist = (string)result["artist"],
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
-                                        
                                         LastUpdateDate = DateTime.Now
                                     };
                                 ctx.AddOrUpdate(CardObj);
                                 break;
                             case "Special":
-                                //Special Eneryg
+                                //Special Energy
+                                SpecialCardObj = ctx.SpecialCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                                    ?? new SpecialCard()
+                                    {
+                                        CardName = (string)result["name"],
+                                        CardImageURL = (string)result["imageUrl"],
+                                        CardImageHiURL = (string)result["imageUrlHiRes"],
+                                        CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
+                                        CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
+                                        Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
+                                        CardNum = (int)result["number"],
+                                        Artist = (string)result["artist"],
+                                        CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
+                                        //SpecialCardText = (string)result["text"],
+                                        LastUpdateDate = DateTime.Now
+                                    };
+                                ctx.AddOrUpdate(SpecialCardObj);
                                 break;
                             default:
                                 break;

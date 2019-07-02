@@ -4,8 +4,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TCGCollector.Models
 {
-    public class SpecialCard : Card
+    public class CardText
     {
+        public int CardTextID { get; set; }
+        [StringLength(1024)]
+        public string CardTextLine { get; set; }
         public ICollection<SpecialCardCardText> SpecialCardCardTexts { get; set; }
+
     }
 }

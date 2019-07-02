@@ -22,6 +22,17 @@ namespace TCGCollector.Models
                 .HasOne(ucc => ucc.CardCollection)
                 .WithMany(cc => cc.UserCardCollections)
                 .HasForeignKey(ucc => ucc.CardCollectionID);
+
+            modelBuilder.Entity<SpecialCardCardText>()
+                .HasKey(scct => new { scct.CardID, scct.CardTextID });
+            modelBuilder.Entity<SpecialCardCardText>()
+                .HasOne(scct => scct.SpecialCard)
+                .WithMany(sc => sc.SpecialCardCardTexts)
+                .HasForeignKey(scct => scct.CardID);
+            modelBuilder.Entity<SpecialCardCardText>()
+                .HasOne(scct => scct.CardText)
+                .WithMany(ct => ct.SpecialCardCardTexts)
+                .HasForeignKey(scct => scct.CardTextID);
         }
 
         public DbSet<CardCat> CardCats { get; set; }

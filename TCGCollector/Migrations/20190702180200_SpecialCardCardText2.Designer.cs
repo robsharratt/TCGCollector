@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TCGCollector.Models;
@@ -9,9 +10,10 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190702180200_SpecialCardCardText2")]
+    partial class SpecialCardCardText2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,9 +203,13 @@ namespace TCGCollector.Migrations
 
                     b.Property<int>("CardTextID");
 
+                    b.Property<int?>("CardTextID1");
+
                     b.HasKey("CardID", "CardTextID");
 
                     b.HasIndex("CardTextID");
+
+                    b.HasIndex("CardTextID1");
 
                     b.ToTable("SpecialCardCardText");
                 });
@@ -292,13 +298,12 @@ namespace TCGCollector.Migrations
                 {
                     b.HasOne("TCGCollector.Models.SpecialCard", "SpecialCard")
                         .WithMany("SpecialCardCardTexts")
-                        .HasForeignKey("CardID")
+                        .HasForeignKey("CardTextID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TCGCollector.Models.CardText", "CardText")
                         .WithMany("SpecialCardCardTexts")
-                        .HasForeignKey("CardTextID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CardTextID1");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.UserCardCollection", b =>
