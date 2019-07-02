@@ -53,6 +53,14 @@ namespace TCGCollector.Models
                 context.SaveChanges();
             }
 
+            //Create Card Types
+            if (!context.PokemonTypes.Any())
+            {
+                ObjectBuilderHelper.BuildPokemonTypesFromJSON(context, @"JSON Data/PokemonTypes.json");
+
+                context.SaveChanges();
+            }
+
             //No Longer Required as included in Set create
             //if (!context.SetSeries.Any())
             //{

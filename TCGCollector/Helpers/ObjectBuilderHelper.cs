@@ -83,6 +83,36 @@ namespace TCGCollector.Helpers
             return SetObj;
         }
 
+        //Build a CardCat Object from JSON
+        public static void BuildPokemonTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+            foreach (var result in obj)
+            {
+                GetPokemonTypeByName(ctx, (string)result["pokemontypename"]);
+            }
+        }
+
+        //CardCat Object Helper with create if not exists
+        public static PokemonType GetPokemonTypeByName(ApplicationDbContext ctx, string PokemonTypeName)
+        {
+            PokemonType PokemonTypeObj;
+            //Check if object already exists and create it if it does not
+            PokemonTypeObj = ctx.PokemonTypes.SingleOrDefault(m => m.PokemonTypeName.Equals(PokemonTypeName))
+                ?? new PokemonType()
+                {
+                    PokemonTypeName = PokemonTypeName,
+                    LastUpdateDate = DateTime.Now
+                };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+            ctx.AddOrUpdate(PokemonTypeObj);
+            ctx.SaveChanges();
+
+            return PokemonTypeObj;
+        }
+
         //Build a Set Object from JSON
         public static void BuildSetsFromJSON(ApplicationDbContext ctx, string JSONPath)
         {
