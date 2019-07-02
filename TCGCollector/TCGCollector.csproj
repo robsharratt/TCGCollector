@@ -21,5 +21,7 @@
     <Folder Include="Models\Objects\Magic\" />
     <Folder Include="JSON Data\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Views\CardCats\" />
+    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
 </Project>
