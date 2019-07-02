@@ -71,26 +71,9 @@
         "set": "Sun & Moon",
         "setCode": "sm1",
         "text": [
-            "This card provides Colorless Energy. While in play, this card provides every type of Energy but provides only 1 Energy at a time. When you attach this card from your hand to 1 of your Pokémon, put 1 damage counter on that Pokémon."
+            "This card provides Colorless Energy. While in play, this card provides every type of Energy but provides only 1 Energy at a time. When you attach this card from your hand to 1 of your Pokémon, put 1 damage counter on that Pokémon.",
+            "Line 2"
         ],
         "imageUrlHiRes": "https://images.pokemontcg.io/sm1/137_hires.png"
-    },
-    {
-        "id": "1",
-        "name": "Name",
-        "imageUrl": "",
-        "subtype": "SubType",
-        "supertype": "Super",
-        "number": "1",
-        "artist": "",
-        "rarity": "Rarity",
-        "series": "Series",
-        "set": "Set",
-        "setCode": "Code",
-        "text": [
-            "Text Line 1",
-            "Text Line 2"
-        ],
-        "imageUrlHiRes": ""
     }
 ]

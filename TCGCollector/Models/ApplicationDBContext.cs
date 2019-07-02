@@ -41,6 +41,7 @@ namespace TCGCollector.Models
         public DbSet<SetSeries> SetSeries { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
+        public DbSet<CardText> CardTexts { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<SpecialCard> SpecialCards { get; set; }
         public DbSet<TrainerCard> TrainerCards { get; set; }

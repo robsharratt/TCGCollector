@@ -10,6 +10,8 @@ namespace TCGCollector.Models
         [StringLength(1024)]
         public string CardTextLine { get; set; }
         public ICollection<SpecialCardCardText> SpecialCardCardTexts { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime LastUpdateDate { get; set; }
 
     }
 }

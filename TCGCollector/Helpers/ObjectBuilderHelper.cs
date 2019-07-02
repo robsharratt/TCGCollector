@@ -32,7 +32,8 @@ namespace TCGCollector.Helpers
             CardCat CardCatObj;
             //Check if object already exists and create it if it does not
             CardCatObj = ctx.CardCats.SingleOrDefault(m => m.CardCatName.Equals(CardCatName))
-                ?? new CardCat() {
+                ?? new CardCat()
+                {
                     CardCatName = CardCatName,
                     LastUpdateDate = DateTime.Now
                 };
@@ -80,7 +81,8 @@ namespace TCGCollector.Helpers
             CardType CardTypeObj;
             //Check if object already exists and create it if it does not
             CardTypeObj = ctx.CardTypes.SingleOrDefault(m => m.CardTypeName.Equals(CardTypeName))
-                ?? new CardType() {
+                ?? new CardType()
+                {
                     CardTypeName = CardTypeName,
                     LastUpdateDate = DateTime.Now
                 };
@@ -98,7 +100,7 @@ namespace TCGCollector.Helpers
             Set SetObj;
             //Check if object already exists and create it if it does not
             SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals(SetName));
-            
+
             return SetObj;
         }
 
@@ -113,7 +115,8 @@ namespace TCGCollector.Helpers
                 SpecialCard SpecialCardObj;
                 TrainerCard TrainerCardObj;
 
-                switch ((string)result["supertype"]) {
+                switch ((string)result["supertype"])
+                {
                     case "Energy":
                         switch ((string)result["subtype"])
                         {
@@ -149,127 +152,164 @@ namespace TCGCollector.Helpers
                                         CardNum = (int)result["number"],
                                         Artist = (string)result["artist"],
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
-                                        //SpecialCardText = (string)result["text"],
                                         LastUpdateDate = DateTime.Now
                                     };
+                                if (result["text"].HasValues)
+                                {
+                                    List<SpecialCardCardText> specialCardCardTexts = new List<SpecialCardCardText>();
+                                    foreach (var textitem in result["text"])
+                                    {
+                                        CardText CardTextObj = ctx.CardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
+                                            ?? new CardText()
+                                            {
+                                                CardTextLine = textitem.ToString(),
+                                                LastUpdateDate = DateTime.Now
+                                            };
+
+
+                                        //SpecialCardObj.SpecialCardCardTexts = new List<SpecialCardCardText> {
+                                        //new SpecialCardCardText
+                                        //{
+                                        //SpecialCard = SpecialCardObj,
+                                        //CardText = CardTextObj
+                                        //}
+                                        specialCardCardTexts.Add(
+                                            new SpecialCardCardText
+                                            {
+                                                SpecialCard = SpecialCardObj,
+                                                CardText = CardTextObj
+                                            }
+                                        );
+                                    }
+
+                                    SpecialCardObj.SpecialCardCardTexts = specialCardCardTexts;
+
+                                    //ctx.SpecialCards.Add(CardTextObj);
+                                    //CardTextObj.SpecialCardCardTexts.Add()
+                                    //SpecialCardObj.CardT.Add(CardTextObj);
+                                    //SpecialCardText = (string)result["text"],
+                                }
                                 ctx.AddOrUpdate(SpecialCardObj);
-                                break;
-                            default:
-                                break;
-                        }
-                        break;
-                    case "Pokemon":
-                        break;
-                    case "Trainer":
                         break;
                     default:
                         break;
                 }
-                //If Card - CardCat = Energy, CardType = Basic
-                //If SpecialCard - CardCat = Energy. CardType = Special
-                //If PokemonCard
-                //If TrainerCar
-                //GetCardByName(ctx, (string)result["pokemontypename"]);
-                
-                ctx.SaveChanges();
+                break;
+                    case "Pokemon":
+                        break;
+                    case "Trainer":
+
+                        break;
+                default:
+                        break;
             }
-        }
+            //If Card - CardCat = Energy, CardType = Basic
+            //If SpecialCard - CardCat = Energy. CardType = Special
+            //If PokemonCard
+            //If TrainerCar
+            //GetCardByName(ctx, (string)result["pokemontypename"]);
 
-        //CardCat Object Helper with create if not exists
-        //public static Card GetCardByName(ApplicationDbContext ctx, string CardName, int CardNum)
-        //{
-        //    Card CardObj;
-            ////Check if object already exists and create it if it does not
-            //CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals(CardName) && m.CardNum == CardNum)
-            //    ?? new Card()
-            //    {
-            //        CardName = PokemonTypeName,
-            //        LastUpdateDate = DateTime.Now
-            //    };
-
-            ////Put Values here that Need to Update otherwise if the record exists then it'll not be updated
-            //ctx.AddOrUpdate(CardObj);
-            //ctx.SaveChanges();
-
-        //    return CardObj;
-        //}
-
-        //Build a CardCat Object from JSON
-        public static void BuildPokemonTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
-        {
-            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
-
-            foreach (var result in obj)
-            {
-                GetPokemonTypeByName(ctx, (string)result["pokemontypename"]);
-            }
-        }
-
-        //CardCat Object Helper with create if not exists
-        public static PokemonType GetPokemonTypeByName(ApplicationDbContext ctx, string PokemonTypeName)
-        {
-            PokemonType PokemonTypeObj;
-            //Check if object already exists and create it if it does not
-            PokemonTypeObj = ctx.PokemonTypes.SingleOrDefault(m => m.PokemonTypeName.Equals(PokemonTypeName))
-                ?? new PokemonType()
-                {
-                    PokemonTypeName = PokemonTypeName,
-                    LastUpdateDate = DateTime.Now
-                };
-
-            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
-            ctx.AddOrUpdate(PokemonTypeObj);
             ctx.SaveChanges();
-
-            return PokemonTypeObj;
-        }
-
-        //Build a Set Object from JSON
-        public static void BuildSetsFromJSON(ApplicationDbContext ctx, string JSONPath)
-        {
-            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
-
-            foreach (var result in obj)
-            {
-                Set SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals((string)result["name"]) && m.SetCode.Equals((string)result["code"]))
-                    ?? new Set() {
-                        SetName = (string)result["name"],
-                        SetCode = (string)result["code"],
-                        SetPTCGOCode = (string)result["ptcgoCode"],
-                        SetSeries = ObjectBuilderHelper.GetSetSeriesByName(ctx, (string)result["series"]),
-                        //SetSeries = context.SetSeries.FirstOrDefault(m => m.SetSeriesName.Equals("Sun & Moon")),
-                        SetTotalCards = (int)result["totalCards"],
-                        SetStandard = (bool)result["standardLegal"],
-                        SetExpanded = (bool)result["expandedLegal"],
-                        SetSymbolURL = (string)result["symbolUrl"],
-                        SetLogoURL = (string)result["logoUrl"],
-                        SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture),
-                        LastUpdateDate = DateTime.Now
-                    };
-                //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
-                //SetObj.SetTotalCards = (int)result["totalCards"];
-
-                ctx.AddOrUpdate(SetObj);
-                ctx.SaveChanges();
-            }
-        }
-
-        //SetSeries Object Helper with create if not exists
-        public static SetSeries GetSetSeriesByName(ApplicationDbContext ctx, string SetSeriesName)
-        {
-            SetSeries SetSeriesObj;
-            //Check if object already exists and create it if it does not
-            SetSeriesObj = ctx.SetSeries.SingleOrDefault(m => m.SetSeriesName.Equals(SetSeriesName))
-                ?? new SetSeries() {
-                    SetSeriesName = SetSeriesName,
-                    LastUpdateDate = DateTime.Now
-                };
-
-            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
-            ctx.AddOrUpdate(SetSeriesObj);
-            ctx.SaveChanges();
-
-            return SetSeriesObj;
         }
     }
+
+    //CardCat Object Helper with create if not exists
+    //public static Card GetCardByName(ApplicationDbContext ctx, string CardName, int CardNum)
+    //{
+    //    Card CardObj;
+    ////Check if object already exists and create it if it does not
+    //CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals(CardName) && m.CardNum == CardNum)
+    //    ?? new Card()
+    //    {
+    //        CardName = PokemonTypeName,
+    //        LastUpdateDate = DateTime.Now
+    //    };
+
+    ////Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+    //ctx.AddOrUpdate(CardObj);
+    //ctx.SaveChanges();
+
+    //    return CardObj;
+    //}
+
+    //Build a CardCat Object from JSON
+    public static void BuildPokemonTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
+    {
+        JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+        foreach (var result in obj)
+        {
+            GetPokemonTypeByName(ctx, (string)result["pokemontypename"]);
+        }
+    }
+
+    //CardCat Object Helper with create if not exists
+    public static PokemonType GetPokemonTypeByName(ApplicationDbContext ctx, string PokemonTypeName)
+    {
+        PokemonType PokemonTypeObj;
+        //Check if object already exists and create it if it does not
+        PokemonTypeObj = ctx.PokemonTypes.SingleOrDefault(m => m.PokemonTypeName.Equals(PokemonTypeName))
+            ?? new PokemonType()
+            {
+                PokemonTypeName = PokemonTypeName,
+                LastUpdateDate = DateTime.Now
+            };
+
+        //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+        ctx.AddOrUpdate(PokemonTypeObj);
+        ctx.SaveChanges();
+
+        return PokemonTypeObj;
+    }
+
+    //Build a Set Object from JSON
+    public static void BuildSetsFromJSON(ApplicationDbContext ctx, string JSONPath)
+    {
+        JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+        foreach (var result in obj)
+        {
+            Set SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals((string)result["name"]) && m.SetCode.Equals((string)result["code"]))
+                ?? new Set()
+                {
+                    SetName = (string)result["name"],
+                    SetCode = (string)result["code"],
+                    SetPTCGOCode = (string)result["ptcgoCode"],
+                    SetSeries = ObjectBuilderHelper.GetSetSeriesByName(ctx, (string)result["series"]),
+                    //SetSeries = context.SetSeries.FirstOrDefault(m => m.SetSeriesName.Equals("Sun & Moon")),
+                    SetTotalCards = (int)result["totalCards"],
+                    SetStandard = (bool)result["standardLegal"],
+                    SetExpanded = (bool)result["expandedLegal"],
+                    SetSymbolURL = (string)result["symbolUrl"],
+                    SetLogoURL = (string)result["logoUrl"],
+                    SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture),
+                    LastUpdateDate = DateTime.Now
+                };
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+            //SetObj.SetTotalCards = (int)result["totalCards"];
+
+            ctx.AddOrUpdate(SetObj);
+            ctx.SaveChanges();
+        }
+    }
+
+    //SetSeries Object Helper with create if not exists
+    public static SetSeries GetSetSeriesByName(ApplicationDbContext ctx, string SetSeriesName)
+    {
+        SetSeries SetSeriesObj;
+        //Check if object already exists and create it if it does not
+        SetSeriesObj = ctx.SetSeries.SingleOrDefault(m => m.SetSeriesName.Equals(SetSeriesName))
+            ?? new SetSeries()
+            {
+                SetSeriesName = SetSeriesName,
+                LastUpdateDate = DateTime.Now
+            };
+
+        //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+        ctx.AddOrUpdate(SetSeriesObj);
+        ctx.SaveChanges();
+
+        return SetSeriesObj;
+    }
+}
 }
