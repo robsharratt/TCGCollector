@@ -24,9 +24,9 @@ namespace TCGCollector.Models
                 .HasForeignKey(ucc => ucc.CardCollectionID);
         }
 
-        
         public DbSet<CardCat> CardCats { get; set; }
         public DbSet<CardType> CardTypes { get; set; }
+        public DbSet<CardRarity> CardRarities { get; set; }
         public DbSet<SetSeries> SetSeries { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }

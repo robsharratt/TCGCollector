@@ -94,65 +94,66 @@ namespace TCGCollector.Models
             //Create Cards
             if (!context.Cards.Any())
             {
-                context.Cards.Add(
-                    new Card
-                    {
-                        CardName = "Grass Energy",
-                        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
-                        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
+                ObjectBuilderHelper.BuildCardsFromJSON(context, @"JSON Data/Cards.json");
+                //context.Cards.Add(
+                //    new Card
+                //    {
+                //        CardName = "Grass Energy",
+                //        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
+                //        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
 
-                        //CardCat = context.CardCats.FirstOrDefault(m => m.CardCatName.Equals("Energy")),
-                        //CardCat = context.CardCats.SingleOrDefault(m => m.CardCatName.Equals("Energy"))
-                        //    ?? new CardCat() { CardCatName = "Energy" },
-                        //CardType = context.CardTypes.FirstOrDefault(m => m.CardTypeName.Equals("Basic")),
-                        //Set = context.Sets.FirstOrDefault(m => m.SetName.Equals("Guardians Rising")),
-                        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy"),
-                        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
-                        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
-                        CardNum = 167,
-                        Artist = "",
-                        CardRarity = "Rare Secret",
-                        LastUpdateDate = DateTime.Now
-                    }
-                    );
-                context.SaveChanges();
+                //        //CardCat = context.CardCats.FirstOrDefault(m => m.CardCatName.Equals("Energy")),
+                //        //CardCat = context.CardCats.SingleOrDefault(m => m.CardCatName.Equals("Energy"))
+                //        //    ?? new CardCat() { CardCatName = "Energy" },
+                //        //CardType = context.CardTypes.FirstOrDefault(m => m.CardTypeName.Equals("Basic")),
+                //        //Set = context.Sets.FirstOrDefault(m => m.SetName.Equals("Guardians Rising")),
+                //        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy"),
+                //        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
+                //        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
+                //        CardNum = 167,
+                //        Artist = "",
+                //        CardRarity = "Rare Secret",
+                //        LastUpdateDate = DateTime.Now
+                //    }
+                //    );
+                //context.SaveChanges();
 
-                context.Cards.Add(
-                    new Card
-                    {
-                        CardName = "Grass Energy2",
-                        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
-                        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
+                //context.Cards.Add(
+                //    new Card
+                //    {
+                //        CardName = "Grass Energy2",
+                //        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
+                //        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
 
-                        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy1"),
-                        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
-                        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
-                        CardNum = 167,
-                        Artist = "",
-                        CardRarity = "Rare Secret",
-                        LastUpdateDate = DateTime.Now
-                    }
-                );
-                context.SaveChanges();
+                //        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy1"),
+                //        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
+                //        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
+                //        CardNum = 167,
+                //        Artist = "",
+                //        CardRarity = "Rare Secret",
+                //        LastUpdateDate = DateTime.Now
+                //    }
+                //);
+                //context.SaveChanges();
 
-                context.SpecialCards.Add(
-                    new SpecialCard
-                    {
-                        CardName = "Grass Energy3",
-                        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
-                        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
+                //context.SpecialCards.Add(
+                //    new SpecialCard
+                //    {
+                //        CardName = "Grass Energy3",
+                //        CardImageURL = "https://images.pokemontcg.io/sm2/167.png",
+                //        CardImageHiURL = "https://images.pokemontcg.io/sm2/167_hires.png",
 
-                        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy1"),
-                        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
-                        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
-                        CardNum = 167,
-                        Artist = "",
-                        CardRarity = "Rare Secret",
-                        SpecialCardText = "Special Card Test Text",
-                        LastUpdateDate = DateTime.Now
-                    }
-                );
-                context.SaveChanges();
+                //        CardCat = ObjectBuilderHelper.GetCardCatByName(context, "Energy1"),
+                //        CardType = ObjectBuilderHelper.GetCardTypeByName(context, "Basic"),
+                //        Set = ObjectBuilderHelper.GetSetByNameNoInsert(context, "Guardians Rising"),
+                //        CardNum = 167,
+                //        Artist = "",
+                //        CardRarity = "Rare Secret",
+                //        SpecialCardText = "Special Card Test Text",
+                //        LastUpdateDate = DateTime.Now
+                //    }
+                //);
+                //context.SaveChanges();
             }
             context.SaveChanges();
 

@@ -1,0 +1,44 @@
+﻿[
+    {
+        "id": "sm1-164",
+        "name": "Grass Energy",
+        "imageUrl": "https://images.pokemontcg.io/sm1/164.png",
+        "subtype": "Basic",
+        "supertype": "Energy",
+        "number": "164",
+        "artist": "",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/164_hires.png"
+    },
+    {
+        "id": "sm1-165",
+        "name": "Fire Energy",
+        "imageUrl": "https://images.pokemontcg.io/sm1/165.png",
+        "subtype": "Basic",
+        "supertype": "Energy",
+        "number": "165",
+        "artist": "",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/165_hires.png"
+    },
+    {
+        "id": "sm1-166",
+        "name": "Water Energy",
+        "imageUrl": "https://images.pokemontcg.io/sm1/166.png",
+        "subtype": "Basic",
+        "supertype": "Energy",
+        "number": "166",
+        "artist": "",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/166_hires.png"
+    }
+]

@@ -44,6 +44,25 @@ namespace TCGCollector.Helpers
             return CardCatObj;
         }
 
+        //CardRarity Object Helper with create if not exists
+        public static CardRarity GetCardRarityByName(ApplicationDbContext ctx, string CardRarityName)
+        {
+            CardRarity CardRarityObj;
+            //Check if object already exists and create it if it does not
+            CardRarityObj = ctx.CardRarities.SingleOrDefault(m => m.CardRarityName.Equals(CardRarityName))
+                ?? new CardRarity()
+                {
+                    CardRarityName = CardRarityName,
+                    LastUpdateDate = DateTime.Now
+                };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+            ctx.AddOrUpdate(CardRarityObj);
+            ctx.SaveChanges();
+
+            return CardRarityObj;
+        }
+
         //Build a CardType Object from JSON
         public static void BuildCardTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
         {
@@ -82,6 +101,79 @@ namespace TCGCollector.Helpers
             
             return SetObj;
         }
+
+        //Build a CardCat Object from JSON
+        public static void BuildCardsFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+            foreach (var result in obj)
+            {
+                Card CardObj;
+                SpecialCard SpecialCardObj;
+                TrainerCard TrainerCardObj;
+
+                switch ((string)result["supertype"]) {
+                    case "Energy":
+                        switch ((string)result["subtype"])
+                        {
+                            case "Basic":
+                                //Basic Energy
+                                CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                                    ?? new Card()
+                                    {
+                                        CardName = (string)result["name"],
+                                        CardImageURL = (string)result["imageUrl"],
+                                        CardImageHiURL = (string)result["imageUrlHiRes"],
+                                        CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
+                                        CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
+                                        Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
+                                        CardNum = (int)result["number"],
+                                        Artist = (string)result["artist"],
+                                        CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
+                                        LastUpdateDate = DateTime.Now
+                                    };
+                                break;
+                            case "Special":
+                                //Special Eneryg
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "Pokemon":
+                        break;
+                    case "Trainer":
+                        break;
+                    default:
+                        break;
+                }
+                //If Card - CardCat = Energy, CardType = Basic
+                //If SpecialCard - CardCat = Energy. CardType = Special
+                //If PokemonCard
+                //If TrainerCar
+                //GetCardByName(ctx, (string)result["pokemontypename"]);
+            }
+        }
+
+        //CardCat Object Helper with create if not exists
+        //public static Card GetCardByName(ApplicationDbContext ctx, string CardName, int CardNum)
+        //{
+        //    Card CardObj;
+            ////Check if object already exists and create it if it does not
+            //CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals(CardName) && m.CardNum == CardNum)
+            //    ?? new Card()
+            //    {
+            //        CardName = PokemonTypeName,
+            //        LastUpdateDate = DateTime.Now
+            //    };
+
+            ////Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+            //ctx.AddOrUpdate(CardObj);
+            //ctx.SaveChanges();
+
+        //    return CardObj;
+        //}
 
         //Build a CardCat Object from JSON
         public static void BuildPokemonTypesFromJSON(ApplicationDbContext ctx, string JSONPath)

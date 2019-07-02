@@ -26,7 +26,11 @@ namespace TCGCollector.Models
 
         public int CardNum { get; set; }
         public string Artist { get; set; }
-        public string CardRarity { get; set; }
+
+        //Foreign Key for Card Rarity
+        public Nullable<int> CardRarityID { get; set; }
+        public CardRarity CardRarity { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime SetReleaseDate { get; set; }
         [DataType(DataType.DateTime)]
