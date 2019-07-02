@@ -1,0 +1,57 @@
+﻿[
+    {
+        "cardtypename": "Basic"
+    },
+
+    {
+        "cardtypename": "Stage 1"
+    },
+    {
+        "cardtypename": "Stage 2"
+    },
+    {
+        "cardtypename": "Item"
+    },
+    {
+        "cardtypename": "Supporter"
+    },
+    {
+        "cardtypename": "Stadium"
+    },
+    {
+        "cardtypename": "Pokémon Tool"
+    },
+    {
+        "cardtypename": "Technical Machine"
+    },
+    {
+        "cardtypename": "EX"
+    },
+    {
+        "cardtypename": "GX"
+    },
+    {
+        "cardtypename": "TAG TEAM"
+    },
+    {
+        "cardtypename": "LEGEND"
+    },
+    {
+        "cardtypename": "BREAK"
+    },
+    {
+        "cardtypename": "MEGA"
+    },
+    {
+        "cardtypename": "Special"
+    },
+    {
+        "cardtypename": "Level Up"
+    },
+    {
+        "cardtypename": "Rocket's Secret Machine"
+    },
+    {
+        "cardtypename": "Restored"
+    },
+]

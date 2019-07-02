@@ -15,10 +15,10 @@ namespace TCGCollector.Helpers
 {
     public static class ObjectBuilderHelper
     {
-        //Build a Set Object from JSON
+        //Build a CardCat Object from JSON
         public static void BuildCardCatsFromJSON(ApplicationDbContext ctx, string JSONPath)
         {
-            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(@"JSON Data/CardCats.json"));
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
 
             foreach (var result in obj)
             {
@@ -43,6 +43,18 @@ namespace TCGCollector.Helpers
 
             return CardCatObj;
         }
+
+        //Build a CardType Object from JSON
+        public static void BuildCardTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+            foreach (var result in obj)
+            {
+                GetCardCatByName(ctx, (string)result["cardtypename"]);
+            }
+        }
+
         //CardType Object Helper with create if not exists
         public static CardType GetCardTypeByName(ApplicationDbContext ctx, string CardTypeName)
         {
@@ -74,7 +86,7 @@ namespace TCGCollector.Helpers
         //Build a Set Object from JSON
         public static void BuildSetsFromJSON(ApplicationDbContext ctx, string JSONPath)
         {
-            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(@"JSON Data/Sets.json"));
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
 
             foreach (var result in obj)
             {

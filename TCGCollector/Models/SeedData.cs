@@ -42,46 +42,32 @@ namespace TCGCollector.Models
             {
                 ObjectBuilderHelper.BuildCardCatsFromJSON(context, @"JSON Data/CardCats.json");
 
-                //var strings = new List<string>()
-                //{
-                //    "Pokemon", "Trainer", "Energy"
-                //};
-
-                //foreach (string value in strings)
-                //{
-
-                    //ObjectBuilderHelper.GetCardCatByName(context, value);
-                    //context.CardCats.Add(
-                    //    new CardCat
-                    //    {
-                    //        CardCatName = value,
-                    //        LastUpdateDate = DateTime.Now
-                    //    }
-                    //);
-                //}
                 context.SaveChanges();
             }
 
             if (!context.CardTypes.Any())
             {
-                var strings = new List<string>() {
-                        "Basic", "Stage 1", "Stage 2", "Item", "Supporter",
-                        "Stadium", "Pokémon Tool", "Technical Machine", "EX", "GX",
-                        "TAG TEAM", "LEGEND", "BREAK", "MEGA", "Special",
-                        "Level Up", "Rocket's Secret Machine", "Restored", "Test"
-                };
+                //var strings = new List<string>() {
+                //        "Basic", "Stage 1", "Stage 2", "Item", "Supporter",
+                //        "Stadium", "Pokémon Tool", "Technical Machine", "EX", "GX",
+                //        "TAG TEAM", "LEGEND", "BREAK", "MEGA", "Special",
+                //        "Level Up", "Rocket's Secret Machine", "Restored", "Test"
+                //};
 
-                foreach (string value in strings)
-                {
-                    ObjectBuilderHelper.GetCardTypeByName(context, value);
-                    //context.CardTypes.Add(
-                    //    new CardType
-                    //    {
-                    //        CardTypeName = value,
-                    //        LastUpdateDate = DateTime.Now
-                    //    }
-                    //);
-                }
+                //foreach (string value in strings)
+                //{
+                //    ObjectBuilderHelper.GetCardTypeByName(context, value);
+                //context.CardTypes.Add(
+                //    new CardType
+                //    {
+                //        CardTypeName = value,
+                //        LastUpdateDate = DateTime.Now
+                //    }
+                //);
+                //}
+
+                ObjectBuilderHelper.BuildCardCatsFromJSON(context, @"JSON Data/CardTypes.json");
+
                 context.SaveChanges();
             }
 
