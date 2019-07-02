@@ -45,54 +45,37 @@ namespace TCGCollector.Models
                 context.SaveChanges();
             }
 
+            //Create Card Types
             if (!context.CardTypes.Any())
             {
-                //var strings = new List<string>() {
-                //        "Basic", "Stage 1", "Stage 2", "Item", "Supporter",
-                //        "Stadium", "Pokémon Tool", "Technical Machine", "EX", "GX",
-                //        "TAG TEAM", "LEGEND", "BREAK", "MEGA", "Special",
-                //        "Level Up", "Rocket's Secret Machine", "Restored", "Test"
-                //};
-
-                //foreach (string value in strings)
-                //{
-                //    ObjectBuilderHelper.GetCardTypeByName(context, value);
-                //context.CardTypes.Add(
-                //    new CardType
-                //    {
-                //        CardTypeName = value,
-                //        LastUpdateDate = DateTime.Now
-                //    }
-                //);
-                //}
-
                 ObjectBuilderHelper.BuildCardCatsFromJSON(context, @"JSON Data/CardTypes.json");
 
                 context.SaveChanges();
             }
 
-            if (!context.SetSeries.Any())
-            {
-                var strings = new List<string>()
-                {
-                    "Sun & Moon"
-                };
+            //No Longer Required as included in Set create
+            //if (!context.SetSeries.Any())
+            //{
+            //    var strings = new List<string>()
+            //    {
+            //        "Sun & Moon"
+            //    };
 
-                foreach (string value in strings)
-                {
-                    ObjectBuilderHelper.GetSetSeriesByName(context, value);
-                    //context.SetSeries.Add(
-                    //    new SetSeries
-                    //    {
-                    //        SetSeriesName = value,
-                    //        LastUpdateDate = DateTime.Now
-                    //    }
-                    //);
-                }
-                context.SaveChanges();
-            }
+            //    foreach (string value in strings)
+            //    {
+            //        ObjectBuilderHelper.GetSetSeriesByName(context, value);
+            //        //context.SetSeries.Add(
+            //        //    new SetSeries
+            //        //    {
+            //        //        SetSeriesName = value,
+            //        //        LastUpdateDate = DateTime.Now
+            //        //    }
+            //        //);
+            //    }
+            //    context.SaveChanges();
+            //}
 
-            //Load Base Sets
+            //Create Sets (SetSeries is loaded based on Set being loaded that uses that SetSeries)
             if (!context.Sets.Any())
             {
                 ObjectBuilderHelper.BuildSetsFromJSON(context, @"JSON Data/Sets.json");
@@ -100,6 +83,7 @@ namespace TCGCollector.Models
                 //context.SaveChanges();
             }
 
+            //Create Cards
             if (!context.Cards.Any())
             {
                 context.Cards.Add(
