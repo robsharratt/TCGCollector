@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +22,8 @@
     <Folder Include="Models\Objects\Magic\" />
     <Folder Include="JSON Data\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Views\CardCats\" />
-    <Folder Include="Models\ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\CardType\Details.cshtml" />
   </ItemGroup>
 </Project>

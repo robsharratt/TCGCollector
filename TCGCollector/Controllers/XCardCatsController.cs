@@ -9,15 +9,15 @@ using TCGCollector.Models;
 
 namespace TCGCollector.Controllers
 {
-    public class CardCatsController : Controller
+    public class XCardCatsController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var entities = new CardCatDBEntities();
+            //var entities = new CardCatDBEntities();
 
-            return View(entities.MovieSet.ToList());
-            //return View();
+            //return View(entities.MovieSet.ToList());
+            return View();
         }
 
         //[HttpGet]

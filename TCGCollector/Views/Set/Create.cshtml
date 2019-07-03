@@ -1,0 +1,88 @@
+@model TCGCollector.Models.Set
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Set</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SetName" class="control-label"></label>
+                <input asp-for="SetName" class="form-control" />
+                <span asp-validation-for="SetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetCode" class="control-label"></label>
+                <input asp-for="SetCode" class="form-control" />
+                <span asp-validation-for="SetCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetPTCGOCode" class="control-label"></label>
+                <input asp-for="SetPTCGOCode" class="form-control" />
+                <span asp-validation-for="SetPTCGOCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetSeriesID" class="control-label"></label>
+                <select asp-for="SetSeriesID" class ="form-control" asp-items="ViewBag.SetSeriesID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetTotalCards" class="control-label"></label>
+                <input asp-for="SetTotalCards" class="form-control" />
+                <span asp-validation-for="SetTotalCards" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SetStandard" /> @Html.DisplayNameFor(model => model.SetStandard)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="SetExpanded" /> @Html.DisplayNameFor(model => model.SetExpanded)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetSymbolURL" class="control-label"></label>
+                <input asp-for="SetSymbolURL" class="form-control" />
+                <span asp-validation-for="SetSymbolURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetLogoURL" class="control-label"></label>
+                <input asp-for="SetLogoURL" class="form-control" />
+                <span asp-validation-for="SetLogoURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SetReleaseDate" class="control-label"></label>
+                <input asp-for="SetReleaseDate" class="form-control" />
+                <span asp-validation-for="SetReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUpdateDate" class="control-label"></label>
+                <input asp-for="LastUpdateDate" class="form-control" />
+                <span asp-validation-for="LastUpdateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

@@ -48,7 +48,7 @@ namespace TCGCollector.Models
             //Create Card Types
             if (!context.CardTypes.Any())
             {
-                ObjectBuilderHelper.BuildCardCatsFromJSON(context, @"JSON Data/CardTypes.json");
+                ObjectBuilderHelper.BuildCardTypesFromJSON(context, @"JSON Data/CardTypes.json");
 
                 context.SaveChanges();
             }

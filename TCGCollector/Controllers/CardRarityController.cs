@@ -9,23 +9,22 @@ using TCGCollector.Models;
 
 namespace TCGCollector.Controllers
 {
-    public class SetController : Controller
+    public class CardRarityController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SetController(ApplicationDbContext context)
+        public CardRarityController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Set
+        // GET: CardRarity
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Sets.Include(s => s.SetSeries);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.CardRarities.ToListAsync());
         }
 
-        // GET: Set/Details/5
+        // GET: CardRarity/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets
-                .Include(s => s.SetSeries)
-                .FirstOrDefaultAsync(m => m.SetID == id);
-            if (@set == null)
+            var cardRarity = await _context.CardRarities
+                .FirstOrDefaultAsync(m => m.CardRarityID == id);
+            if (cardRarity == null)
             {
                 return NotFound();
             }
 
-            return View(@set);
+            return View(cardRarity);
         }
 
-        // GET: Set/Create
+        // GET: CardRarity/Create
         public IActionResult Create()
         {
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID");
             return View();
         }
 
-        // POST: Set/Create
+        // POST: CardRarity/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SetID,SetName,SetCode,SetPTCGOCode,SetSeriesID,SetTotalCards,SetStandard,SetExpanded,SetSymbolURL,SetLogoURL,SetReleaseDate,LastUpdateDate")] Set @set)
+        public async Task<IActionResult> Create([Bind("CardRarityID,CardRarityName,LastUpdateDate")] CardRarity cardRarity)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@set);
+                _context.Add(cardRarity);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardRarity);
         }
 
-        // GET: Set/Edit/5
+        // GET: CardRarity/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets.FindAsync(id);
-            if (@set == null)
+            var cardRarity = await _context.CardRarities.FindAsync(id);
+            if (cardRarity == null)
             {
                 return NotFound();
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardRarity);
         }
 
-        // POST: Set/Edit/5
+        // POST: CardRarity/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SetID,SetName,SetCode,SetPTCGOCode,SetSeriesID,SetTotalCards,SetStandard,SetExpanded,SetSymbolURL,SetLogoURL,SetReleaseDate,LastUpdateDate")] Set @set)
+        public async Task<IActionResult> Edit(int id, [Bind("CardRarityID,CardRarityName,LastUpdateDate")] CardRarity cardRarity)
         {
-            if (id != @set.SetID)
+            if (id != cardRarity.CardRarityID)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace TCGCollector.Controllers
             {
                 try
                 {
-                    _context.Update(@set);
+                    _context.Update(cardRarity);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SetExists(@set.SetID))
+                    if (!CardRarityExists(cardRarity.CardRarityID))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace TCGCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardRarity);
         }
 
-        // GET: Set/Delete/5
+        // GET: CardRarity/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets
-                .Include(s => s.SetSeries)
-                .FirstOrDefaultAsync(m => m.SetID == id);
-            if (@set == null)
+            var cardRarity = await _context.CardRarities
+                .FirstOrDefaultAsync(m => m.CardRarityID == id);
+            if (cardRarity == null)
             {
                 return NotFound();
             }
 
-            return View(@set);
+            return View(cardRarity);
         }
 
-        // POST: Set/Delete/5
+        // POST: CardRarity/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @set = await _context.Sets.FindAsync(id);
-            _context.Sets.Remove(@set);
+            var cardRarity = await _context.CardRarities.FindAsync(id);
+            _context.CardRarities.Remove(cardRarity);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SetExists(int id)
+        private bool CardRarityExists(int id)
         {
-            return _context.Sets.Any(e => e.SetID == id);
+            return _context.CardRarities.Any(e => e.CardRarityID == id);
         }
     }
 }

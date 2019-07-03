@@ -71,7 +71,7 @@ namespace TCGCollector.Helpers
 
             foreach (var result in obj)
             {
-                GetCardCatByName(ctx, (string)result["cardtypename"]);
+                GetCardTypeByName(ctx, (string)result["cardtypename"]);
             }
         }
 

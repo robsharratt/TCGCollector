@@ -9,23 +9,22 @@ using TCGCollector.Models;
 
 namespace TCGCollector.Controllers
 {
-    public class SetController : Controller
+    public class CardCatController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public SetController(ApplicationDbContext context)
+        public CardCatController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Set
+        // GET: CardCat
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Sets.Include(s => s.SetSeries);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.CardCats.ToListAsync());
         }
 
-        // GET: Set/Details/5
+        // GET: CardCat/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets
-                .Include(s => s.SetSeries)
-                .FirstOrDefaultAsync(m => m.SetID == id);
-            if (@set == null)
+            var cardCat = await _context.CardCats
+                .FirstOrDefaultAsync(m => m.CardCatID == id);
+            if (cardCat == null)
             {
                 return NotFound();
             }
 
-            return View(@set);
+            return View(cardCat);
         }
 
-        // GET: Set/Create
+        // GET: CardCat/Create
         public IActionResult Create()
         {
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID");
             return View();
         }
 
-        // POST: Set/Create
+        // POST: CardCat/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SetID,SetName,SetCode,SetPTCGOCode,SetSeriesID,SetTotalCards,SetStandard,SetExpanded,SetSymbolURL,SetLogoURL,SetReleaseDate,LastUpdateDate")] Set @set)
+        public async Task<IActionResult> Create([Bind("CardCatID,CardCatName,LastUpdateDate")] CardCat cardCat)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@set);
+                _context.Add(cardCat);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardCat);
         }
 
-        // GET: Set/Edit/5
+        // GET: CardCat/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets.FindAsync(id);
-            if (@set == null)
+            var cardCat = await _context.CardCats.FindAsync(id);
+            if (cardCat == null)
             {
                 return NotFound();
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardCat);
         }
 
-        // POST: Set/Edit/5
+        // POST: CardCat/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SetID,SetName,SetCode,SetPTCGOCode,SetSeriesID,SetTotalCards,SetStandard,SetExpanded,SetSymbolURL,SetLogoURL,SetReleaseDate,LastUpdateDate")] Set @set)
+        public async Task<IActionResult> Edit(int id, [Bind("CardCatID,CardCatName,LastUpdateDate")] CardCat cardCat)
         {
-            if (id != @set.SetID)
+            if (id != cardCat.CardCatID)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace TCGCollector.Controllers
             {
                 try
                 {
-                    _context.Update(@set);
+                    _context.Update(cardCat);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SetExists(@set.SetID))
+                    if (!CardCatExists(cardCat.CardCatID))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace TCGCollector.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SetSeriesID"] = new SelectList(_context.SetSeries, "SetSeriesID", "SetSeriesID", @set.SetSeriesID);
-            return View(@set);
+            return View(cardCat);
         }
 
-        // GET: Set/Delete/5
+        // GET: CardCat/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace TCGCollector.Controllers
                 return NotFound();
             }
 
-            var @set = await _context.Sets
-                .Include(s => s.SetSeries)
-                .FirstOrDefaultAsync(m => m.SetID == id);
-            if (@set == null)
+            var cardCat = await _context.CardCats
+                .FirstOrDefaultAsync(m => m.CardCatID == id);
+            if (cardCat == null)
             {
                 return NotFound();
             }
 
-            return View(@set);
+            return View(cardCat);
         }
 
-        // POST: Set/Delete/5
+        // POST: CardCat/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @set = await _context.Sets.FindAsync(id);
-            _context.Sets.Remove(@set);
+            var cardCat = await _context.CardCats.FindAsync(id);
+            _context.CardCats.Remove(cardCat);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SetExists(int id)
+        private bool CardCatExists(int id)
         {
-            return _context.Sets.Any(e => e.SetID == id);
+            return _context.CardCats.Any(e => e.CardCatID == id);
         }
     }
 }
