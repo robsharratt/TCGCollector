@@ -155,6 +155,8 @@ namespace TCGCollector.Migrations
                     SetExpanded = table.Column<bool>(nullable: false),
                     SetSymbolURL = table.Column<string>(nullable: true),
                     SetLogoURL = table.Column<string>(nullable: true),
+                    SetSymbolLocalURL = table.Column<string>(nullable: true),
+                    SetLogoLocalURL = table.Column<string>(nullable: true),
                     SetReleaseDate = table.Column<DateTime>(nullable: false),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -202,6 +204,8 @@ namespace TCGCollector.Migrations
                     CardName = table.Column<string>(nullable: true),
                     CardImageURL = table.Column<string>(nullable: true),
                     CardImageHiURL = table.Column<string>(nullable: true),
+                    CardImageLocalURL = table.Column<string>(nullable: true),
+                    CardImageHiLocalURL = table.Column<string>(nullable: true),
                     CardCatID = table.Column<int>(nullable: true),
                     CardTypeID = table.Column<int>(nullable: true),
                     SetID = table.Column<int>(nullable: true),

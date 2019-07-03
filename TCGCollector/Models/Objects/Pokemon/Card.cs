@@ -11,6 +11,8 @@ namespace TCGCollector.Models
         public string CardName { get; set; }
         public string CardImageURL { get; set; }
         public string CardImageHiURL { get; set; }
+        public string CardImageLocalURL { get; set; }
+        public string CardImageHiLocalURL { get; set; }
 
         //Foreign Key for Card Category - Pokemon, Trainer, Energy
         public Nullable<int> CardCatID { get; set; }

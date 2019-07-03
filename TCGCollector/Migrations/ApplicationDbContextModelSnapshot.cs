@@ -28,7 +28,11 @@ namespace TCGCollector.Migrations
 
                     b.Property<int?>("CardCatID");
 
+                    b.Property<string>("CardImageHiLocalURL");
+
                     b.Property<string>("CardImageHiURL");
+
+                    b.Property<string>("CardImageLocalURL");
 
                     b.Property<string>("CardImageURL");
 
@@ -145,6 +149,8 @@ namespace TCGCollector.Migrations
 
                     b.Property<bool>("SetExpanded");
 
+                    b.Property<string>("SetLogoLocalURL");
+
                     b.Property<string>("SetLogoURL");
 
                     b.Property<string>("SetName");
@@ -156,6 +162,8 @@ namespace TCGCollector.Migrations
                     b.Property<int?>("SetSeriesID");
 
                     b.Property<bool>("SetStandard");
+
+                    b.Property<string>("SetSymbolLocalURL");
 
                     b.Property<string>("SetSymbolURL");
 

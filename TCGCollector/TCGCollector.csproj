@@ -22,8 +22,10 @@
     <Folder Include="Models\Objects\Magic\" />
     <Folder Include="JSON Data\" />
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CardType\Details.cshtml" />
+    <Content Remove="Views\Set\Details.cshtml" />
   </ItemGroup>
 </Project>

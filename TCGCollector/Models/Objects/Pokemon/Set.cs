@@ -21,6 +21,8 @@ namespace TCGCollector.Models
         public bool SetExpanded { get; set; }
         public string SetSymbolURL { get; set; }
         public string SetLogoURL { get; set; }
+        public string SetSymbolLocalURL { get; set; }
+        public string SetLogoLocalURL { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime SetReleaseDate { get; set; }

@@ -307,6 +307,8 @@ namespace TCGCollector.Helpers
                     SetExpanded = (bool)result["expandedLegal"],
                     SetSymbolURL = (string)result["symbolUrl"],
                     SetLogoURL = (string)result["logoUrl"],
+                    //SetSymbolLocalURL = Directory.GetCurrentDirectory(),
+                    //SetLogoLocalURL = Directory.GetCurrentDirectory(),
                     SetReleaseDate = DateTime.ParseExact((string)result["releaseDate"], "MM/dd/yyyy", CultureInfo.InvariantCulture),
                     LastUpdateDate = DateTime.Now
                 };

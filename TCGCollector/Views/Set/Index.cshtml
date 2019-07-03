@@ -28,7 +28,7 @@
                 @Html.DisplayNameFor(model => model.SetPTCGOCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SetSeries)
+                @Html.DisplayNameFor(model => model.SetSeries.SetSeriesName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SetTotalCards)
@@ -67,7 +67,7 @@
                 @Html.DisplayFor(modelItem => item.SetPTCGOCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SetSeries.SetSeriesID)
+                @Html.DisplayFor(modelItem => item.SetSeries.SetSeriesName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SetTotalCards)
