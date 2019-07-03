@@ -23,9 +23,47 @@
     <Folder Include="JSON Data\" />
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\Images\Sets\" />
+    <Folder Include="wwwroot\Images\Cards\" />
+    <Folder Include="wwwroot\Images\Cards\HighRes\" />
+    <Folder Include="wwwroot\Images\Cards\LowRes\" />
+    <Folder Include="JSON Data\Cards\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\CardType\Details.cshtml" />
     <Content Remove="Views\Set\Details.cshtml" />
+    <Content Remove="wwwroot\Images\Sets\xy3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\xy1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\xy0symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\pop8logo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex9logo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex6logo.png" />
+    <Content Remove="wwwroot\Images\Sets\pop1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\pop1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\nplogo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ecard2symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ecard2logo.png" />
+    <Content Remove="wwwroot\Images\Sets\ecard1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ecard1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base6symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base6logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo4symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo4logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo3logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo2symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo2logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base5logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base4symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base4logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base3logo.png" />
+    <Content Remove="wwwroot\Images\Sets\basepsymbol.png" />
+    <Content Remove="wwwroot\Images\Sets\baseplogo.png" />
+    <Content Remove="wwwroot\Images\Sets\base2symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base2logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base1logo.png" />
   </ItemGroup>
 </Project>

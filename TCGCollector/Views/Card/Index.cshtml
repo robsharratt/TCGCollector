@@ -42,9 +42,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.CardRarity)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdateDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -57,17 +54,17 @@
             <td>
                 @*@Html.DisplayFor(modelItem => item.CardImageURL)*@
                 <div class="display-field">
-                    <img src="@Url.Content(item.CardImageURL)" alt="" />
+                    <img src="@Url.Content(item.CardImageLocalURL)" alt="" style="height: 342px; width: 245px;" />
                 </div>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CardCat.CardCatID)
+                @Html.DisplayFor(modelItem => item.CardCat.CardCatName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CardType.CardTypeID)
+                @Html.DisplayFor(modelItem => item.CardType.CardTypeName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Set.SetID)
+                @Html.DisplayFor(modelItem => item.Set.SetName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CardNum)
@@ -76,10 +73,7 @@
                 @Html.DisplayFor(modelItem => item.Artist)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CardRarity.CardRarityID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdateDate)
+                @Html.DisplayFor(modelItem => item.CardRarity.CardRarityName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CardID">Edit</a> |

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using TCGCollector.Models;
+using TCGCollector.Helpers;
 
 namespace TCGCollector
 {
@@ -67,7 +68,8 @@ namespace TCGCollector
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
+            SeedData.EnsurePopulated(app, env);
+            //FileHelper fs = new FileHelper(env);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -15,7 +16,7 @@ namespace TCGCollector.Models
 {
     public class SeedData
     {
-        public static void EnsurePopulated(IApplicationBuilder app)
+        public static void EnsurePopulated(IApplicationBuilder app, IHostingEnvironment env)
         {
             ApplicationDbContext context = app.ApplicationServices
             .GetRequiredService<ApplicationDbContext>();
@@ -86,7 +87,7 @@ namespace TCGCollector.Models
             //Create Sets (SetSeries is loaded based on Set being loaded that uses that SetSeries)
             if (!context.Sets.Any())
             {
-                ObjectBuilderHelper.BuildSetsFromJSON(context, @"JSON Data/Sets.json");
+                ObjectBuilderHelper.BuildSetsFromJSON(context, env, @"JSON Data/Sets.json");
 
                 //context.SaveChanges();
             }
@@ -94,7 +95,7 @@ namespace TCGCollector.Models
             //Create Cards
             if (!context.Cards.Any())
             {
-                ObjectBuilderHelper.BuildCardsFromJSON(context, @"JSON Data/Cards.json");
+                ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards.json");
                 //context.Cards.Add(
                 //    new Card
                 //    {
