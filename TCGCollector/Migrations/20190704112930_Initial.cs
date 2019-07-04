@@ -213,7 +213,11 @@ namespace TCGCollector.Migrations
                     Artist = table.Column<string>(nullable: true),
                     CardRarityID = table.Column<int>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    HP = table.Column<int>(nullable: true),
+                    ConvertedRetreatCost = table.Column<int>(nullable: true),
+                    NationalPokedexNumber = table.Column<int>(nullable: true),
+                    EvolvesFrom = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

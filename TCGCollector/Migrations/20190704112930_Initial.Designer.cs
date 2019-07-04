@@ -10,7 +10,7 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190703120937_Initial")]
+    [Migration("20190704112930_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -283,6 +283,21 @@ namespace TCGCollector.Migrations
                     b.HasIndex("CardCollectionID");
 
                     b.ToTable("UserCardCollection");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCard", b =>
+                {
+                    b.HasBaseType("TCGCollector.Models.Card");
+
+                    b.Property<int>("ConvertedRetreatCost");
+
+                    b.Property<string>("EvolvesFrom");
+
+                    b.Property<int>("HP");
+
+                    b.Property<int>("NationalPokedexNumber");
+
+                    b.HasDiscriminator().HasValue("PokemonCard");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.SpecialCard", b =>

@@ -283,6 +283,21 @@ namespace TCGCollector.Migrations
                     b.ToTable("UserCardCollection");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.PokemonCard", b =>
+                {
+                    b.HasBaseType("TCGCollector.Models.Card");
+
+                    b.Property<int>("ConvertedRetreatCost");
+
+                    b.Property<string>("EvolvesFrom");
+
+                    b.Property<int>("HP");
+
+                    b.Property<int>("NationalPokedexNumber");
+
+                    b.HasDiscriminator().HasValue("PokemonCard");
+                });
+
             modelBuilder.Entity("TCGCollector.Models.SpecialCard", b =>
                 {
                     b.HasBaseType("TCGCollector.Models.Card");

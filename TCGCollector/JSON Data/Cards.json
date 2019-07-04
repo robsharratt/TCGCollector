@@ -126,5 +126,506 @@
             "Put 2 basic Energy cards from your discard pile into your hand."
         ],
         "imageUrlHiRes": "https://images.pokemontcg.io/sm1/116_hires.png"
+    },
+    {
+        "id": "sm1-1",
+        "name": "Caterpie",
+        "imageUrl": "https://images.pokemontcg.io/sm1/1.png",
+        "subtype": "Basic",
+        "supertype": "Pokémon",
+        "hp": "50",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "1",
+        "artist": "Kanako Eo",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Nap",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "",
+                "text": "Heal 20 damage from this Pokémon."
+            },
+            {
+                "name": "Gnaw",
+                "cost": [
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "20",
+                "text": ""
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/1_hires.png",
+        "nationalPokedexNumber": 10,
+        "evolvesTo": [
+            "Metapod"
+        ]
+    },
+    {
+        "id": "sm1-2",
+        "name": "Metapod",
+        "imageUrl": "https://images.pokemontcg.io/sm1/2.png",
+        "subtype": "Stage 1",
+        "supertype": "Pokémon",
+        "evolvesFrom": "Caterpie",
+        "hp": "80",
+        "retreatCost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+        ],
+        "convertedRetreatCost": 3,
+        "number": "2",
+        "artist": "Yuka Morii",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Iron Defense",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "",
+                "text": "Flip a coin. If heads, prevent all damage done to this Pokémon by attacks during your opponent's next turn."
+            },
+            {
+                "name": "Bug Bite",
+                "cost": [
+                    "Colorless",
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 3,
+                "damage": "40",
+                "text": ""
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/2_hires.png",
+        "nationalPokedexNumber": 11,
+        "evolvesTo": [
+            "Butterfree"
+        ]
+    },
+    {
+        "id": "sm1-3",
+        "name": "Butterfree",
+        "imageUrl": "https://images.pokemontcg.io/sm1/3.png",
+        "subtype": "Stage 2",
+        "supertype": "Pokémon",
+        "evolvesFrom": "Metapod",
+        "hp": "130",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "3",
+        "artist": "chibi",
+        "rarity": "Rare",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Psy Bolt",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "30",
+                "text": "Flip a coin. If heads, your opponent's Active Pokémon is now Paralyzed."
+            },
+            {
+                "name": "Whirlwind",
+                "cost": [
+                    "Colorless",
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 3,
+                "damage": "80",
+                "text": "Your opponent switches their Active Pokémon with 1 of their Benched Pokémon."
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/3_hires.png",
+        "nationalPokedexNumber": 12
+    },
+    {
+        "id": "sm1-4",
+        "name": "Paras",
+        "imageUrl": "https://images.pokemontcg.io/sm1/4.png",
+        "subtype": "Basic",
+        "supertype": "Pokémon",
+        "hp": "60",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "4",
+        "artist": "Ayaka Yoshida",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Scratch",
+                "cost": [
+                    "Grass",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "30",
+                "text": ""
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/4_hires.png",
+        "nationalPokedexNumber": 46,
+        "evolvesTo": [
+            "Parasect"
+        ]
+    },
+    {
+        "id": "sm1-5",
+        "name": "Parasect",
+        "imageUrl": "https://images.pokemontcg.io/sm1/5.png",
+        "subtype": "Stage 1",
+        "supertype": "Pokémon",
+        "evolvesFrom": "Paras",
+        "hp": "110",
+        "retreatCost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+        ],
+        "convertedRetreatCost": 3,
+        "number": "5",
+        "artist": "Eri Yamaki",
+        "rarity": "Rare",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Fury Cutter",
+                "cost": [
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "10+",
+                "text": "Flip 3 coins. If 1 of them is heads, this attack does 20 more damage. If 2 of them are heads, this attack does 60 more damage. If all of them are heads, this attack does 120 more damage."
+            },
+            {
+                "name": "Mushroom Drain",
+                "cost": [
+                    "Grass",
+                    "Grass",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 3,
+                "damage": "70",
+                "text": "Heal 30 damage from this Pokémon."
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/5_hires.png",
+        "nationalPokedexNumber": 47
+    },
+    {
+        "id": "sm1-6",
+        "name": "Pinsir",
+        "imageUrl": "https://images.pokemontcg.io/sm1/6.png",
+        "subtype": "Basic",
+        "supertype": "Pokémon",
+        "hp": "110",
+        "retreatCost": [
+            "Colorless",
+            "Colorless"
+        ],
+        "convertedRetreatCost": 2,
+        "number": "6",
+        "artist": "DemizuPosuka",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Roof Fling",
+                "cost": [
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "",
+                "text": "Flip a coin. If heads, put your opponent's Active Pokémon and all cards attached to it into your opponent's hand."
+            },
+            {
+                "name": "Guillotine",
+                "cost": [
+                    "Grass",
+                    "Grass"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "50",
+                "text": ""
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/6_hires.png",
+        "nationalPokedexNumber": 127
+    },
+    {
+        "id": "sm1-7",
+        "name": "Surskit",
+        "imageUrl": "https://images.pokemontcg.io/sm1/7.png",
+        "subtype": "Basic",
+        "supertype": "Pokémon",
+        "hp": "50",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "7",
+        "artist": "Kyoko Umemoto",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Quick Attack",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "10+",
+                "text": "Flip a coin. If heads, this attack does 10 more damage."
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/7_hires.png",
+        "nationalPokedexNumber": 283,
+        "evolvesTo": [
+            "Masquerain"
+        ]
+    },
+    {
+        "id": "sm1-8",
+        "name": "Masquerain",
+        "imageUrl": "https://images.pokemontcg.io/sm1/8.png",
+        "subtype": "Stage 1",
+        "supertype": "Pokémon",
+        "evolvesFrom": "Surskit",
+        "hp": "90",
+        "number": "8",
+        "artist": "miki kudo",
+        "rarity": "Rare",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Struggle Bug",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "30",
+                "text": "Move an Energy from your opponent's Active Pokémon to 1 of their Benched Pokémon."
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/8_hires.png",
+        "nationalPokedexNumber": 284
+    },
+    {
+        "id": "sm1-9",
+        "name": "Rowlet",
+        "imageUrl": "https://images.pokemontcg.io/sm1/9.png",
+        "subtype": "Basic",
+        "supertype": "Pokémon",
+        "hp": "60",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "9",
+        "artist": "Megumi Mizutani",
+        "rarity": "Common",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Tackle",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "10",
+                "text": ""
+            },
+            {
+                "name": "Leafage",
+                "cost": [
+                    "Grass",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 2,
+                "damage": "20",
+                "text": ""
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/9_hires.png",
+        "nationalPokedexNumber": 722,
+        "evolvesTo": [
+            "Dartrix"
+        ]
+    },
+    {
+        "id": "sm1-10",
+        "name": "Dartrix",
+        "imageUrl": "https://images.pokemontcg.io/sm1/10.png",
+        "subtype": "Stage 1",
+        "supertype": "Pokémon",
+        "evolvesFrom": "Rowlet",
+        "hp": "80",
+        "retreatCost": [
+            "Colorless"
+        ],
+        "convertedRetreatCost": 1,
+        "number": "10",
+        "artist": "Mizue",
+        "rarity": "Uncommon",
+        "series": "Sun & Moon",
+        "set": "Sun & Moon",
+        "setCode": "sm1",
+        "types": [
+            "Grass"
+        ],
+        "attacks": [
+            {
+                "name": "Sharp Blade Quill",
+                "cost": [
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 1,
+                "damage": "",
+                "text": "This attack does 20 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+            },
+            {
+                "name": "Leaf Blade",
+                "cost": [
+                    "Grass",
+                    "Colorless",
+                    "Colorless"
+                ],
+                "convertedEnergyCost": 3,
+                "damage": "50+",
+                "text": "Flip a coin. If heads, this attack does 20 more damage."
+            }
+        ],
+        "weaknesses": [
+            {
+                "type": "Fire",
+                "value": "×2"
+            }
+        ],
+        "imageUrlHiRes": "https://images.pokemontcg.io/sm1/10_hires.png",
+        "nationalPokedexNumber": 723,
+        "evolvesTo": [
+            "Decidueye"
+        ]
     }
 ]

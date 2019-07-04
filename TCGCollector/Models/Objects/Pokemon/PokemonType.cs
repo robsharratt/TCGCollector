@@ -10,5 +10,7 @@ namespace TCGCollector.Models
         public string PokemonTypeName { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
+
+        public ICollection<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
     }
 }

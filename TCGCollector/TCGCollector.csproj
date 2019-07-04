@@ -65,5 +65,34 @@
     <Content Remove="wwwroot\Images\Sets\base2logo.png" />
     <Content Remove="wwwroot\Images\Sets\base1symbol.png" />
     <Content Remove="wwwroot\Images\Sets\base1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex8symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ex5logo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex4symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ex4logo.png" />
+    <Content Remove="wwwroot\Images\Sets\npsymbol.png" />
+    <Content Remove="wwwroot\Images\Sets\nplogo.png" />
+    <Content Remove="wwwroot\Images\Sets\ex3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\ex3logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base6logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo4symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo4logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo3symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo3logo.png" />
+    <Content Remove="wwwroot\Images\Sets\si1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\si1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo2symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo2logo.png" />
+    <Content Remove="wwwroot\Images\Sets\neo1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\neo1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\gym2logo.png" />
+    <Content Remove="wwwroot\Images\Sets\gym1symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\gym1logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base5symbol.png" />
+    <Content Remove="wwwroot\Images\Sets\base5logo.png" />
+    <Content Remove="wwwroot\Images\Sets\base4symbol.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm17.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm19_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm110.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm110_hires.png" />
   </ItemGroup>
 </Project>
