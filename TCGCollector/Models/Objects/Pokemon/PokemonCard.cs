@@ -21,8 +21,8 @@ namespace TCGCollector.Models
         //Only appears on Stage 1 or Stage 2
         public string EvolvesFrom { get; set; }
         //Only appears on Basic or Stage 1
-        //EvolvesTo structure
 
+        public ICollection<PokemonCardEvolvesTo> PokemonCardEvolvesTos { get; set; }
         public ICollection<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
     }
 }

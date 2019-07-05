@@ -63,21 +63,43 @@ namespace TCGCollector.Models
                 .HasOne(pcpt => pcpt.PokemonType)
                 .WithMany(pt => pt.PokemonCardPokemonTypes)
                 .HasForeignKey(pcpt => pcpt.PokemonTypeID);
+
+            //PokemonCardEvolvesTo Mamy to Many Relationship
+            modelBuilder.Entity<PokemonCardEvolvesTo>()
+                .HasKey(pcet => new { pcet.CardID, pcet.EvolvesToID });
+            modelBuilder.Entity<PokemonCardEvolvesTo>()
+                .HasOne(pcet => pcet.PokemonCard)
+                .WithMany(pc => pc.PokemonCardEvolvesTos)
+                .HasForeignKey(pcet => pcet.CardID);
+            modelBuilder.Entity<PokemonCardEvolvesTo>()
+                .HasOne(pcet => pcet.EvolvesTo)
+                .WithMany(et => et.PokemonCardEvolvesTos)
+                .HasForeignKey(pcet => pcet.EvolvesToID);
         }
 
+        //Card Data
         public DbSet<CardCat> CardCats { get; set; }
         public DbSet<CardType> CardTypes { get; set; }
         public DbSet<CardRarity> CardRarities { get; set; }
         public DbSet<SetSeries> SetSeries { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
+        public DbSet<EvolvesTo> EvolvesTos { get; set; }
         public DbSet<Card> Cards { get; set; }
-        public DbSet<SpecialCardText> SpecialCardTexts { get; set; }
-        public DbSet<SpecialCard> SpecialCards { get; set; }
-        public DbSet<TrainerCardText> TrainerCardTexts { get; set; }
-        public DbSet<TrainerCard> TrainerCards { get; set; }
         public DbSet<PokemonCard> PokemonCards { get; set; }
+        public DbSet<SpecialCard> SpecialCards { get; set; }
+        public DbSet<TrainerCard> TrainerCards { get; set; }
+        public DbSet<SpecialCardText> SpecialCardTexts { get; set; }
+        public DbSet<TrainerCardText> TrainerCardTexts { get; set; }
+        public DbSet<SpecialCardSpecialCardText> SpecialCardSpecialCardTexts { get; set; }
+        public DbSet<TrainerCardTrainerCardText> TrainerCardTrainerCardTexts { get; set; }
+        public DbSet<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
+        public DbSet<PokemonCardEvolvesTo> PokemonCardEvolvesTos { get; set; }
+
+        //Card Collections
         public DbSet<CardCollection> CardCollections { get; set; }
+
+        //Adminsitration
         public DbSet<User> Users { get; set; }
     }
 }

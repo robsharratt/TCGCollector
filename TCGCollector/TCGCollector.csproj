@@ -95,4 +95,9 @@
     <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm110.png" />
     <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm110_hires.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20190704112930_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190704112930_Initial.cs" />
+    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+  </ItemGroup>
 </Project>
