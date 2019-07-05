@@ -124,6 +124,20 @@ namespace TCGCollector.Migrations
                     b.ToTable("CardTypes");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.EnergyType", b =>
+                {
+                    b.Property<int>("EnergyTypeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("EnergyTypeName");
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.HasKey("EnergyTypeID");
+
+                    b.ToTable("EnergyTypes");
+                });
+
             modelBuilder.Entity("TCGCollector.Models.EvolvesTo", b =>
                 {
                     b.Property<int>("EvolvesToID")
@@ -157,11 +171,28 @@ namespace TCGCollector.Migrations
 
                     b.Property<int>("PokemonTypeID");
 
+                    b.Property<int?>("EnergyTypeID");
+
                     b.HasKey("CardID", "PokemonTypeID");
+
+                    b.HasIndex("EnergyTypeID");
 
                     b.HasIndex("PokemonTypeID");
 
                     b.ToTable("PokemonCardPokemonTypes");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardRetreatCost", b =>
+                {
+                    b.Property<int>("CardID");
+
+                    b.Property<int>("EnergyTypeID");
+
+                    b.HasKey("CardID", "EnergyTypeID");
+
+                    b.HasIndex("EnergyTypeID");
+
+                    b.ToTable("PokemonCardRetreatCosts");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.PokemonType", b =>
@@ -391,9 +422,26 @@ namespace TCGCollector.Migrations
                         .HasForeignKey("CardID")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("TCGCollector.Models.EnergyType")
+                        .WithMany("PokemonCardPokemonTypes")
+                        .HasForeignKey("EnergyTypeID");
+
                     b.HasOne("TCGCollector.Models.PokemonType", "PokemonType")
                         .WithMany("PokemonCardPokemonTypes")
                         .HasForeignKey("PokemonTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardRetreatCost", b =>
+                {
+                    b.HasOne("TCGCollector.Models.PokemonCard", "PokemonCard")
+                        .WithMany("PokemonCardRetreatCosts")
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TCGCollector.Models.EnergyType", "EnergyType")
+                        .WithMany("PokemonCardRetreatCosts")
+                        .HasForeignKey("EnergyTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

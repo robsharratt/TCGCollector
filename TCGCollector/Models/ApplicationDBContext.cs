@@ -75,6 +75,18 @@ namespace TCGCollector.Models
                 .HasOne(pcet => pcet.EvolvesTo)
                 .WithMany(et => et.PokemonCardEvolvesTos)
                 .HasForeignKey(pcet => pcet.EvolvesToID);
+
+            //PokemonCardPokemonType Mamy to Many Relationship
+            modelBuilder.Entity<PokemonCardRetreatCost>()
+                .HasKey(pcrc => new { pcrc.CardID, pcrc.EnergyTypeID });
+            modelBuilder.Entity<PokemonCardRetreatCost>()
+                .HasOne(pcrc => pcrc.PokemonCard)
+                .WithMany(pc => pc.PokemonCardRetreatCosts)
+                .HasForeignKey(pcrc => pcrc.CardID);
+            modelBuilder.Entity<PokemonCardRetreatCost>()
+                .HasOne(pcrc => pcrc.EnergyType)
+                .WithMany(rc => rc.PokemonCardRetreatCosts)
+                .HasForeignKey(pcrc => pcrc.EnergyTypeID);
         }
 
         //Card Data
@@ -84,6 +96,7 @@ namespace TCGCollector.Models
         public DbSet<SetSeries> SetSeries { get; set; }
         public DbSet<Set> Sets { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
+        public DbSet<EnergyType> EnergyTypes { get; set; }
         public DbSet<EvolvesTo> EvolvesTos { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<PokemonCard> PokemonCards { get; set; }
@@ -95,6 +108,7 @@ namespace TCGCollector.Models
         public DbSet<TrainerCardTrainerCardText> TrainerCardTrainerCardTexts { get; set; }
         public DbSet<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
         public DbSet<PokemonCardEvolvesTo> PokemonCardEvolvesTos { get; set; }
+        public DbSet<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
 
         //Card Collections
         public DbSet<CardCollection> CardCollections { get; set; }

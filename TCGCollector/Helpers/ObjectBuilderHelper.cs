@@ -383,7 +383,7 @@ namespace TCGCollector.Helpers
         //    return CardObj;
         //}
 
-        //Build a CardCat Object from JSON
+        //Build a PokemoneType Object from JSON
         public static void BuildPokemonTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
         {
             JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
@@ -394,7 +394,7 @@ namespace TCGCollector.Helpers
             }
         }
 
-        //CardCat Object Helper with create if not exists
+        //PokemonType Object Helper with create if not exists
         public static PokemonType GetPokemonTypeByName(ApplicationDbContext ctx, string PokemonTypeName)
         {
             PokemonType PokemonTypeObj;
@@ -411,6 +411,36 @@ namespace TCGCollector.Helpers
             ctx.SaveChanges();
 
             return PokemonTypeObj;
+        }
+
+        //Build a EnergyType Object from JSON
+        public static void BuildEnergyTypesFromJSON(ApplicationDbContext ctx, string JSONPath)
+        {
+            JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
+
+            foreach (var result in obj)
+            {
+                GetEnergyTypeByName(ctx, (string)result["energytypename"]);
+            }
+        }
+
+        //EnergyType Object Helper with create if not exists
+        public static EnergyType GetEnergyTypeByName(ApplicationDbContext ctx, string EnergyTypeName)
+        {
+            EnergyType EnergyTypeObj;
+            //Check if object already exists and create it if it does not
+            EnergyTypeObj = ctx.EnergyTypes.SingleOrDefault(m => m.EnergyTypeName.Equals(EnergyTypeName))
+                ?? new EnergyType()
+                {
+                    EnergyTypeName = EnergyTypeName,
+                    LastUpdateDate = DateTime.Now
+                };
+
+            //Put Values here that Need to Update otherwise if the record exists then it'll not be updated
+            ctx.AddOrUpdate(EnergyTypeObj);
+            ctx.SaveChanges();
+
+            return EnergyTypeObj;
         }
 
         //Build a Set Object from JSON

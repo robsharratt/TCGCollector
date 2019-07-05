@@ -20,9 +20,9 @@ namespace TCGCollector.Models
         public int NationalPokedexNumber { get; set; }
         //Only appears on Stage 1 or Stage 2
         public string EvolvesFrom { get; set; }
-        //Only appears on Basic or Stage 1
 
         public ICollection<PokemonCardEvolvesTo> PokemonCardEvolvesTos { get; set; }
         public ICollection<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
+        public ICollection<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
     }
 }

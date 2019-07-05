@@ -62,6 +62,14 @@ namespace TCGCollector.Models
                 context.SaveChanges();
             }
 
+            //Create Energy Types
+            if (!context.EnergyTypes.Any())
+            {
+                ObjectBuilderHelper.BuildEnergyTypesFromJSON(context, @"JSON Data/EnergyTypes.json");
+
+                context.SaveChanges();
+            }
+
             //No Longer Required as included in Set create
             //if (!context.SetSeries.Any())
             //{
