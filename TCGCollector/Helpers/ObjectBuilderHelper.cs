@@ -205,6 +205,8 @@ namespace TCGCollector.Helpers
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                         LastUpdateDate = DateTime.Now
                                     };
+
+                                //SpecialCardText
                                 if (result["text"] != null && result["text"].HasValues)
                                 {
                                     List<SpecialCardSpecialCardText> specialCardCardTexts = new List<SpecialCardSpecialCardText>();
@@ -304,6 +306,58 @@ namespace TCGCollector.Helpers
                             }
 
                             PokemonCardObj.PokemonCardEvolvesTos = pokemonCardEvolvesTos;
+                        }
+
+                        //RetreatCosts
+                        if (result["retreatCost"] != null && result["retreatCost"].HasValues)
+                        {
+                            List<PokemonCardRetreatCost> pokemonCardRetreatCosts = new List<PokemonCardRetreatCost>();
+                            foreach (var textitem in result["retreatCost"])
+                            {
+                                EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)textitem);
+
+                                pokemonCardRetreatCosts.Add(
+                                    new PokemonCardRetreatCost
+                                    {
+                                        PokemonCard = PokemonCardObj,
+                                        EnergyType = EnergyTypeObj
+                                    }
+                                );
+                            }
+
+                            PokemonCardObj.PokemonCardRetreatCosts = pokemonCardRetreatCosts;
+                        }
+
+                        //Weaknesses
+                        if (result["weaknesses"] != null && result["weaknesses"].HasValues)
+                        {
+                            //JArray obj2 = JArray.Parse(result["weaknesses"]);
+                            //Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>((string)result["weaknesses"]);
+                            JArray obj2 = (JArray)result.SelectToken("weaknesses");
+
+                            List<PokemonCardWeakness> pokemonCardWeaknesses = new List<PokemonCardWeakness>();
+
+                            foreach (var result2 in obj2)
+                            {
+                                EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+                                Weakness WeaknessObj = ctx.Weaknesses.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.WeaknessValue.Equals((string)result2["value"]))
+                                    ?? new Weakness()
+                                    {
+                                        EnergyType = EnergyTypeObj,
+                                        WeaknessValue = (string)result2["value"],
+                                        LastUpdateDate = DateTime.Now
+                                    };
+
+                                pokemonCardWeaknesses.Add(
+                                    new PokemonCardWeakness
+                                    {
+                                        PokemonCard = PokemonCardObj,
+                                        Weakness = WeaknessObj
+                                    }
+                                    );
+                            }
+
+                            PokemonCardObj.PokemonCardWeaknesses = pokemonCardWeaknesses;
                         }
 
                         ctx.AddOrUpdate(PokemonCardObj);
@@ -478,8 +532,8 @@ namespace TCGCollector.Helpers
                         SetCode = (string)result["code"],
                         SetPTCGOCode = (string)result["ptcgoCode"],
                         SetSeries = ObjectBuilderHelper.GetSetSeriesByName(ctx, (string)result["series"]),
-                    //SetSeries = context.SetSeries.FirstOrDefault(m => m.SetSeriesName.Equals("Sun & Moon")),
-                    SetTotalCards = (int)result["totalCards"],
+                        //SetSeries = context.SetSeries.FirstOrDefault(m => m.SetSeriesName.Equals("Sun & Moon")),
+                        SetTotalCards = (int)result["totalCards"],
                         SetStandard = (bool)result["standardLegal"],
                         SetExpanded = (bool)result["expandedLegal"],
                         SetSymbolURL = (string)result["symbolUrl"],

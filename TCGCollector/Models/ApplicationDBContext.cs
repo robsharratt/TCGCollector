@@ -76,17 +76,29 @@ namespace TCGCollector.Models
                 .WithMany(et => et.PokemonCardEvolvesTos)
                 .HasForeignKey(pcet => pcet.EvolvesToID);
 
+            //PokemonCardWeakness Mamy to Many Relationship
+            modelBuilder.Entity<PokemonCardWeakness>()
+                .HasKey(pcw => new { pcw.CardID, pcw.WeaknessID });
+            modelBuilder.Entity<PokemonCardWeakness>()
+                .HasOne(pcw => pcw.PokemonCard)
+                .WithMany(w => w.PokemonCardWeaknesses)
+                .HasForeignKey(pcw => pcw.CardID);
+            modelBuilder.Entity<PokemonCardWeakness>()
+                .HasOne(pcw => pcw.Weakness)
+                .WithMany(w => w.PokemonCardWeakness)
+                .HasForeignKey(pcw => pcw.WeaknessID);
+
             //PokemonCardPokemonType Mamy to Many Relationship
-            modelBuilder.Entity<PokemonCardRetreatCost>()
-                .HasKey(pcrc => new { pcrc.CardID, pcrc.EnergyTypeID });
-            modelBuilder.Entity<PokemonCardRetreatCost>()
-                .HasOne(pcrc => pcrc.PokemonCard)
-                .WithMany(pc => pc.PokemonCardRetreatCosts)
-                .HasForeignKey(pcrc => pcrc.CardID);
-            modelBuilder.Entity<PokemonCardRetreatCost>()
-                .HasOne(pcrc => pcrc.EnergyType)
-                .WithMany(rc => rc.PokemonCardRetreatCosts)
-                .HasForeignKey(pcrc => pcrc.EnergyTypeID);
+            //modelBuilder.Entity<PokemonCardRetreatCost>()
+            //    .HasKey(pcrc => new { pcrc.CardID, pcrc.EnergyTypeID });
+            //modelBuilder.Entity<PokemonCardRetreatCost>()
+            //    .HasOne(pcrc => pcrc.PokemonCard)
+            //    .WithMany(pc => pc.PokemonCardRetreatCosts)
+            //    .HasForeignKey(pcrc => pcrc.CardID);
+            //modelBuilder.Entity<PokemonCardRetreatCost>()
+            //    .HasOne(pcrc => pcrc.EnergyType)
+            //    .WithMany(rc => rc.PokemonCardRetreatCosts)
+            //    .HasForeignKey(pcrc => pcrc.EnergyTypeID);
         }
 
         //Card Data
@@ -98,6 +110,7 @@ namespace TCGCollector.Models
         public DbSet<PokemonType> PokemonTypes { get; set; }
         public DbSet<EnergyType> EnergyTypes { get; set; }
         public DbSet<EvolvesTo> EvolvesTos { get; set; }
+        public DbSet<Weakness> Weaknesses { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<PokemonCard> PokemonCards { get; set; }
         public DbSet<SpecialCard> SpecialCards { get; set; }

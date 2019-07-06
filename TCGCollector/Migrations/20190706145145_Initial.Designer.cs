@@ -10,7 +10,7 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190705161159_Initial")]
+    [Migration("20190706145145_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -186,15 +186,37 @@ namespace TCGCollector.Migrations
 
             modelBuilder.Entity("TCGCollector.Models.PokemonCardRetreatCost", b =>
                 {
+                    b.Property<int>("PokemonCardRetreatCostID")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("CardID");
 
                     b.Property<int>("EnergyTypeID");
 
-                    b.HasKey("CardID", "EnergyTypeID");
+                    b.HasKey("PokemonCardRetreatCostID");
+
+                    b.HasIndex("CardID");
 
                     b.HasIndex("EnergyTypeID");
 
                     b.ToTable("PokemonCardRetreatCosts");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardWeakness", b =>
+                {
+                    b.Property<int>("CardID");
+
+                    b.Property<int>("WeaknessID");
+
+                    b.Property<int?>("EnergyTypeID");
+
+                    b.HasKey("CardID", "WeaknessID");
+
+                    b.HasIndex("EnergyTypeID");
+
+                    b.HasIndex("WeaknessID");
+
+                    b.ToTable("PokemonCardWeakness");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.PokemonType", b =>
@@ -356,6 +378,24 @@ namespace TCGCollector.Migrations
                     b.ToTable("UserCardCollection");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.Weakness", b =>
+                {
+                    b.Property<int>("WeaknessID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EnergyTypeID");
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("WeaknessValue");
+
+                    b.HasKey("WeaknessID");
+
+                    b.HasIndex("EnergyTypeID");
+
+                    b.ToTable("Weaknesses");
+                });
+
             modelBuilder.Entity("TCGCollector.Models.PokemonCard", b =>
                 {
                     b.HasBaseType("TCGCollector.Models.Card");
@@ -442,8 +482,25 @@ namespace TCGCollector.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("TCGCollector.Models.EnergyType", "EnergyType")
-                        .WithMany("PokemonCardRetreatCosts")
+                        .WithMany()
                         .HasForeignKey("EnergyTypeID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardWeakness", b =>
+                {
+                    b.HasOne("TCGCollector.Models.PokemonCard", "PokemonCard")
+                        .WithMany("PokemonCardWeaknesses")
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TCGCollector.Models.EnergyType")
+                        .WithMany("PokemonCardWeaknesses")
+                        .HasForeignKey("EnergyTypeID");
+
+                    b.HasOne("TCGCollector.Models.Weakness", "Weakness")
+                        .WithMany("PokemonCardWeakness")
+                        .HasForeignKey("WeaknessID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -490,6 +547,14 @@ namespace TCGCollector.Migrations
                     b.HasOne("TCGCollector.Models.User", "User")
                         .WithMany("UserCardCollections")
                         .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.Weakness", b =>
+                {
+                    b.HasOne("TCGCollector.Models.EnergyType", "EnergyType")
+                        .WithMany()
+                        .HasForeignKey("EnergyTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -12,6 +12,8 @@ namespace TCGCollector.Models
         public DateTime LastUpdateDate { get; set; }
 
         public ICollection<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
-        public ICollection<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
+        public ICollection<PokemonCardWeakness> PokemonCardWeaknesses { get; set; }
+
+        //public ICollection<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
     }
 }
