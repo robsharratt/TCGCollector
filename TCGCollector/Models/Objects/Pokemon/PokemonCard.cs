@@ -25,5 +25,6 @@ namespace TCGCollector.Models
         public ICollection<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
         public ICollection<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
         public ICollection<PokemonCardWeakness> PokemonCardWeaknesses { get; set; }
+        public ICollection<PokemonCardAttack> PokemonCardAttacks { get; set; }
     }
 }

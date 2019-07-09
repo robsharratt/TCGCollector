@@ -16,7 +16,7 @@ namespace TCGCollector.Models
             //    .Property(b => b.ConvertedRetreatCost)
             //    .HasDefaultValue(0);
 
-            //UserCardCollection Mamy to Many Relationship
+            //UserCardCollection Many to Many Relationship
             modelBuilder.Entity<UserCardCollection>()
                 .HasKey(ucc => new { ucc.UserID, ucc.CardCollectionID });
             modelBuilder.Entity<UserCardCollection>()
@@ -28,7 +28,7 @@ namespace TCGCollector.Models
                 .WithMany(cc => cc.UserCardCollections)
                 .HasForeignKey(ucc => ucc.CardCollectionID);
 
-            //SpecialCardSpecialCardText Mamy to Many Relationship
+            //SpecialCardSpecialCardText Many to Many Relationship
             modelBuilder.Entity<SpecialCardSpecialCardText>()
                 .HasKey(scsct => new { scsct.CardID, scsct.CardTextID });
             modelBuilder.Entity<SpecialCardSpecialCardText>()
@@ -40,7 +40,7 @@ namespace TCGCollector.Models
                 .WithMany(sct => sct.SpecialCardSpecialCardTexts)
                 .HasForeignKey(scsct => scsct.CardTextID);
 
-            //TrainerCardTrainerCardText Mamy to Many Relationship
+            //TrainerCardTrainerCardText Many to Many Relationship
             modelBuilder.Entity<TrainerCardTrainerCardText>()
                 .HasKey(tctct => new { tctct.CardID, tctct.CardTextID });
             modelBuilder.Entity<TrainerCardTrainerCardText>()
@@ -52,7 +52,7 @@ namespace TCGCollector.Models
                 .WithMany(tct => tct.TrainerCardTrainerCardTexts)
                 .HasForeignKey(tctct => tctct.CardTextID);
 
-            //PokemonCardPokemonType Mamy to Many Relationship
+            //PokemonCardPokemonType Many to Many Relationship
             modelBuilder.Entity<PokemonCardPokemonType>()
                 .HasKey(pcpt => new { pcpt.CardID, pcpt.PokemonTypeID });
             modelBuilder.Entity<PokemonCardPokemonType>()
@@ -64,7 +64,7 @@ namespace TCGCollector.Models
                 .WithMany(pt => pt.PokemonCardPokemonTypes)
                 .HasForeignKey(pcpt => pcpt.PokemonTypeID);
 
-            //PokemonCardEvolvesTo Mamy to Many Relationship
+            //PokemonCardEvolvesTo Many to Many Relationship
             modelBuilder.Entity<PokemonCardEvolvesTo>()
                 .HasKey(pcet => new { pcet.CardID, pcet.EvolvesToID });
             modelBuilder.Entity<PokemonCardEvolvesTo>()
@@ -76,7 +76,7 @@ namespace TCGCollector.Models
                 .WithMany(et => et.PokemonCardEvolvesTos)
                 .HasForeignKey(pcet => pcet.EvolvesToID);
 
-            //PokemonCardWeakness Mamy to Many Relationship
+            //PokemonCardWeakness Many to Many Relationship
             modelBuilder.Entity<PokemonCardWeakness>()
                 .HasKey(pcw => new { pcw.CardID, pcw.WeaknessID });
             modelBuilder.Entity<PokemonCardWeakness>()
@@ -85,10 +85,22 @@ namespace TCGCollector.Models
                 .HasForeignKey(pcw => pcw.CardID);
             modelBuilder.Entity<PokemonCardWeakness>()
                 .HasOne(pcw => pcw.Weakness)
-                .WithMany(w => w.PokemonCardWeakness)
+                .WithMany(w => w.PokemonCardWeaknesses)
                 .HasForeignKey(pcw => pcw.WeaknessID);
 
-            //PokemonCardPokemonType Mamy to Many Relationship
+            //PokemonCardAttack Many to Many Relationship
+            modelBuilder.Entity<PokemonCardAttack>()
+                .HasKey(pca => new { pca.CardID, pca.AttackID });
+            modelBuilder.Entity<PokemonCardAttack>()
+                .HasOne(pca => pca.PokemonCard)
+                .WithMany(a => a.PokemonCardAttacks)
+                .HasForeignKey(pca => pca.CardID);
+            modelBuilder.Entity<PokemonCardAttack>()
+                .HasOne(pca => pca.Attack)
+                .WithMany(a => a.PokemonCardAttacks)
+                .HasForeignKey(pca => pca.AttackID);
+
+            //PokemonCardPokemonType Many to Many Relationship
             //modelBuilder.Entity<PokemonCardRetreatCost>()
             //    .HasKey(pcrc => new { pcrc.CardID, pcrc.EnergyTypeID });
             //modelBuilder.Entity<PokemonCardRetreatCost>()
@@ -111,6 +123,7 @@ namespace TCGCollector.Models
         public DbSet<EnergyType> EnergyTypes { get; set; }
         public DbSet<EvolvesTo> EvolvesTos { get; set; }
         public DbSet<Weakness> Weaknesses { get; set; }
+        public DbSet<Attack> Attacks { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<PokemonCard> PokemonCards { get; set; }
         public DbSet<SpecialCard> SpecialCards { get; set; }
@@ -122,6 +135,9 @@ namespace TCGCollector.Models
         public DbSet<PokemonCardPokemonType> PokemonCardPokemonTypes { get; set; }
         public DbSet<PokemonCardEvolvesTo> PokemonCardEvolvesTos { get; set; }
         public DbSet<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
+        public DbSet<PokemonCardWeakness> PokemonCardWeaknesses { get; set; }
+        public DbSet<PokemonCardAttack> PokemonCardAttacks { get; set; }
+        public DbSet<AttackEnergy> AttackEnergies { get; set; }
 
         //Card Collections
         public DbSet<CardCollection> CardCollections { get; set; }

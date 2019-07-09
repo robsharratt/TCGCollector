@@ -360,6 +360,59 @@ namespace TCGCollector.Helpers
                             PokemonCardObj.PokemonCardWeaknesses = pokemonCardWeaknesses;
                         }
 
+                        //Attack
+                        if (result["attacks"] != null && result["attacks"].HasValues)
+                        {
+                            JArray obj2 = (JArray)result.SelectToken("attacks");
+
+                            List<PokemonCardAttack> pokemonCardAttacks = new List<PokemonCardAttack>();
+
+                            foreach (var result2 in obj2)
+                            {
+                                //EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+                                Attack AttackObj = ctx.Attacks.SingleOrDefault(m => m.AttackName.Equals((string)result2["name"]) && m.AttackText.Equals((string)result2["text"]))
+                                    ?? new Attack()
+                                    {
+                                        //EnergyType = EnergyTypeObj,
+                                        AttackName = (string)result2["name"],
+                                        AttackConvertedEnergyCost = (int)result2["convertedEnergyCost"],
+                                        AttackDamage = (string)result2["damage"],
+                                        AttackText = (string)result2["text"],
+                                        LastUpdateDate = DateTime.Now
+                                    };
+
+                                //Energy for Attack
+                                if (result2["cost"] != null && result2["cost"].HasValues)
+                                {
+                                    List<AttackEnergy> attackEnergies = new List<AttackEnergy>();
+                                    foreach (var textitem in result2["cost"])
+                                    {
+                                        EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)textitem);
+
+                                        attackEnergies.Add(
+                                            new AttackEnergy
+                                            {
+                                                Attack = AttackObj,
+                                                EnergyType = EnergyTypeObj
+                                            }
+                                        );
+                                    }
+
+                                    AttackObj.AttackEnergies = attackEnergies;
+                                }
+
+                                pokemonCardAttacks.Add(
+                                    new PokemonCardAttack
+                                    {
+                                        PokemonCard = PokemonCardObj,
+                                        Attack = AttackObj
+                                    }
+                                    );
+                            }
+
+                            PokemonCardObj.PokemonCardAttacks = pokemonCardAttacks;
+                        }
+
                         ctx.AddOrUpdate(PokemonCardObj);
                         break;
                     case "Trainer":

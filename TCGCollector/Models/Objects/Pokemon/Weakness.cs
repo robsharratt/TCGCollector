@@ -13,6 +13,6 @@ namespace TCGCollector.Models
         [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
 
-        public ICollection<PokemonCardWeakness> PokemonCardWeakness { get; set; }
+        public ICollection<PokemonCardWeakness> PokemonCardWeaknesses { get; set; }
     }
 }
