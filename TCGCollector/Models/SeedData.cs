@@ -103,7 +103,12 @@ namespace TCGCollector.Models
             //Create Cards
             if (!context.Cards.Any())
             {
-                ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
+                string[] fileEntries = Directory.GetFiles("JSON Data/Cards/", "*.json");
+                foreach (string fileName in fileEntries)
+                {
+                    ObjectBuilderHelper.BuildCardsFromJSON(context, env, fileName);
+                }
+                //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards.json");
                 //context.Cards.Add(
                 //    new Card
