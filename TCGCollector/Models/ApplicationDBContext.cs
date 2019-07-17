@@ -12,6 +12,7 @@ namespace TCGCollector.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //
             //modelBuilder.Entity<PokemonCard>()
             //    .Property(b => b.ConvertedRetreatCost)
             //    .HasDefaultValue(0);
