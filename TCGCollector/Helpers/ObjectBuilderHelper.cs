@@ -34,7 +34,7 @@ namespace TCGCollector.Helpers
             CardCat CardCatObj;
             //Check if object already exists and create it if it does not
             CardCatObj = ctx.CardCats.SingleOrDefault(m => m.CardCatName.Equals(CardCatName))
-                ?? new CardCat()
+                ?? new CardCat
                 {
                     CardCatName = CardCatName,
                     LastUpdateDate = DateTime.Now
@@ -53,7 +53,7 @@ namespace TCGCollector.Helpers
             CardRarity CardRarityObj;
             //Check if object already exists and create it if it does not
             CardRarityObj = ctx.CardRarities.SingleOrDefault(m => m.CardRarityName.Equals(CardRarityName))
-                ?? new CardRarity()
+                ?? new CardRarity
                 {
                     CardRarityName = CardRarityName,
                     LastUpdateDate = DateTime.Now
@@ -83,7 +83,7 @@ namespace TCGCollector.Helpers
             CardType CardTypeObj;
             //Check if object already exists and create it if it does not
             CardTypeObj = ctx.CardTypes.SingleOrDefault(m => m.CardTypeName.Equals(CardTypeName))
-                ?? new CardType()
+                ?? new CardType
                 {
                     CardTypeName = CardTypeName,
                     LastUpdateDate = DateTime.Now
@@ -170,7 +170,7 @@ namespace TCGCollector.Helpers
                             case "Basic":
                                 //Basic Energy
                                 CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
-                                    ?? new Card()
+                                    ?? new Card
                                     {
                                         CardName = (string)result["name"],
                                         CardImageURL = (string)result["imageUrl"],
@@ -190,7 +190,7 @@ namespace TCGCollector.Helpers
                             case "Special":
                                 //Special Energy
                                 SpecialCardObj = ctx.SpecialCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
-                                    ?? new SpecialCard()
+                                    ?? new SpecialCard
                                     {
                                         CardName = (string)result["name"],
                                         CardImageURL = (string)result["imageUrl"],
@@ -213,7 +213,7 @@ namespace TCGCollector.Helpers
                                     foreach (var textitem in result["text"])
                                     {
                                         SpecialCardText SpecialCardTextObj = ctx.SpecialCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
-                                            ?? new SpecialCardText()
+                                            ?? new SpecialCardText
                                             {
                                                 CardTextLine = textitem.ToString(),
                                                 LastUpdateDate = DateTime.Now
@@ -247,7 +247,7 @@ namespace TCGCollector.Helpers
                         //}
 
                         PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
-                            ?? new PokemonCard()
+                            ?? new PokemonCard
                             {
                                 CardName = (string)result["name"],
                                 CardImageURL = (string)result["imageUrl"],
@@ -341,7 +341,7 @@ namespace TCGCollector.Helpers
                             {
                                 EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
                                 Weakness WeaknessObj = ctx.Weaknesses.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.WeaknessValue.Equals((string)result2["value"]))
-                                    ?? new Weakness()
+                                    ?? new Weakness
                                     {
                                         EnergyType = EnergyTypeObj,
                                         WeaknessValue = (string)result2["value"],
@@ -371,7 +371,7 @@ namespace TCGCollector.Helpers
                             {
                                 //EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
                                 Attack AttackObj = ctx.Attacks.SingleOrDefault(m => m.AttackName.Equals((string)result2["name"]) && m.AttackText.Equals((string)result2["text"]))
-                                    ?? new Attack()
+                                    ?? new Attack
                                     {
                                         //EnergyType = EnergyTypeObj,
                                         AttackName = (string)result2["name"],
@@ -417,7 +417,7 @@ namespace TCGCollector.Helpers
                         break;
                     case "Trainer":
                         TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
-                            ?? new TrainerCard()
+                            ?? new TrainerCard
                             {
                                 CardName = (string)result["name"],
                                 CardImageURL = (string)result["imageUrl"],
@@ -439,7 +439,7 @@ namespace TCGCollector.Helpers
                             foreach (var textitem in result["text"])
                             {
                                 TrainerCardText TrainerCardTextObj = ctx.TrainerCardTexts.SingleOrDefault(m => m.CardTextLine.Equals((string)textitem))
-                                    ?? new TrainerCardText()
+                                    ?? new TrainerCardText
                                     {
                                         CardTextLine = textitem.ToString(),
                                         LastUpdateDate = DateTime.Now
@@ -507,7 +507,7 @@ namespace TCGCollector.Helpers
             PokemonType PokemonTypeObj;
             //Check if object already exists and create it if it does not
             PokemonTypeObj = ctx.PokemonTypes.SingleOrDefault(m => m.PokemonTypeName.Equals(PokemonTypeName))
-                ?? new PokemonType()
+                ?? new PokemonType
                 {
                     PokemonTypeName = PokemonTypeName,
                     LastUpdateDate = DateTime.Now
@@ -537,7 +537,7 @@ namespace TCGCollector.Helpers
             EnergyType EnergyTypeObj;
             //Check if object already exists and create it if it does not
             EnergyTypeObj = ctx.EnergyTypes.SingleOrDefault(m => m.EnergyTypeName.Equals(EnergyTypeName))
-                ?? new EnergyType()
+                ?? new EnergyType
                 {
                     EnergyTypeName = EnergyTypeName,
                     LastUpdateDate = DateTime.Now
@@ -579,7 +579,7 @@ namespace TCGCollector.Helpers
                 }
 
                 Set SetObj = ctx.Sets.SingleOrDefault(m => m.SetName.Equals((string)result["name"]) && m.SetCode.Equals((string)result["code"]))
-                    ?? new Set()
+                    ?? new Set
                     {
                         SetName = (string)result["name"],
                         SetCode = (string)result["code"],
@@ -610,7 +610,7 @@ namespace TCGCollector.Helpers
             SetSeries SetSeriesObj;
             //Check if object already exists and create it if it does not
             SetSeriesObj = ctx.SetSeries.SingleOrDefault(m => m.SetSeriesName.Equals(SetSeriesName))
-                ?? new SetSeries()
+                ?? new SetSeries
                 {
                     SetSeriesName = SetSeriesName,
                     LastUpdateDate = DateTime.Now
@@ -629,7 +629,7 @@ namespace TCGCollector.Helpers
             EvolvesTo EvolvesToObj;
             //Check if object already exists and create it if it does not
             EvolvesToObj = ctx.EvolvesTos.SingleOrDefault(m => m.EvolvesToName.Equals(EvolvesToName))
-                 ?? new EvolvesTo()
+                 ?? new EvolvesTo
                  {
                      EvolvesToName = EvolvesToName,
                      LastUpdateDate = DateTime.Now

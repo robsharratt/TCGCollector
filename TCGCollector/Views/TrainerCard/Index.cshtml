@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.CardImageURL)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CardImageHiURL)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.CardCat)
             </th>
             <th>
@@ -58,10 +55,10 @@
                 @Html.DisplayFor(modelItem => item.CardName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CardImageURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CardImageHiURL)
+                @*@Html.DisplayFor(modelItem => item.CardImageURL)*@
+                <div class="display-field">
+                    <img src="@Url.Content(item.CardImageLocalURL)" alt="" style="height: 342px; width: 245px;" />
+                </div>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CardCat.CardCatID)

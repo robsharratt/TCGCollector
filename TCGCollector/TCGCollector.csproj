@@ -30,74 +30,8 @@
     <Folder Include="JSON Data\Cards\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="Views\CardType\Details.cshtml" />
-    <Content Remove="Views\Set\Details.cshtml" />
-    <Content Remove="wwwroot\Images\Sets\xy3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\xy1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\xy0symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\pop8logo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex9logo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex6logo.png" />
-    <Content Remove="wwwroot\Images\Sets\pop1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\pop1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\nplogo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ecard2symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ecard2logo.png" />
-    <Content Remove="wwwroot\Images\Sets\ecard1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ecard1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base6symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base6logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo4symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo4logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo3logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo2symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo2logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base5logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base4symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base4logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base3logo.png" />
-    <Content Remove="wwwroot\Images\Sets\basepsymbol.png" />
-    <Content Remove="wwwroot\Images\Sets\baseplogo.png" />
-    <Content Remove="wwwroot\Images\Sets\base2symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base2logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex8symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ex5logo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex4symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ex4logo.png" />
-    <Content Remove="wwwroot\Images\Sets\npsymbol.png" />
-    <Content Remove="wwwroot\Images\Sets\nplogo.png" />
-    <Content Remove="wwwroot\Images\Sets\ex3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\ex3logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base6logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo4symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo4logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo3symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo3logo.png" />
-    <Content Remove="wwwroot\Images\Sets\si1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\si1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo2symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo2logo.png" />
-    <Content Remove="wwwroot\Images\Sets\neo1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\neo1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\gym2logo.png" />
-    <Content Remove="wwwroot\Images\Sets\gym1symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\gym1logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base5symbol.png" />
-    <Content Remove="wwwroot\Images\Sets\base5logo.png" />
-    <Content Remove="wwwroot\Images\Sets\base4symbol.png" />
-    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm17.png" />
-    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm19_hires.png" />
-    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm110.png" />
-    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm110_hires.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Migrations\20190704112930_Initial.Designer.cs" />
     <Compile Remove="Migrations\20190704112930_Initial.cs" />
-    <Compile Remove="Migrations\ApplicationDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20190706145145_Initial.Designer.cs" />
   </ItemGroup>
 </Project>
