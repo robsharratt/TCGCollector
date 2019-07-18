@@ -155,10 +155,18 @@ namespace TCGCollector.Helpers
                         webClient.DownloadFile(uriCardImageURL, CardImageLocalPath);
                     }
                 }
+                catch (System.Net.WebException we)
+                {
+                    Console.WriteLine("ERROR: " + we.Message + ": " + uriCardImageURL);
+                    throw we;
+
+                }
                 catch (Exception e)
                 {
+                    //ILogger logger = Get;
+                    //logger.LogWarning("ERROR: " + e.Message + ": " + uriCardImageURL);
                     Console.WriteLine("ERROR: " + e.Message + ": " + uriCardImageURL);
-                    throw new Exception();
+                    throw e;
                 }
 
                 try
@@ -169,10 +177,15 @@ namespace TCGCollector.Helpers
                         webClient.DownloadFile(uriCardImageHiURL, CardImageHiLocalPath);
                     }
                 }
+                catch (System.Net.WebException we)
+                {
+                    Console.WriteLine("ERROR: " + we.Message + ": " + uriCardImageHiURL);
+                    throw we;
+                }
                 catch (Exception e)
                 {
                     Console.WriteLine("ERROR: " + e.Message + ": " + uriCardImageHiURL);
-                    throw new Exception();
+                    throw e;
                   
                 }
 
