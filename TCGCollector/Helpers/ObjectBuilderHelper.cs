@@ -403,6 +403,38 @@ namespace TCGCollector.Helpers
                             PokemonCardObj.PokemonCardWeaknesses = pokemonCardWeaknesses;
                         }
 
+                        //Resistance
+                        if (result["resistances"] != null && result["resistances"].HasValues)
+                        {
+                            //JArray obj2 = JArray.Parse(result["weaknesses"]);
+                            //Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>((string)result["weaknesses"]);
+                            JArray obj2 = (JArray)result.SelectToken("resistances");
+
+                            List<PokemonCardResistance> pokemonCardResistances = new List<PokemonCardResistance>();
+
+                            foreach (var result2 in obj2)
+                            {
+                                EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+                                Resistance ResistanceObj = ctx.Resistances.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.ResistanceValue.Equals((string)result2["value"]))
+                                    ?? new Resistance
+                                    {
+                                        EnergyType = EnergyTypeObj,
+                                        ResistanceValue = (string)result2["value"],
+                                        LastUpdateDate = DateTime.Now
+                                    };
+
+                                pokemonCardResistances.Add(
+                                    new PokemonCardResistance
+                                    {
+                                        PokemonCard = PokemonCardObj,
+                                        Resistance = ResistanceObj
+                                    }
+                                    );
+                            }
+
+                            PokemonCardObj.PokemonCardResistances = pokemonCardResistances;
+                        }
+
                         //Attack
                         if (result["attacks"] != null && result["attacks"].HasValues)
                         {
