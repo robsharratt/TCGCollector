@@ -8,6 +8,7 @@ using System.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -146,16 +147,33 @@ namespace TCGCollector.Helpers
                 string CardImageLocalPath = CardImageDirectory + "/" + CardImageLocalFile;
                 string CardImageHiLocalPath = CardImageHiDirectory + "/" + CardImageHiLocalFile;
 
-                //Only download images if there isn't already a file with this name
-                if (!File.Exists(CardImageLocalPath))
+                try
                 {
-                    webClient.DownloadFile(uriCardImageURL, CardImageLocalPath);
+                    //Only download images if there isn't already a file with this name
+                    if (!File.Exists(CardImageLocalPath))
+                    {
+                        webClient.DownloadFile(uriCardImageURL, CardImageLocalPath);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message + ": " + uriCardImageURL);
+                    throw new Exception();
                 }
 
-                //Only download images if there isn't already a file with this name
-                if (!File.Exists(CardImageHiLocalPath))
+                try
                 {
-                    webClient.DownloadFile(uriCardImageHiURL, CardImageHiLocalPath);
+                    //Only download images if there isn't already a file with this name
+                    if (!File.Exists(CardImageHiLocalPath))
+                    {
+                        webClient.DownloadFile(uriCardImageHiURL, CardImageHiLocalPath);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("ERROR: " + e.Message + ": " + uriCardImageHiURL);
+                    throw new Exception();
+                  
                 }
 
                 //Store the local image URL path for web access
@@ -169,7 +187,7 @@ namespace TCGCollector.Helpers
                         {
                             case "Basic":
                                 //Basic Energy
-                                CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                                CardObj = ctx.Cards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
                                     ?? new Card
                                     {
                                         CardName = (string)result["name"],
@@ -180,7 +198,7 @@ namespace TCGCollector.Helpers
                                         CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
                                         CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
                                         Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
-                                        CardNum = (int)result["number"],
+                                        CardNum = (string)result["number"],
                                         Artist = (string)result["artist"],
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                         LastUpdateDate = DateTime.Now
@@ -189,7 +207,7 @@ namespace TCGCollector.Helpers
                                 break;
                             case "Special":
                                 //Special Energy
-                                SpecialCardObj = ctx.SpecialCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                                SpecialCardObj = ctx.SpecialCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
                                     ?? new SpecialCard
                                     {
                                         CardName = (string)result["name"],
@@ -200,7 +218,7 @@ namespace TCGCollector.Helpers
                                         CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
                                         CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
                                         Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
-                                        CardNum = (int)result["number"],
+                                        CardNum = (string)result["number"],
                                         Artist = (string)result["artist"],
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                         LastUpdateDate = DateTime.Now
@@ -246,7 +264,7 @@ namespace TCGCollector.Helpers
                         //    ConvRetreatCost = (int)result["convertedRetreatCost"];
                         //}
 
-                        PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                        PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
                             ?? new PokemonCard
                             {
                                 CardName = (string)result["name"],
@@ -257,7 +275,7 @@ namespace TCGCollector.Helpers
                                 CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
                                 CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
                                 Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
-                                CardNum = (int)result["number"],
+                                CardNum = (string)result["number"],
                                 Artist = (string)result["artist"],
                                 CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                 HP = (int)result["hp"],
@@ -416,7 +434,7 @@ namespace TCGCollector.Helpers
                         ctx.AddOrUpdate(PokemonCardObj);
                         break;
                     case "Trainer":
-                        TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum == (int)result["number"])
+                        TrainerCardObj = ctx.TrainerCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
                             ?? new TrainerCard
                             {
                                 CardName = (string)result["name"],
@@ -427,7 +445,7 @@ namespace TCGCollector.Helpers
                                 CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
                                 CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
                                 Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
-                                CardNum = (int)result["number"],
+                                CardNum = (string)result["number"],
                                 Artist = (string)result["artist"],
                                 CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                 LastUpdateDate = DateTime.Now

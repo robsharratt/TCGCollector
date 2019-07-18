@@ -11,6 +11,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="2.2.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +29,7 @@
     <Folder Include="wwwroot\Images\Cards\HighRes\" />
     <Folder Include="wwwroot\Images\Cards\LowRes\" />
     <Folder Include="JSON Data\Cards\" />
+    <Folder Include="wwwroot\Logs\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Migrations\20190704112930_Initial.Designer.cs" />
@@ -175,5 +177,121 @@
     <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10117.png" />
     <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10117_hires.png" />
     <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10A.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm18_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm111_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm112.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm112_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm116.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm116_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm117.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm117_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm119_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm120.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm120_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm124.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm124_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\sm1\sm125.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm125_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\sm1\sm130_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1042_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1046.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1046_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1047.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1047_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1048.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1048_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1049.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1049_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1050.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1050_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1055.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1055_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1056.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1056_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1057.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1057_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1058.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1058_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1059.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1060.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1060_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1061.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1061_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1062.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1062_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1063.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1063_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1064.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1064_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1065.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1065_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1070.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1070_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1071.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1071_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1072.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1072_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1073.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1073_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1074.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1074_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1075.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1075_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1080.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1080_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1081.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1081_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1082.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1082_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1083.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1083_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1084.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1084_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1085.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1085_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1086.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1086_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1087.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1087_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1088.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1088_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1089.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1089_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1090.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1090_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1091.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1091_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex1092.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex1092_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10101_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10102.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10102_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10103.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10103_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10104.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10104_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10105.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10105_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10106.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10106_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10110.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10110_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10111.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10111_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10112.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10112_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10113.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10113_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10114.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10114_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10V_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10X.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10X_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10Y.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10Y_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10Z.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10Z_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex10\ex10!.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex10\ex10!_hires.png" />
   </ItemGroup>
 </Project>

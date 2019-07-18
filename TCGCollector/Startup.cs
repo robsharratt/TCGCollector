@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TCGCollector.Models;
 using TCGCollector.Helpers;
 
@@ -45,8 +46,10 @@ namespace TCGCollector
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile(env.WebRootPath + "/Logs/" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".txt");
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

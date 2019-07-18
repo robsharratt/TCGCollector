@@ -1,0 +1,47 @@
+﻿[
+{
+    "id": "ex10-A",
+    "name": "Unown",
+    "imageUrl": "https://images.pokemontcg.io/ex10/A.png",
+    "subtype": "Basic",
+    "supertype": "Pokémon",
+    "ability": {
+        "name": "Shuffle",
+        "text": "Once during your turn (before your attack), you may search your deck for another Unown and switch it with Unown. (Any cards attached to Unown, damage counters, Special Conditions, and effects on it are now on the new Pokémon.) If you do, put Unown on top of your deck. Shuffle your deck afterward. You can't use more than 1 Shuffle Poké-Power each turn.",
+        "type": "Poké-Power"
+    },
+    "hp": "60",
+    "retreatCost": [
+        "Colorless"
+    ],
+    "convertedRetreatCost": 1,
+    "number": "A",
+    "artist": "Shin-ichi Yoshikawa",
+    "rarity": "Rare Holo",
+    "series": "EX",
+    "set": "Unseen Forces",
+    "setCode": "ex10",
+    "types": [
+        "Psychic"
+    ],
+    "attacks": [
+        {
+            "name": "Hidden Power",
+            "cost": [
+                "Colorless",
+                "Colorless"
+            ],
+            "convertedEnergyCost": 2,
+            "text": "Search your deck for up to 2 Supporter cards, show them to your opponent, and put them into your hand. Shuffle your deck afterward."
+        }
+    ],
+    "weaknesses": [
+        {
+            "type": "Psychic",
+            "value": "×2"
+        }
+    ],
+    "imageUrlHiRes": "https://images.pokemontcg.io/ex10/A_hires.png",
+    "nationalPokedexNumber": 201
+}
+]

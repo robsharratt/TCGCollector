@@ -6,6 +6,7 @@ using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -103,6 +104,8 @@ namespace TCGCollector.Models
             //Create Cards
             if (!context.Cards.Any())
             {
+                //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards2.json");
+                //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
                 string[] fileEntries = Directory.GetFiles("JSON Data/Cards/", "*.json");
                 foreach (string fileName in fileEntries)
                 {

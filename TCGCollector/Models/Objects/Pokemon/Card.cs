@@ -26,7 +26,7 @@ namespace TCGCollector.Models
         public Nullable<int> SetID { get; set; }
         public Set Set { get; set; }
 
-        public int CardNum { get; set; }
+        public string CardNum { get; set; }
         public string Artist { get; set; }
 
         //Foreign Key for Card Rarity
