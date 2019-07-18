@@ -40,6 +40,7 @@ namespace TCGCollector
             services.AddTransient<ICardRepository, EFCardRepository>();
             services.AddTransient<ICardTypeRepository, EFCardTypeRepository>();
             services.AddTransient<ISetRepository, EFSetRepository>();
+            //services.AddTransient<TestHelper>();
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc();
@@ -71,6 +72,7 @@ namespace TCGCollector
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
             SeedData.EnsurePopulated(app, env);
             //FileHelper fs = new FileHelper(env);
         }

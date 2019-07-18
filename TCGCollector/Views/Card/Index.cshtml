@@ -15,6 +15,14 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p>
+}
+
 <table class="table">
     <thead>
         <tr>

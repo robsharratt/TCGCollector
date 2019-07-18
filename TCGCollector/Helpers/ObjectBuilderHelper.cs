@@ -158,7 +158,7 @@ namespace TCGCollector.Helpers
                 catch (System.Net.WebException we)
                 {
                     Console.WriteLine("ERROR: " + we.Message + ": " + uriCardImageURL);
-                    throw we;
+                    //throw we;
 
                 }
                 catch (Exception e)
@@ -180,13 +180,13 @@ namespace TCGCollector.Helpers
                 catch (System.Net.WebException we)
                 {
                     Console.WriteLine("ERROR: " + we.Message + ": " + uriCardImageHiURL);
-                    throw we;
+                    //throw we;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("ERROR: " + e.Message + ": " + uriCardImageHiURL);
                     throw e;
-                  
+
                 }
 
                 //Store the local image URL path for web access
@@ -276,6 +276,18 @@ namespace TCGCollector.Helpers
                         //{
                         //    ConvRetreatCost = (int)result["convertedRetreatCost"];
                         //}
+                        int NationalPokedexNumValue = -1;
+                        int HPValue = -1;
+
+                        if (result["nationalPokedexNumber"] != null)
+                        {
+                            NationalPokedexNumValue = (int)result["nationalPokedexNumber"];
+                        }
+
+                        if (result["hp"] != null)
+                        {
+                            HPValue = (int)result["hp"];
+                        }
 
                         PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
                             ?? new PokemonCard
@@ -291,10 +303,10 @@ namespace TCGCollector.Helpers
                                 CardNum = (string)result["number"],
                                 Artist = (string)result["artist"],
                                 CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
-                                HP = (int)result["hp"],
+                                HP = HPValue,
                                 //ConvertedRetreatCost = ConvRetreatCost,
                                 //ConvertedRetreatCost = GetValueOrDefault<int>(result["convertedRetreatCost"]),
-                                NationalPokedexNumber = (int)result["nationalPokedexNumber"],
+                                NationalPokedexNumber = NationalPokedexNumValue,
                                 EvolvesFrom = (string)result["evolvesFrom"],
                                 LastUpdateDate = DateTime.Now
                             };
