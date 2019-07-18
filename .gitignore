@@ -30,6 +30,8 @@ bld/
 #wwwroot/
 wwwroot/Images/
 TCGCollector/wwwroot/Images/
+wwwroot/Logs/
+TCGCollector/wwwroot/Logs/
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
