@@ -101,6 +101,18 @@ namespace TCGCollector.Models
                 .WithMany(r => r.PokemonCardResistances)
                 .HasForeignKey(pcr => pcr.ResistanceID);
 
+            //PokemonCardAbility Many to Many Relationship
+            modelBuilder.Entity<PokemonCardAbility>()
+                .HasKey(pcab => new { pcab.CardID, pcab.AbilityID });
+            modelBuilder.Entity<PokemonCardAbility>()
+                .HasOne(pcab => pcab.PokemonCard)
+                .WithMany(ab => ab.PokemonCardAbilities)
+                .HasForeignKey(pcab => pcab.CardID);
+            modelBuilder.Entity<PokemonCardAbility>()
+                .HasOne(pcab => pcab.Ability)
+                .WithMany(ab => ab.PokemonCardAbilities)
+                .HasForeignKey(pcab => pcab.AbilityID);
+
             //PokemonCardAttack Many to Many Relationship
             modelBuilder.Entity<PokemonCardAttack>()
                 .HasKey(pca => new { pca.CardID, pca.AttackID });
@@ -137,6 +149,7 @@ namespace TCGCollector.Models
         public DbSet<EvolvesTo> EvolvesTos { get; set; }
         public DbSet<Weakness> Weaknesses { get; set; }
         public DbSet<Resistance> Resistances { get; set; }
+        public DbSet<Ability> Abilities { get; set; }
         public DbSet<Attack> Attacks { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<PokemonCard> PokemonCards { get; set; }
@@ -151,6 +164,7 @@ namespace TCGCollector.Models
         public DbSet<PokemonCardRetreatCost> PokemonCardRetreatCosts { get; set; }
         public DbSet<PokemonCardWeakness> PokemonCardWeaknesses { get; set; }
         public DbSet<PokemonCardResistance> PokemonCardResistances { get; set; }
+        public DbSet<PokemonCardAbility> PokemonCardAbilities { get; set; }
         public DbSet<PokemonCardAttack> PokemonCardAttacks { get; set; }
         public DbSet<AttackEnergy> AttackEnergies { get; set; }
 

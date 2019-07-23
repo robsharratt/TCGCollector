@@ -435,6 +435,39 @@ namespace TCGCollector.Helpers
                             PokemonCardObj.PokemonCardResistances = pokemonCardResistances;
                         }
 
+                        //Ability
+                        if (result["ability"] != null && result["ability"].HasValues)
+                        {
+                            //JArray obj2 = JArray.Parse(result["weaknesses"]);
+                            //Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>((string)result["weaknesses"]);
+                            JObject AbilityJSON = (JObject)result.SelectToken("ability");
+
+                            List <PokemonCardAbility> pokemonCardAbilities = new List<PokemonCardAbility>();
+
+                            //foreach (var result2 in obj2)
+                            //{
+                               // EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+                                Ability AbilityObj = ctx.Abilities.SingleOrDefault(m => m.AbilityName.Equals((string)AbilityJSON["name"]) && m.AbilityText.Equals((string)AbilityJSON["text"]))
+                                    ?? new Ability
+                                    {
+                                        AbilityName = (string)AbilityJSON["name"],
+                                        AbilityText = (string)AbilityJSON["text"],
+                                        AbilityType = (string)AbilityJSON["type"],
+                                        LastUpdateDate = DateTime.Now
+                                    };
+                                
+                                pokemonCardAbilities.Add(
+                                    new PokemonCardAbility
+                                    {
+                                        PokemonCard = PokemonCardObj,
+                                        Ability = AbilityObj
+                                    }
+                                    );
+                            //}
+
+                            PokemonCardObj.PokemonCardAbilities = pokemonCardAbilities;
+                        }
+
                         //Attack
                         if (result["attacks"] != null && result["attacks"].HasValues)
                         {
