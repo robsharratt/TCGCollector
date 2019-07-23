@@ -35,4 +35,7 @@
     <Compile Remove="Migrations\20190704112930_Initial.cs" />
     <Compile Remove="Migrations\20190706145145_Initial.Designer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Weakness\Create.cshtml" />
+  </ItemGroup>
 </Project>

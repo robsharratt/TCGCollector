@@ -9,6 +9,22 @@ namespace TCGCollector.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Abilities",
+                columns: table => new
+                {
+                    AbilityID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    AbilityName = table.Column<string>(nullable: true),
+                    AbilityText = table.Column<string>(maxLength: 1024, nullable: true),
+                    AbilityType = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Abilities", x => x.AbilityID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Attacks",
                 columns: table => new
                 {
@@ -212,6 +228,27 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Resistances",
+                columns: table => new
+                {
+                    ResistanceID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    EnergyTypeID = table.Column<int>(nullable: false),
+                    ResistanceValue = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Resistances", x => x.ResistanceID);
+                    table.ForeignKey(
+                        name: "FK_Resistances_EnergyTypes_EnergyTypeID",
+                        column: x => x.EnergyTypeID,
+                        principalTable: "EnergyTypes",
+                        principalColumn: "EnergyTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Weaknesses",
                 columns: table => new
                 {
@@ -301,7 +338,7 @@ namespace TCGCollector.Migrations
                     CardCatID = table.Column<int>(nullable: true),
                     CardTypeID = table.Column<int>(nullable: true),
                     SetID = table.Column<int>(nullable: true),
-                    CardNum = table.Column<int>(nullable: false),
+                    CardNum = table.Column<string>(nullable: true),
                     Artist = table.Column<string>(nullable: true),
                     CardRarityID = table.Column<int>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false),
@@ -338,6 +375,30 @@ namespace TCGCollector.Migrations
                         principalTable: "Sets",
                         principalColumn: "SetID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PokemonCardAbilities",
+                columns: table => new
+                {
+                    CardID = table.Column<int>(nullable: false),
+                    AbilityID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PokemonCardAbilities", x => new { x.CardID, x.AbilityID });
+                    table.ForeignKey(
+                        name: "FK_PokemonCardAbilities_Abilities_AbilityID",
+                        column: x => x.AbilityID,
+                        principalTable: "Abilities",
+                        principalColumn: "AbilityID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PokemonCardAbilities_Cards_CardID",
+                        column: x => x.CardID,
+                        principalTable: "Cards",
+                        principalColumn: "CardID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -409,6 +470,30 @@ namespace TCGCollector.Migrations
                         column: x => x.PokemonTypeID,
                         principalTable: "PokemonTypes",
                         principalColumn: "PokemonTypeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PokemonCardResistances",
+                columns: table => new
+                {
+                    CardID = table.Column<int>(nullable: false),
+                    ResistanceID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PokemonCardResistances", x => new { x.CardID, x.ResistanceID });
+                    table.ForeignKey(
+                        name: "FK_PokemonCardResistances_Cards_CardID",
+                        column: x => x.CardID,
+                        principalTable: "Cards",
+                        principalColumn: "CardID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PokemonCardResistances_Resistances_ResistanceID",
+                        column: x => x.ResistanceID,
+                        principalTable: "Resistances",
+                        principalColumn: "ResistanceID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -541,6 +626,11 @@ namespace TCGCollector.Migrations
                 column: "SetID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PokemonCardAbilities_AbilityID",
+                table: "PokemonCardAbilities",
+                column: "AbilityID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardAttacks_AttackID",
                 table: "PokemonCardAttacks",
                 column: "AttackID");
@@ -556,6 +646,11 @@ namespace TCGCollector.Migrations
                 column: "PokemonTypeID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PokemonCardResistances_ResistanceID",
+                table: "PokemonCardResistances",
+                column: "ResistanceID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardRetreatCosts_CardID",
                 table: "PokemonCardRetreatCosts",
                 column: "CardID");
@@ -569,6 +664,11 @@ namespace TCGCollector.Migrations
                 name: "IX_PokemonCardWeaknesses_WeaknessID",
                 table: "PokemonCardWeaknesses",
                 column: "WeaknessID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resistances_EnergyTypeID",
+                table: "Resistances",
+                column: "EnergyTypeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sets_SetSeriesID",
@@ -602,6 +702,9 @@ namespace TCGCollector.Migrations
                 name: "AttackEnergies");
 
             migrationBuilder.DropTable(
+                name: "PokemonCardAbilities");
+
+            migrationBuilder.DropTable(
                 name: "PokemonCardAttacks");
 
             migrationBuilder.DropTable(
@@ -609,6 +712,9 @@ namespace TCGCollector.Migrations
 
             migrationBuilder.DropTable(
                 name: "PokemonCardPokemonTypes");
+
+            migrationBuilder.DropTable(
+                name: "PokemonCardResistances");
 
             migrationBuilder.DropTable(
                 name: "PokemonCardRetreatCosts");
@@ -626,6 +732,9 @@ namespace TCGCollector.Migrations
                 name: "UserCardCollection");
 
             migrationBuilder.DropTable(
+                name: "Abilities");
+
+            migrationBuilder.DropTable(
                 name: "Attacks");
 
             migrationBuilder.DropTable(
@@ -633,6 +742,9 @@ namespace TCGCollector.Migrations
 
             migrationBuilder.DropTable(
                 name: "PokemonTypes");
+
+            migrationBuilder.DropTable(
+                name: "Resistances");
 
             migrationBuilder.DropTable(
                 name: "Weaknesses");

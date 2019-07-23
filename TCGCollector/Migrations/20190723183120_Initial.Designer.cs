@@ -10,7 +10,7 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190717121223_Initial")]
+    [Migration("20190723183120_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,6 +20,25 @@ namespace TCGCollector.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("TCGCollector.Models.Ability", b =>
+                {
+                    b.Property<int>("AbilityID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AbilityName");
+
+                    b.Property<string>("AbilityText")
+                        .HasMaxLength(1024);
+
+                    b.Property<string>("AbilityType");
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.HasKey("AbilityID");
+
+                    b.ToTable("Abilities");
+                });
 
             modelBuilder.Entity("TCGCollector.Models.Attack", b =>
                 {
@@ -79,7 +98,7 @@ namespace TCGCollector.Migrations
 
                     b.Property<string>("CardName");
 
-                    b.Property<int>("CardNum");
+                    b.Property<string>("CardNum");
 
                     b.Property<int?>("CardRarityID");
 
@@ -193,6 +212,19 @@ namespace TCGCollector.Migrations
                     b.ToTable("EvolvesTos");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardAbility", b =>
+                {
+                    b.Property<int>("CardID");
+
+                    b.Property<int>("AbilityID");
+
+                    b.HasKey("CardID", "AbilityID");
+
+                    b.HasIndex("AbilityID");
+
+                    b.ToTable("PokemonCardAbilities");
+                });
+
             modelBuilder.Entity("TCGCollector.Models.PokemonCardAttack", b =>
                 {
                     b.Property<int>("CardID");
@@ -230,6 +262,19 @@ namespace TCGCollector.Migrations
                     b.HasIndex("PokemonTypeID");
 
                     b.ToTable("PokemonCardPokemonTypes");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardResistance", b =>
+                {
+                    b.Property<int>("CardID");
+
+                    b.Property<int>("ResistanceID");
+
+                    b.HasKey("CardID", "ResistanceID");
+
+                    b.HasIndex("ResistanceID");
+
+                    b.ToTable("PokemonCardResistances");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.PokemonCardRetreatCost", b =>
@@ -275,6 +320,24 @@ namespace TCGCollector.Migrations
                     b.HasKey("PokemonTypeID");
 
                     b.ToTable("PokemonTypes");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.Resistance", b =>
+                {
+                    b.Property<int>("ResistanceID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EnergyTypeID");
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("ResistanceValue");
+
+                    b.HasKey("ResistanceID");
+
+                    b.HasIndex("EnergyTypeID");
+
+                    b.ToTable("Resistances");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.Set", b =>
@@ -501,6 +564,19 @@ namespace TCGCollector.Migrations
                         .HasForeignKey("SetID");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardAbility", b =>
+                {
+                    b.HasOne("TCGCollector.Models.Ability", "Ability")
+                        .WithMany("PokemonCardAbilities")
+                        .HasForeignKey("AbilityID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TCGCollector.Models.PokemonCard", "PokemonCard")
+                        .WithMany("PokemonCardAbilities")
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TCGCollector.Models.PokemonCardAttack", b =>
                 {
                     b.HasOne("TCGCollector.Models.Attack", "Attack")
@@ -540,6 +616,19 @@ namespace TCGCollector.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.PokemonCardResistance", b =>
+                {
+                    b.HasOne("TCGCollector.Models.PokemonCard", "PokemonCard")
+                        .WithMany("PokemonCardResistances")
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TCGCollector.Models.Resistance", "Resistance")
+                        .WithMany("PokemonCardResistances")
+                        .HasForeignKey("ResistanceID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("TCGCollector.Models.PokemonCardRetreatCost", b =>
                 {
                     b.HasOne("TCGCollector.Models.PokemonCard", "PokemonCard")
@@ -563,6 +652,14 @@ namespace TCGCollector.Migrations
                     b.HasOne("TCGCollector.Models.Weakness", "Weakness")
                         .WithMany("PokemonCardWeaknesses")
                         .HasForeignKey("WeaknessID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.Resistance", b =>
+                {
+                    b.HasOne("TCGCollector.Models.EnergyType", "EnergyType")
+                        .WithMany()
+                        .HasForeignKey("EnergyTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -1,0 +1,61 @@
+@model IEnumerable<TCGCollector.Models.Ability>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AbilityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbilityText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AbilityType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbilityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbilityText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AbilityType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AbilityID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AbilityID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AbilityID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
