@@ -383,7 +383,10 @@ namespace TCGCollector.Helpers
                             foreach (var result2 in obj2)
                             {
                                 EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
-                                Weakness WeaknessObj = ctx.Weaknesses.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.WeaknessValue.Equals((string)result2["value"]))
+                                if (!pokemonCardWeaknesses.Exists(a => a.Weakness.EnergyType.Equals(EnergyTypeObj)
+                                    && a.Weakness.WeaknessValue.Equals((string)result2["value"])))
+                                {
+                                    Weakness WeaknessObj = ctx.Weaknesses.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.WeaknessValue.Equals((string)result2["value"]))
                                     ?? new Weakness
                                     {
                                         EnergyType = EnergyTypeObj,
@@ -391,13 +394,14 @@ namespace TCGCollector.Helpers
                                         LastUpdateDate = DateTime.Now
                                     };
 
-                                pokemonCardWeaknesses.Add(
-                                    new PokemonCardWeakness
-                                    {
-                                        PokemonCard = PokemonCardObj,
-                                        Weakness = WeaknessObj
-                                    }
-                                    );
+                                    pokemonCardWeaknesses.Add(
+                                        new PokemonCardWeakness
+                                        {
+                                            PokemonCard = PokemonCardObj,
+                                            Weakness = WeaknessObj
+                                        }
+                                        );
+                                }
                             }
 
                             PokemonCardObj.PokemonCardWeaknesses = pokemonCardWeaknesses;
@@ -415,21 +419,30 @@ namespace TCGCollector.Helpers
                             foreach (var result2 in obj2)
                             {
                                 EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
-                                Resistance ResistanceObj = ctx.Resistances.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.ResistanceValue.Equals((string)result2["value"]))
-                                    ?? new Resistance
-                                    {
-                                        EnergyType = EnergyTypeObj,
-                                        ResistanceValue = (string)result2["value"],
-                                        LastUpdateDate = DateTime.Now
-                                    };
 
-                                pokemonCardResistances.Add(
-                                    new PokemonCardResistance
-                                    {
-                                        PokemonCard = PokemonCardObj,
-                                        Resistance = ResistanceObj
-                                    }
-                                    );
+                                //Check if list already has the object in it
+                                if (!pokemonCardResistances.Exists(a => a.Resistance.EnergyType.Equals(EnergyTypeObj)
+                                        && a.Resistance.ResistanceValue.Equals((string)result2["value"])))
+                                {
+
+                                    Resistance ResistanceObj = ctx.Resistances.SingleOrDefault(m => m.EnergyType.Equals(EnergyTypeObj) && m.ResistanceValue.Equals((string)result2["value"]))
+                                        ?? new Resistance
+                                        {
+                                            EnergyType = EnergyTypeObj,
+                                            ResistanceValue = (string)result2["value"],
+                                            LastUpdateDate = DateTime.Now
+                                        };
+
+                                    pokemonCardResistances.Add(
+                                        new PokemonCardResistance
+                                        {
+                                            PokemonCard = PokemonCardObj,
+                                            Resistance = ResistanceObj
+                                        }
+                                        );
+                                    //ctx.AddOrUpdate(pokemonCardResistances);
+                                    //ctx.SaveChanges();
+                                }
                             }
 
                             PokemonCardObj.PokemonCardResistances = pokemonCardResistances;

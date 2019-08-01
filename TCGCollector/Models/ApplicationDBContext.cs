@@ -125,7 +125,7 @@ namespace TCGCollector.Models
                 .WithMany(a => a.PokemonCardAttacks)
                 .HasForeignKey(pca => pca.AttackID);
 
-            //PokemonCardPokemonType Many to Many Relationship
+            //PokemonCardRetreatCost Many to Many Relationship
             //modelBuilder.Entity<PokemonCardRetreatCost>()
             //    .HasKey(pcrc => new { pcrc.CardID, pcrc.EnergyTypeID });
             //modelBuilder.Entity<PokemonCardRetreatCost>()

@@ -251,11 +251,16 @@ namespace TCGCollector.Migrations
 
             modelBuilder.Entity("TCGCollector.Models.PokemonCardPokemonType", b =>
                 {
+                    b.Property<int>("PokemonCardPokemonTypeID")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("CardID");
 
                     b.Property<int>("PokemonTypeID");
 
-                    b.HasKey("CardID", "PokemonTypeID");
+                    b.HasKey("PokemonCardPokemonTypeID");
+
+                    b.HasIndex("CardID");
 
                     b.HasIndex("PokemonTypeID");
 

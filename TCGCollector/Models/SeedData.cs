@@ -105,15 +105,16 @@ namespace TCGCollector.Models
             if (!context.Cards.Any())
             {
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards2.json");
-                ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
+                //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
+                //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Team Rocket Returns.json");
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Emerald.json");
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/HS—Undaunted.json");
 
-                //string[] fileEntries = Directory.GetFiles("JSON Data/Cards/", "*.json");
-                //foreach (string fileName in fileEntries)
-                //{
-                //    ObjectBuilderHelper.BuildCardsFromJSON(context, env, fileName);
-                //}
+                string[] fileEntries = Directory.GetFiles("JSON Data/Cards/", "*.json");
+                foreach (string fileName in fileEntries)
+                {
+                    ObjectBuilderHelper.BuildCardsFromJSON(context, env, fileName);
+                }
 
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards/Sun & Moon.json");
                 //ObjectBuilderHelper.BuildCardsFromJSON(context, env, @"JSON Data/Cards.json");

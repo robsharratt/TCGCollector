@@ -453,12 +453,14 @@ namespace TCGCollector.Migrations
                 name: "PokemonCardPokemonTypes",
                 columns: table => new
                 {
+                    PokemonCardPokemonTypeID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CardID = table.Column<int>(nullable: false),
                     PokemonTypeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonCardPokemonTypes", x => new { x.CardID, x.PokemonTypeID });
+                    table.PrimaryKey("PK_PokemonCardPokemonTypes", x => x.PokemonCardPokemonTypeID);
                     table.ForeignKey(
                         name: "FK_PokemonCardPokemonTypes_Cards_CardID",
                         column: x => x.CardID,
@@ -639,6 +641,11 @@ namespace TCGCollector.Migrations
                 name: "IX_PokemonCardEvolvesTos_EvolvesToID",
                 table: "PokemonCardEvolvesTos",
                 column: "EvolvesToID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PokemonCardPokemonTypes_CardID",
+                table: "PokemonCardPokemonTypes",
+                column: "CardID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardPokemonTypes_PokemonTypeID",

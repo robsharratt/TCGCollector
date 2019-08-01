@@ -37,5 +37,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\Weakness\Create.cshtml" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex7\ex713_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex7\ex717.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex7\ex717_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex7\ex718.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex7\ex718_hires.png" />
+    <Content Remove="wwwroot\Images\Cards\LowRes\ex7\ex719.png" />
+    <Content Remove="wwwroot\Images\Cards\HighRes\ex7\ex719_hires.png" />
   </ItemGroup>
 </Project>
