@@ -108,13 +108,14 @@ namespace TCGCollector.Helpers
         }
 
         //Build a CardCat Object from JSON
-        public static void BuildCardsFromJSON(ApplicationDbContext ctx, IHostingEnvironment env, string JSONPath)
+        public static void BuildCardsFromJSON(ApplicationDbContext ctx, IWebHostEnvironment env, string JSONPath)
         {
             JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
 
             foreach (var result in obj)
             {
                 Card CardObj;
+                Set SetObj;
                 SpecialCard SpecialCardObj;
                 TrainerCard TrainerCardObj;
                 PokemonCard PokemonCardObj;
@@ -192,6 +193,10 @@ namespace TCGCollector.Helpers
                 //Store the local image URL path for web access
                 string CardImageLocalURL = "/Images/Cards/LowRes/" + uriCardImageURL.Segments.ElementAt(uriCardImageURL.Segments.Length - 2) + CardImageLocalFile;
                 string CardImageHiLocalURL = "/Images/Cards/HighRes/" + uriCardImageHiURL.Segments.ElementAt(uriCardImageHiURL.Segments.Length - 2) + CardImageHiLocalFile;
+
+
+                //Get a Generic Set Object
+                SetObj = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]);
 
                 switch ((string)result["supertype"])
                 {
@@ -317,7 +322,9 @@ namespace TCGCollector.Helpers
                             HPValue = (int)result["hp"];
                         }
 
-                        PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]))
+                        //Set SetObj = ctx.Sets.SingleOrDefault(m => m.SetCode.Equals((string)result["SetCode"]));
+
+                        PokemonCardObj = ctx.PokemonCards.SingleOrDefault(m => m.CardName.Equals((string)result["name"]) && m.CardNum.Equals((string)result["number"]) && m.SetID == SetObj.SetID)
                             ?? new PokemonCard
                             {
                                 CardName = (string)result["name"],
@@ -327,7 +334,7 @@ namespace TCGCollector.Helpers
                                 CardImageHiLocalURL = CardImageHiLocalURL,
                                 CardCat = ObjectBuilderHelper.GetCardCatByName(ctx, (string)result["supertype"]),
                                 CardType = ObjectBuilderHelper.GetCardTypeByName(ctx, (string)result["subtype"]),
-                                Set = ObjectBuilderHelper.GetSetByNameNoInsert(ctx, (string)result["set"]),
+                                Set = SetObj,
                                 CardNum = (string)result["number"],
                                 Artist = (string)result["artist"],
                                 CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
@@ -423,19 +430,29 @@ namespace TCGCollector.Helpers
 
                                         if (pokemonCardRetreatCost == null)
                                         {
-                                            pokemonCardRetreatCosts.Add(
-                                                new PokemonCardRetreatCost
-                                                {
-                                                    PokemonCard = PokemonCardObj,
-                                                    EnergyType = EnergyTypeObj
-                                                }
-                                            );
+                                            //pokemonCardRetreatCosts.Add(
+                                            //    new PokemonCardRetreatCost
+                                            //    {
+                                            //        PokemonCard = PokemonCardObj,
+                                            //        EnergyType = EnergyTypeObj
+                                            //    }
+                                            //);
+                                            pokemonCardRetreatCost.PokemonCard = PokemonCardObj;
+                                            pokemonCardRetreatCost.EnergyType = EnergyTypeObj;
                                         }
                                     }
                                     else
                                     {
-                                        pokemonCardRetreatCost.PokemonCard = PokemonCardObj;
-                                        pokemonCardRetreatCost.EnergyType = EnergyTypeObj;
+                                        pokemonCardRetreatCosts.Add(
+                                            new PokemonCardRetreatCost
+                                            {
+                                                PokemonCard = PokemonCardObj,
+                                                EnergyType = EnergyTypeObj
+                                            }
+                                        );
+
+                                        //pokemonCardRetreatCost.PokemonCard = PokemonCardObj;
+                                        //pokemonCardRetreatCost.EnergyType = EnergyTypeObj;
                                     }
                                 }
                             }
@@ -834,7 +851,7 @@ namespace TCGCollector.Helpers
         }
 
         //Build a Set Object from JSON
-        public static void BuildSetsFromJSON(ApplicationDbContext ctx, IHostingEnvironment env, string JSONPath)
+        public static void BuildSetsFromJSON(ApplicationDbContext ctx, IWebHostEnvironment env, string JSONPath)
         {
             JArray obj = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(File.ReadAllText(JSONPath));
 

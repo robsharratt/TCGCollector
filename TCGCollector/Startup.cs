@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TCGCollector.Models;
 using TCGCollector.Helpers;
@@ -43,11 +44,14 @@ namespace TCGCollector
             //services.AddTransient<TestHelper>();
 
             //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc();
+            //services.AddMvc();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddFile(env.WebRootPath + "/Logs/" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".txt");
             
@@ -66,11 +70,20 @@ namespace TCGCollector
             app.UseCookiePolicy();
             app.UseStatusCodePages();
 
-            app.UseMvc(routes =>
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //});
+
+
+            app.UseRouting();
+            //app.UseMvcWithDefaultRoute();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
 
             SeedData.EnsurePopulated(app, env);

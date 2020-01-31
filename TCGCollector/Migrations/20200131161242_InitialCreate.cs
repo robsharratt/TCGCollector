@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TCGCollector.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     AbilityID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AbilityName = table.Column<string>(nullable: true),
                     AbilityText = table.Column<string>(maxLength: 1024, nullable: true),
                     AbilityType = table.Column<string>(nullable: true),
@@ -29,7 +29,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     AttackID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AttackName = table.Column<string>(nullable: true),
                     AttackConvertedEnergyCost = table.Column<int>(nullable: false),
                     AttackDamage = table.Column<string>(nullable: true),
@@ -46,7 +46,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     CardCatID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardCatName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -60,7 +60,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     CardCollectionID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardCollectionName = table.Column<string>(nullable: true),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
@@ -75,7 +75,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     CardRarityID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardRarityName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -89,7 +89,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     CardTypeID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardTypeName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -103,7 +103,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     EnergyTypeID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EnergyTypeName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -117,7 +117,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     EvolvesToID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EvolvesToName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -131,7 +131,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     MagicBlockID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MagicBlockName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -145,7 +145,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     MagicSetTypeID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MagicSetTypeName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -159,7 +159,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     PokemonTypeID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PokemonTypeName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -173,7 +173,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     SetSeriesID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SetSeriesName = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -187,7 +187,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     SpecialCardTextID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardTextLine = table.Column<string>(maxLength: 1024, nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -201,7 +201,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     TrainerCardTextID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardTextLine = table.Column<string>(maxLength: 1024, nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -215,7 +215,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     UserID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserLogin = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -234,7 +234,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     AttackEnergyID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AttackID = table.Column<int>(nullable: false),
                     EnergyTypeID = table.Column<int>(nullable: false)
                 },
@@ -260,7 +260,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     ResistanceID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EnergyTypeID = table.Column<int>(nullable: false),
                     ResistanceValue = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
@@ -281,7 +281,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     WeaknessID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     EnergyTypeID = table.Column<int>(nullable: false),
                     WeaknessValue = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
@@ -302,7 +302,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     MagicSetID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MagicSetName = table.Column<string>(nullable: true),
                     MagicSetCode = table.Column<string>(nullable: true),
                     MagicSetCodeAlt = table.Column<string>(nullable: true),
@@ -341,7 +341,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     SetID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SetName = table.Column<string>(nullable: true),
                     SetCode = table.Column<string>(nullable: true),
                     SetPTCGOCode = table.Column<string>(nullable: true),
@@ -396,37 +396,33 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     MagicCardID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     MagicCardName = table.Column<string>(nullable: true),
                     MagicSetID = table.Column<int>(nullable: true),
-                    CardCatID = table.Column<int>(nullable: true),
-                    CardTypeID = table.Column<int>(nullable: true),
-                    CardNum = table.Column<string>(nullable: true),
-                    Artist = table.Column<string>(nullable: true),
-                    CardRarityID = table.Column<int>(nullable: true),
+                    MagicCardHasFoil = table.Column<bool>(nullable: false),
+                    MagicCardHasNonFoil = table.Column<bool>(nullable: false),
+                    MagicCardHasAltArt = table.Column<bool>(nullable: false),
+                    MagicCardIsArena = table.Column<bool>(nullable: false),
+                    MagicCardIsFullArt = table.Column<bool>(nullable: false),
+                    MagicCardIsMTGO = table.Column<bool>(nullable: false),
+                    MagicCardIsOnlineOnly = table.Column<bool>(nullable: false),
+                    MagicCardIsOversized = table.Column<bool>(nullable: false),
+                    MagicCardIsPaper = table.Column<bool>(nullable: false),
+                    MagicCardIsPromo = table.Column<bool>(nullable: false),
+                    MagicCardIsReprint = table.Column<bool>(nullable: false),
+                    MagicCardIsReserved = table.Column<bool>(nullable: false),
+                    MagicCardIsStarter = table.Column<bool>(nullable: false),
+                    MagicCardIsStorySpotlight = table.Column<bool>(nullable: false),
+                    MagicCardIsTextless = table.Column<bool>(nullable: false),
+                    MagicCardIsTimeshifted = table.Column<bool>(nullable: false),
+                    MagicCardNum = table.Column<string>(nullable: true),
+                    MagicCardArtist = table.Column<string>(nullable: true),
+                    MagicCardText = table.Column<string>(nullable: true),
                     LastUpdateDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MagicCards", x => x.MagicCardID);
-                    table.ForeignKey(
-                        name: "FK_MagicCards_CardCats_CardCatID",
-                        column: x => x.CardCatID,
-                        principalTable: "CardCats",
-                        principalColumn: "CardCatID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MagicCards_CardRarities_CardRarityID",
-                        column: x => x.CardRarityID,
-                        principalTable: "CardRarities",
-                        principalColumn: "CardRarityID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MagicCards_CardTypes_CardTypeID",
-                        column: x => x.CardTypeID,
-                        principalTable: "CardTypes",
-                        principalColumn: "CardTypeID",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_MagicCards_MagicSets_MagicSetID",
                         column: x => x.MagicSetID,
@@ -440,7 +436,7 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     CardID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardName = table.Column<string>(nullable: true),
                     CardImageURL = table.Column<string>(nullable: true),
                     CardImageHiURL = table.Column<string>(nullable: true),
@@ -613,25 +609,26 @@ namespace TCGCollector.Migrations
                 columns: table => new
                 {
                     PokemonCardRetreatCostID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CardID = table.Column<int>(nullable: false),
+                    PokemonCardCardID = table.Column<int>(nullable: true),
                     EnergyTypeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PokemonCardRetreatCosts", x => x.PokemonCardRetreatCostID);
                     table.ForeignKey(
-                        name: "FK_PokemonCardRetreatCosts_Cards_CardID",
-                        column: x => x.CardID,
-                        principalTable: "Cards",
-                        principalColumn: "CardID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_PokemonCardRetreatCosts_EnergyTypes_EnergyTypeID",
                         column: x => x.EnergyTypeID,
                         principalTable: "EnergyTypes",
                         principalColumn: "EnergyTypeID",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PokemonCardRetreatCosts_Cards_PokemonCardCardID",
+                        column: x => x.PokemonCardCardID,
+                        principalTable: "Cards",
+                        principalColumn: "CardID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -737,21 +734,6 @@ namespace TCGCollector.Migrations
                 column: "SetID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MagicCards_CardCatID",
-                table: "MagicCards",
-                column: "CardCatID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MagicCards_CardRarityID",
-                table: "MagicCards",
-                column: "CardRarityID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MagicCards_CardTypeID",
-                table: "MagicCards",
-                column: "CardTypeID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MagicCards_MagicSetID",
                 table: "MagicCards",
                 column: "MagicSetID");
@@ -792,14 +774,14 @@ namespace TCGCollector.Migrations
                 column: "ResistanceID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PokemonCardRetreatCosts_CardID",
-                table: "PokemonCardRetreatCosts",
-                column: "CardID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardRetreatCosts_EnergyTypeID",
                 table: "PokemonCardRetreatCosts",
                 column: "EnergyTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PokemonCardRetreatCosts_PokemonCardCardID",
+                table: "PokemonCardRetreatCosts",
+                column: "PokemonCardCardID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardWeaknesses_WeaknessID",

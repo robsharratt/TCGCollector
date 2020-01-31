@@ -17,7 +17,7 @@ namespace TCGCollector.Models
 {
     public class SeedData
     {
-        public static void EnsurePopulated(IApplicationBuilder app, IHostingEnvironment env)
+        public static void EnsurePopulated(IApplicationBuilder app, IWebHostEnvironment env)
         {
             ApplicationDbContext context = app.ApplicationServices
             .GetRequiredService<ApplicationDbContext>();
