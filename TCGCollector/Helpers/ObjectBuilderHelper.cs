@@ -216,6 +216,9 @@ namespace TCGCollector.Helpers
                                         CardRarity = ObjectBuilderHelper.GetCardRarityByName(ctx, (string)result["rarity"]),
                                         LastUpdateDate = DateTime.Now
                                     };
+
+                                Console.WriteLine("INFO: Card: " + CardObj.CardNum + " " + CardObj.CardName);
+
                                 ctx.AddOrUpdate(CardObj);
                                 break;
                             case "Special":
@@ -237,6 +240,8 @@ namespace TCGCollector.Helpers
                                         LastUpdateDate = DateTime.Now
                                     };
 
+                                Console.WriteLine("INFO: Special Card: " + SpecialCardObj.CardNum + " " + SpecialCardObj.CardName);
+
                                 //SpecialCardText
                                 if (result["text"] != null && result["text"].HasValues)
                                 {
@@ -250,13 +255,36 @@ namespace TCGCollector.Helpers
                                                 LastUpdateDate = DateTime.Now
                                             };
 
-                                        specialCardCardTexts.Add(
-                                            new SpecialCardSpecialCardText
+                                        if (SpecialCardTextObj != null)
+                                        {
+                                            SpecialCardSpecialCardText specialCardSpecialCardText = new SpecialCardSpecialCardText();
+                                            //if (SpecialCardObj.SpecialCardSpecialCardTexts != null)
+                                            //{
+                                            //    specialCardSpecialCardText = SpecialCardTextObj.SpecialCardSpecialCardTexts.SingleOrDefault(m => m.CardID.Equals(SpecialCardObj.CardID) && m.CardTextID.Equals(SpecialCardTextObj.SpecialCardTextID));
+
+                                            //    if (specialCardSpecialCardText == null)
+                                            //    {
+
+                                            //Check list for existing object
+                                            if (!specialCardCardTexts.Exists(a => a.CardID.Equals(SpecialCardObj) && a.CardText.Equals(SpecialCardTextObj)))
                                             {
-                                                SpecialCard = SpecialCardObj,
-                                                CardText = SpecialCardTextObj
+                                                if (SpecialCardObj.SpecialCardSpecialCardTexts != null)
+                                                {
+                                                    specialCardSpecialCardText = SpecialCardTextObj.SpecialCardSpecialCardTexts.SingleOrDefault(m => m.CardID.Equals(SpecialCardObj) && m.CardTextID.Equals(SpecialCardTextObj));
+                                                }
+
+                                                if (specialCardSpecialCardText == null)
+                                                {
+                                                    specialCardCardTexts.Add(
+                                                        new SpecialCardSpecialCardText
+                                                        {
+                                                            SpecialCard = SpecialCardObj,
+                                                            CardText = SpecialCardTextObj
+                                                        }
+                                                    );
+                                                }
                                             }
-                                        );
+                                        }
                                     }
 
                                     SpecialCardObj.SpecialCardSpecialCardTexts = specialCardCardTexts;
@@ -311,6 +339,8 @@ namespace TCGCollector.Helpers
                                 LastUpdateDate = DateTime.Now
                             };
 
+                        Console.WriteLine("INFO: Pokemon Card: " + PokemonCardObj.CardNum + " " + PokemonCardObj.CardName);
+
                         //PokemonTypes
                         if (result["types"] != null && result["types"].HasValues)
                         {
@@ -331,6 +361,9 @@ namespace TCGCollector.Helpers
                             PokemonCardObj.PokemonCardPokemonTypes = pokemonCardPokemonTypes;
                         }
 
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
+
                         //EvolvesTo
                         if (result["evolvesTo"] != null && result["evolvesTo"].HasValues)
                         {
@@ -339,17 +372,38 @@ namespace TCGCollector.Helpers
                             {
                                 EvolvesTo EvolvesToObj = GetEvolesToByName(ctx, (string)textitem);
 
-                                pokemonCardEvolvesTos.Add(
-                                    new PokemonCardEvolvesTo
+                                //Check if the relationship exists and if not add it
+                                if (EvolvesToObj != null)
+                                {
+                                    PokemonCardEvolvesTo pokemonCardEvolvesTo = new PokemonCardEvolvesTo();
+                                    if (PokemonCardObj.PokemonCardEvolvesTos != null)
                                     {
-                                        PokemonCard = PokemonCardObj,
-                                        EvolvesTo = EvolvesToObj
+                                        pokemonCardEvolvesTo = PokemonCardObj.PokemonCardEvolvesTos.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj) && m.EvolvesTo.Equals(EvolvesToObj));
+
+                                        if (pokemonCardEvolvesTo == null)
+                                        {
+                                            pokemonCardEvolvesTos.Add(
+                                                new PokemonCardEvolvesTo
+                                                {
+                                                    PokemonCard = PokemonCardObj,
+                                                    EvolvesTo = EvolvesToObj
+                                                }
+                                            );
+                                        }
                                     }
-                                );
+                                    //else
+                                    //{
+                                    //    pokemonCardEvolvesTo.PokemonCard = PokemonCardObj;
+                                    //    pokemonCardEvolvesTo.EvolvesTo = EvolvesToObj;
+                                    //}
+                                }
                             }
 
                             PokemonCardObj.PokemonCardEvolvesTos = pokemonCardEvolvesTos;
                         }
+
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
 
                         //RetreatCosts
                         if (result["retreatCost"] != null && result["retreatCost"].HasValues)
@@ -359,17 +413,38 @@ namespace TCGCollector.Helpers
                             {
                                 EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)textitem);
 
-                                pokemonCardRetreatCosts.Add(
-                                    new PokemonCardRetreatCost
+                                //Check if the relationship exists and if not add it
+                                if (EnergyTypeObj != null)
+                                {
+                                    PokemonCardRetreatCost pokemonCardRetreatCost = new PokemonCardRetreatCost();
+                                    if (PokemonCardObj.PokemonCardRetreatCosts != null)
                                     {
-                                        PokemonCard = PokemonCardObj,
-                                        EnergyType = EnergyTypeObj
+                                        pokemonCardRetreatCost = PokemonCardObj.PokemonCardRetreatCosts.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj.CardID) && m.EnergyType.Equals(EnergyTypeObj));
+
+                                        if (pokemonCardRetreatCost == null)
+                                        {
+                                            pokemonCardRetreatCosts.Add(
+                                                new PokemonCardRetreatCost
+                                                {
+                                                    PokemonCard = PokemonCardObj,
+                                                    EnergyType = EnergyTypeObj
+                                                }
+                                            );
+                                        }
                                     }
-                                );
+                                    else
+                                    {
+                                        pokemonCardRetreatCost.PokemonCard = PokemonCardObj;
+                                        pokemonCardRetreatCost.EnergyType = EnergyTypeObj;
+                                    }
+                                }
                             }
 
                             PokemonCardObj.PokemonCardRetreatCosts = pokemonCardRetreatCosts;
                         }
+
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
 
                         //Weaknesses
                         if (result["weaknesses"] != null && result["weaknesses"].HasValues)
@@ -383,6 +458,8 @@ namespace TCGCollector.Helpers
                             foreach (var result2 in obj2)
                             {
                                 EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+
+                                //Check list for existing object
                                 if (!pokemonCardWeaknesses.Exists(a => a.Weakness.EnergyType.Equals(EnergyTypeObj)
                                     && a.Weakness.WeaknessValue.Equals((string)result2["value"])))
                                 {
@@ -394,18 +471,34 @@ namespace TCGCollector.Helpers
                                         LastUpdateDate = DateTime.Now
                                     };
 
-                                    pokemonCardWeaknesses.Add(
-                                        new PokemonCardWeakness
+                                    //Check if the relationship exists and if not add it
+                                    if (WeaknessObj != null)
+                                    {
+                                        PokemonCardWeakness pokemonCardWeakness = new PokemonCardWeakness();
+                                        if (PokemonCardObj.PokemonCardWeaknesses != null)
                                         {
-                                            PokemonCard = PokemonCardObj,
-                                            Weakness = WeaknessObj
+                                            pokemonCardWeakness = PokemonCardObj.PokemonCardWeaknesses.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj.CardID) && m.Weakness.Equals(WeaknessObj));
+
+                                            if (pokemonCardWeakness == null)
+                                            {
+                                                pokemonCardWeaknesses.Add(
+                                                new PokemonCardWeakness
+                                                {
+                                                    PokemonCard = PokemonCardObj,
+                                                    Weakness = WeaknessObj
+                                                }
+                                                );
+                                            }
                                         }
-                                        );
+                                    }
                                 }
                             }
 
                             PokemonCardObj.PokemonCardWeaknesses = pokemonCardWeaknesses;
                         }
+
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
 
                         //Resistance
                         if (result["resistances"] != null && result["resistances"].HasValues)
@@ -433,13 +526,25 @@ namespace TCGCollector.Helpers
                                             LastUpdateDate = DateTime.Now
                                         };
 
-                                    pokemonCardResistances.Add(
-                                        new PokemonCardResistance
+                                    if (ResistanceObj != null)
+                                    {
+                                        PokemonCardResistance pokemonCardResistance = new PokemonCardResistance();
+                                        if (PokemonCardObj.PokemonCardResistances != null)
                                         {
-                                            PokemonCard = PokemonCardObj,
-                                            Resistance = ResistanceObj
+                                            pokemonCardResistance = PokemonCardObj.PokemonCardResistances.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj.CardID) && m.Resistance.Equals(ResistanceObj));
+
+                                            if (pokemonCardResistance == null)
+                                            {
+                                                pokemonCardResistances.Add(
+                                                    new PokemonCardResistance
+                                                    {
+                                                        PokemonCard = PokemonCardObj,
+                                                        Resistance = ResistanceObj
+                                                    }
+                                                    );
+                                            }
                                         }
-                                        );
+                                    }
                                     //ctx.AddOrUpdate(pokemonCardResistances);
                                     //ctx.SaveChanges();
                                 }
@@ -448,6 +553,9 @@ namespace TCGCollector.Helpers
                             PokemonCardObj.PokemonCardResistances = pokemonCardResistances;
                         }
 
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
+
                         //Ability
                         if (result["ability"] != null && result["ability"].HasValues)
                         {
@@ -455,31 +563,48 @@ namespace TCGCollector.Helpers
                             //Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>((string)result["weaknesses"]);
                             JObject AbilityJSON = (JObject)result.SelectToken("ability");
 
-                            List <PokemonCardAbility> pokemonCardAbilities = new List<PokemonCardAbility>();
+                            List<PokemonCardAbility> pokemonCardAbilities = new List<PokemonCardAbility>();
 
                             //foreach (var result2 in obj2)
                             //{
-                               // EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
-                                Ability AbilityObj = ctx.Abilities.SingleOrDefault(m => m.AbilityName.Equals((string)AbilityJSON["name"]) && m.AbilityText.Equals((string)AbilityJSON["text"]))
-                                    ?? new Ability
-                                    {
-                                        AbilityName = (string)AbilityJSON["name"],
-                                        AbilityText = (string)AbilityJSON["text"],
-                                        AbilityType = (string)AbilityJSON["type"],
-                                        LastUpdateDate = DateTime.Now
-                                    };
-                                
-                                pokemonCardAbilities.Add(
-                                    new PokemonCardAbility
-                                    {
-                                        PokemonCard = PokemonCardObj,
-                                        Ability = AbilityObj
-                                    }
+                            // EnergyType EnergyTypeObj = GetEnergyTypeByName(ctx, (string)result2["type"]);
+                            Ability AbilityObj = ctx.Abilities.SingleOrDefault(m => m.AbilityName.Equals((string)AbilityJSON["name"]) && m.AbilityText.Equals((string)AbilityJSON["text"]))
+                                ?? new Ability
+                                {
+                                    AbilityName = (string)AbilityJSON["name"],
+                                    AbilityText = (string)AbilityJSON["text"],
+                                    AbilityType = (string)AbilityJSON["type"],
+                                    LastUpdateDate = DateTime.Now
+                                };
+
+                            //Check if the relationship exists and if not add it
+                            if (AbilityObj != null)
+                            {
+                                PokemonCardAbility pokemonCardAbility = new PokemonCardAbility();
+                                if (PokemonCardObj.PokemonCardAbilities != null)
+                                {
+                                    pokemonCardAbility = PokemonCardObj.PokemonCardAbilities.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj.CardID) && m.Ability.Equals(AbilityObj));
+                                }
+
+                                if (pokemonCardAbility.Ability == null)
+                                {
+                                    pokemonCardAbilities.Add(
+                                        new PokemonCardAbility
+                                        {
+                                            PokemonCard = PokemonCardObj,
+                                            Ability = AbilityObj
+                                        }
                                     );
+                                }
+
+                            }
                             //}
 
                             PokemonCardObj.PokemonCardAbilities = pokemonCardAbilities;
                         }
+
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
 
                         //Attack
                         if (result["attacks"] != null && result["attacks"].HasValues)
@@ -522,17 +647,33 @@ namespace TCGCollector.Helpers
                                     AttackObj.AttackEnergies = attackEnergies;
                                 }
 
-                                pokemonCardAttacks.Add(
-                                    new PokemonCardAttack
+                                //Check if the relationship exists and if not add it
+                                if (AttackObj != null)
+                                {
+                                    PokemonCardAttack pokemonCardAttack = new PokemonCardAttack();
+                                    if (PokemonCardObj.PokemonCardAttacks != null)
                                     {
-                                        PokemonCard = PokemonCardObj,
-                                        Attack = AttackObj
+                                        pokemonCardAttack = PokemonCardObj.PokemonCardAttacks.SingleOrDefault(m => m.CardID.Equals(PokemonCardObj.CardID) && m.Attack.Equals(AttackObj));
                                     }
-                                    );
+
+                                    if (pokemonCardAttack.Attack == null)
+                                    {
+                                        pokemonCardAttacks.Add(
+                                            new PokemonCardAttack
+                                            {
+                                                PokemonCard = PokemonCardObj,
+                                                Attack = AttackObj
+                                            }
+                                            );
+                                    }
+                                }
                             }
 
                             PokemonCardObj.PokemonCardAttacks = pokemonCardAttacks;
                         }
+
+                        ctx.AddOrUpdate(PokemonCardObj);
+                        ctx.SaveChanges();
 
                         ctx.AddOrUpdate(PokemonCardObj);
                         break;
@@ -554,6 +695,8 @@ namespace TCGCollector.Helpers
                                 LastUpdateDate = DateTime.Now
                             };
 
+                        Console.WriteLine("INFO: Trainer Card: " + TrainerCardObj.CardNum + " " + TrainerCardObj.CardName);
+
                         if (result["text"] != null && result["text"].HasValues)
                         {
                             List<TrainerCardTrainerCardText> trainerCardCardTexts = new List<TrainerCardTrainerCardText>();
@@ -566,13 +709,32 @@ namespace TCGCollector.Helpers
                                         LastUpdateDate = DateTime.Now
                                     };
 
-                                trainerCardCardTexts.Add(
-                                     new TrainerCardTrainerCardText
-                                     {
-                                         TrainerCard = TrainerCardObj,
-                                         CardText = TrainerCardTextObj
-                                     }
-                                 );
+                                if (TrainerCardTextObj != null)
+                                {
+                                    TrainerCardTrainerCardText trainerCardTrainerCardText = new TrainerCardTrainerCardText();
+                                    //if (TrainerCardObj.TrainerCardTrainerCardTexts == null)
+                                    //{
+
+                                    //Check list for existing object
+                                    if (!trainerCardCardTexts.Exists(a => a.CardID.Equals(TrainerCardObj) && a.CardTextID.Equals(TrainerCardTextObj)))
+                                    {
+                                        if (TrainerCardObj.TrainerCardTrainerCardTexts != null)
+                                        {
+                                            trainerCardTrainerCardText = TrainerCardTextObj.TrainerCardTrainerCardTexts.SingleOrDefault(m => m.CardID.Equals(TrainerCardObj) && m.CardTextID.Equals(TrainerCardTextObj));
+                                        }
+
+                                        if (trainerCardTrainerCardText == null)
+                                        {
+                                            trainerCardCardTexts.Add(
+                                                new TrainerCardTrainerCardText
+                                                {
+                                                    TrainerCard = TrainerCardObj,
+                                                    CardText = TrainerCardTextObj
+                                                }
+                                            );
+                                        }
+                                    }
+                                }
                             }
 
                             TrainerCardObj.TrainerCardTrainerCardTexts = trainerCardCardTexts;

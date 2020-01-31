@@ -127,6 +127,34 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MagicBlocks",
+                columns: table => new
+                {
+                    MagicBlockID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    MagicBlockName = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MagicBlocks", x => x.MagicBlockID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MagicSetTypes",
+                columns: table => new
+                {
+                    MagicSetTypeID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    MagicSetTypeName = table.Column<string>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MagicSetTypes", x => x.MagicSetTypeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PokemonTypes",
                 columns: table => new
                 {
@@ -270,6 +298,45 @@ namespace TCGCollector.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MagicSets",
+                columns: table => new
+                {
+                    MagicSetID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    MagicSetName = table.Column<string>(nullable: true),
+                    MagicSetCode = table.Column<string>(nullable: true),
+                    MagicSetCodeAlt = table.Column<string>(nullable: true),
+                    MagicSetUSAOnly = table.Column<bool>(nullable: false),
+                    MagicSetFoilOnly = table.Column<bool>(nullable: false),
+                    MagicSetOnlineOnly = table.Column<bool>(nullable: false),
+                    MagicSetKeyruneCode = table.Column<string>(nullable: true),
+                    MTGOCode = table.Column<string>(nullable: true),
+                    MagicParentSetCode = table.Column<string>(nullable: true),
+                    MagicSetSetSize = table.Column<int>(nullable: false),
+                    MagicSetTotalSize = table.Column<int>(nullable: false),
+                    MagicSetReleaseDate = table.Column<DateTime>(nullable: false),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false),
+                    MagicBlockID = table.Column<int>(nullable: true),
+                    MagicSetTypeID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MagicSets", x => x.MagicSetID);
+                    table.ForeignKey(
+                        name: "FK_MagicSets_MagicBlocks_MagicBlockID",
+                        column: x => x.MagicBlockID,
+                        principalTable: "MagicBlocks",
+                        principalColumn: "MagicBlockID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MagicSets_MagicSetTypes_MagicSetTypeID",
+                        column: x => x.MagicSetTypeID,
+                        principalTable: "MagicSetTypes",
+                        principalColumn: "MagicSetTypeID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sets",
                 columns: table => new
                 {
@@ -322,6 +389,50 @@ namespace TCGCollector.Migrations
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MagicCards",
+                columns: table => new
+                {
+                    MagicCardID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    MagicCardName = table.Column<string>(nullable: true),
+                    MagicSetID = table.Column<int>(nullable: true),
+                    CardCatID = table.Column<int>(nullable: true),
+                    CardTypeID = table.Column<int>(nullable: true),
+                    CardNum = table.Column<string>(nullable: true),
+                    Artist = table.Column<string>(nullable: true),
+                    CardRarityID = table.Column<int>(nullable: true),
+                    LastUpdateDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MagicCards", x => x.MagicCardID);
+                    table.ForeignKey(
+                        name: "FK_MagicCards_CardCats_CardCatID",
+                        column: x => x.CardCatID,
+                        principalTable: "CardCats",
+                        principalColumn: "CardCatID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MagicCards_CardRarities_CardRarityID",
+                        column: x => x.CardRarityID,
+                        principalTable: "CardRarities",
+                        principalColumn: "CardRarityID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MagicCards_CardTypes_CardTypeID",
+                        column: x => x.CardTypeID,
+                        principalTable: "CardTypes",
+                        principalColumn: "CardTypeID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MagicCards_MagicSets_MagicSetID",
+                        column: x => x.MagicSetID,
+                        principalTable: "MagicSets",
+                        principalColumn: "MagicSetID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -453,14 +564,12 @@ namespace TCGCollector.Migrations
                 name: "PokemonCardPokemonTypes",
                 columns: table => new
                 {
-                    PokemonCardPokemonTypeID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     CardID = table.Column<int>(nullable: false),
                     PokemonTypeID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PokemonCardPokemonTypes", x => x.PokemonCardPokemonTypeID);
+                    table.PrimaryKey("PK_PokemonCardPokemonTypes", x => new { x.CardID, x.PokemonTypeID });
                     table.ForeignKey(
                         name: "FK_PokemonCardPokemonTypes_Cards_CardID",
                         column: x => x.CardID,
@@ -628,6 +737,36 @@ namespace TCGCollector.Migrations
                 column: "SetID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MagicCards_CardCatID",
+                table: "MagicCards",
+                column: "CardCatID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MagicCards_CardRarityID",
+                table: "MagicCards",
+                column: "CardRarityID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MagicCards_CardTypeID",
+                table: "MagicCards",
+                column: "CardTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MagicCards_MagicSetID",
+                table: "MagicCards",
+                column: "MagicSetID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MagicSets_MagicBlockID",
+                table: "MagicSets",
+                column: "MagicBlockID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MagicSets_MagicSetTypeID",
+                table: "MagicSets",
+                column: "MagicSetTypeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardAbilities_AbilityID",
                 table: "PokemonCardAbilities",
                 column: "AbilityID");
@@ -641,11 +780,6 @@ namespace TCGCollector.Migrations
                 name: "IX_PokemonCardEvolvesTos_EvolvesToID",
                 table: "PokemonCardEvolvesTos",
                 column: "EvolvesToID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PokemonCardPokemonTypes_CardID",
-                table: "PokemonCardPokemonTypes",
-                column: "CardID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonCardPokemonTypes_PokemonTypeID",
@@ -709,6 +843,9 @@ namespace TCGCollector.Migrations
                 name: "AttackEnergies");
 
             migrationBuilder.DropTable(
+                name: "MagicCards");
+
+            migrationBuilder.DropTable(
                 name: "PokemonCardAbilities");
 
             migrationBuilder.DropTable(
@@ -737,6 +874,9 @@ namespace TCGCollector.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserCardCollection");
+
+            migrationBuilder.DropTable(
+                name: "MagicSets");
 
             migrationBuilder.DropTable(
                 name: "Abilities");
@@ -770,6 +910,12 @@ namespace TCGCollector.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "MagicBlocks");
+
+            migrationBuilder.DropTable(
+                name: "MagicSetTypes");
 
             migrationBuilder.DropTable(
                 name: "EnergyTypes");

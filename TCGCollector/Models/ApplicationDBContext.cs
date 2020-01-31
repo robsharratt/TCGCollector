@@ -168,6 +168,12 @@ namespace TCGCollector.Models
         public DbSet<PokemonCardAttack> PokemonCardAttacks { get; set; }
         public DbSet<AttackEnergy> AttackEnergies { get; set; }
 
+        //Magic
+        public DbSet<MagicCard> MagicCards { get; set; }
+        public DbSet<MagicSet> MagicSets { get; set; }
+        public DbSet<MagicBlock> MagicBlocks { get; set; }
+        public DbSet<MagicSetType> MagicSetTypes { get; set; }
+
         //Card Collections
         public DbSet<CardCollection> CardCollections { get; set; }
 

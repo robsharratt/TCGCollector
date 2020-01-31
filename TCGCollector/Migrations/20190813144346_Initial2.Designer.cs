@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TCGCollector.Models;
@@ -9,9 +10,10 @@ using TCGCollector.Models;
 namespace TCGCollector.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190813144346_Initial2")]
+    partial class Initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,6 +212,100 @@ namespace TCGCollector.Migrations
                     b.ToTable("EvolvesTos");
                 });
 
+            modelBuilder.Entity("TCGCollector.Models.MagicBlock", b =>
+                {
+                    b.Property<int>("MagicBlockID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("MagicBlockName");
+
+                    b.HasKey("MagicBlockID");
+
+                    b.ToTable("MagicBlocks");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.MagicCard", b =>
+                {
+                    b.Property<int>("MagicCardID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Artist");
+
+                    b.Property<string>("CardNum");
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("MagicCardName");
+
+                    b.Property<int?>("MagicSetID");
+
+                    b.HasKey("MagicCardID");
+
+                    b.HasIndex("MagicSetID");
+
+                    b.ToTable("MagicCards");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.MagicSet", b =>
+                {
+                    b.Property<int>("MagicSetID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("MTGOCode");
+
+                    b.Property<int?>("MagicBlockID");
+
+                    b.Property<string>("MagicParentSetCode");
+
+                    b.Property<string>("MagicSetCode");
+
+                    b.Property<string>("MagicSetCodeAlt");
+
+                    b.Property<bool>("MagicSetFoilOnly");
+
+                    b.Property<string>("MagicSetKeyruneCode");
+
+                    b.Property<string>("MagicSetName");
+
+                    b.Property<bool>("MagicSetOnlineOnly");
+
+                    b.Property<DateTime>("MagicSetReleaseDate");
+
+                    b.Property<int>("MagicSetSetSize");
+
+                    b.Property<int>("MagicSetTotalSize");
+
+                    b.Property<int?>("MagicSetTypeID");
+
+                    b.Property<bool>("MagicSetUSAOnly");
+
+                    b.HasKey("MagicSetID");
+
+                    b.HasIndex("MagicBlockID");
+
+                    b.HasIndex("MagicSetTypeID");
+
+                    b.ToTable("MagicSets");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.MagicSetType", b =>
+                {
+                    b.Property<int>("MagicSetTypeID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("MagicSetTypeName");
+
+                    b.HasKey("MagicSetTypeID");
+
+                    b.ToTable("MagicSetTypes");
+                });
+
             modelBuilder.Entity("TCGCollector.Models.PokemonCardAbility", b =>
                 {
                     b.Property<int>("CardID");
@@ -251,16 +347,11 @@ namespace TCGCollector.Migrations
 
             modelBuilder.Entity("TCGCollector.Models.PokemonCardPokemonType", b =>
                 {
-                    b.Property<int>("PokemonCardPokemonTypeID")
-                        .ValueGeneratedOnAdd();
-
                     b.Property<int>("CardID");
 
                     b.Property<int>("PokemonTypeID");
 
-                    b.HasKey("PokemonCardPokemonTypeID");
-
-                    b.HasIndex("CardID");
+                    b.HasKey("CardID", "PokemonTypeID");
 
                     b.HasIndex("PokemonTypeID");
 
@@ -565,6 +656,24 @@ namespace TCGCollector.Migrations
                     b.HasOne("TCGCollector.Models.Set", "Set")
                         .WithMany("Cards")
                         .HasForeignKey("SetID");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.MagicCard", b =>
+                {
+                    b.HasOne("TCGCollector.Models.MagicSet", "MagicSet")
+                        .WithMany("MagicCards")
+                        .HasForeignKey("MagicSetID");
+                });
+
+            modelBuilder.Entity("TCGCollector.Models.MagicSet", b =>
+                {
+                    b.HasOne("TCGCollector.Models.MagicBlock", "MagicBlock")
+                        .WithMany("MagicSets")
+                        .HasForeignKey("MagicBlockID");
+
+                    b.HasOne("TCGCollector.Models.MagicSetType", "MagicSetType")
+                        .WithMany("MagicSets")
+                        .HasForeignKey("MagicSetTypeID");
                 });
 
             modelBuilder.Entity("TCGCollector.Models.PokemonCardAbility", b =>
